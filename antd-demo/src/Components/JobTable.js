@@ -1,0 +1,220 @@
+import React from 'react';
+import { Table, Divider, Tag } from 'antd';
+import {Row, DatePicker,Col ,Button} from 'antd';
+import moment from 'moment';
+import {getJobDetails,deleteJobs} from '../Redux/Actions';
+import {connect} from 'react-redux';
+
+
+const { MonthPicker, RangePicker } = DatePicker;
+const { Column, ColumnGroup } = Table;
+
+
+const mapDispatchToProps = (dispatch)=>{
+	return{
+		getJobDetails :(data)=>{
+			dispatch(getJobDetails(data))
+		} ,
+		deleteJobs : (data)=>{
+			dispatch(deleteJobs(data))
+		},
+	}
+
+}
+const mapStateToProps = (state)=>{
+	return{
+		role : state.user.role,
+		jobDetails : state.jobDetails,
+
+	}
+
+}
+
+     
+class JobTable extends React.Component{
+
+	constructor(props){
+		super(props)
+		this.state = {
+			rowsSelected : true,
+			selectedRows:null,
+			selectedRowKeys: [],
+			from_date : null,
+			to_date : null,
+			loadingFlag : false,
+			
+		}
+		this.OnChangeDate = this.OnChangeDate.bind(this);
+		this.loadJobs = this.loadJobs.bind(this);
+		this.onSelectChange = this.onSelectChange.bind(this);
+		this.OnChangeDate = this.OnChangeDate.bind(this);
+	}
+
+	onSelectChange = (selectedRowKeys, selectedRows)  => {
+				   // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+				    if(selectedRows.length != 0){
+				    	this.setState({ selectedRowKeys : selectedRowKeys,
+				    					selectedRows:selectedRows,
+				    					rowsSelected :false});
+				    }else{
+				    	this.setState({selectedRows,selectedRowKeys,rowsSelected :true});
+				    }
+				  }
+    	
+  	
+
+	OnChangeDate = (value,dateString)=>{
+		console.log(dateString);
+		this.setState({
+			from_date : dateString[0],
+			to_date : dateString[1],
+		})
+
+	}
+	loadJobs = ()=>{
+		var data = {};
+		data.from_date = this.state.from_date;
+		data.to_date = this.state.to_date;
+		this.props.getJobDetails(data);
+	}
+
+	OnDeleteJobs= ()=>{
+		debugger;
+		var jobs = [];
+		jobs = this.state.selectedRows.map((row)=>{
+			return row.JobID;
+		})
+		console.log(jobs);
+		this.props.deleteJobs(jobs);
+		var data = {};
+		data.from_date = this.state.from_date;
+		data.to_date = this.state.to_date;
+		this.loadJobs(data);
+		this.setState({
+			rowsSelected : true,
+		})
+	}
+
+
+	componentDidMount (){
+
+		var startDate =  new Date();
+		var endDate = new Date();
+		endDate.setDate(endDate.getDate() + 30);
+
+		var data = {};
+		data.from_date = startDate;
+		data.to_date = endDate;
+
+		this.setState({
+			from_date : startDate,
+			to_date : endDate,
+		})
+
+		this.props.getJobDetails(data);
+
+	}
+	
+
+	render(){
+			const rowSelection = {
+
+				  onChange: this.onSelectChange
+				 
+				};
+			const dateFormat = 'YYYY/MM/DD';
+			var startDate =  new Date().toJSON().slice(0,10);
+			var endDate = new Date();
+			endDate.setDate(endDate.getDate() + 30);
+			
+		return(
+			<div>
+				<Row>
+					<Col>
+					<div style={{margin:"5px"}}>
+			        <RangePicker onChange={ this.OnChangeDate } defaultValue={[moment( startDate, dateFormat), moment(endDate, dateFormat)]}/>
+			        <Button 
+			            type="primary"
+			            style={{margin:"5px"}}
+			            onClick = {this.loadJobs}
+			        >
+			        Load
+			        </Button>
+			        <Button 
+			            type="primary"
+			            style={{margin:"5px"}}
+			            onClick = {this.OnDeleteJobs}
+			            disabled = {this.state.rowsSelected}
+			        >
+			        Delete
+			        </Button>
+
+			      </div>
+			      </Col>
+			      </Row>
+			      <Row>
+			      	<Col xs= {1} sm={1} md={2} lg={3}>
+			      	</Col>
+			      	<Col xs= {22} sm={22} md={20} lg={18}>
+			      	
+							<Table 
+							rowSelection={rowSelection}
+							pagination= { {pageSizeOptions: ['5','10','15','20','50','100'], showSizeChanger: true}}
+							size="small"
+							dataSource={this.props.jobDetails}
+							scroll={{ x: 1000 }}>
+
+							<Column 
+								title="JobID"
+								dataIndex="JobID"
+								key="JobID"
+						        fixed ='left' />
+
+						     <Column 
+								title="Client"
+								dataIndex="Client"
+								key="Client" />
+
+							<Column 
+								title="Date"
+								dataIndex="Date"
+								key="Date" />
+							<Column
+								title="Staff"
+							    dataIndex="Staff"
+								key="Staff" />
+							<Column
+								title="From Time"
+							    dataIndex="from_time"
+								key="from_time" />
+							<Column
+								title="To Time"
+							    dataIndex="to_time"
+								key="to_time" />
+							<Column
+								title="Requested"
+								 dataIndex="Requested"
+								 key="Requested"/>
+							<Column
+								title="Availability"
+								dataIndex="Availability"
+								key="Status" />
+
+					
+					</Table>
+   
+			      	</Col>
+			      	<Col xs= {1} sm={1} md={2} lg={3}>
+			      	</Col>
+					</Row>
+
+			</div>
+
+
+
+			)
+	}
+
+}
+
+export default connect (mapStateToProps,mapDispatchToProps) (JobTable);
