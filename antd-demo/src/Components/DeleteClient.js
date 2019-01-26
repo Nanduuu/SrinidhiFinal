@@ -1,6 +1,6 @@
 import React from 'react';
 import {Row, Col} from 'antd';
-import { Select,Input,Button } from 'antd';
+import { Select,Input,Button ,message} from 'antd';
 import {connect} from 'react-redux';
 import {getClients,deleteClients} from '../Redux/Actions';
 const Option = Select.Option;
@@ -13,6 +13,10 @@ const LabelStyle = {
 
 const submitStyle = {
 	width:"90%"
+}
+
+const success = (text)=>{
+	message.success(text);
 }
 
 const mapDispatchToProps = (dispatch)=>{
@@ -41,11 +45,17 @@ class DeleteClient extends React.Component{
 			selectedClients :[],
 			
 		}
-
 		this.loadClients = this.loadClients.bind(this);
 		this.OnSelect = this.OnSelect.bind(this);
 		this.OnDeselect = this.OnDeselect.bind(this);
+	}
 
+	componentWillReceiveProps = (nextProps)=>{
+		debugger;
+		if (nextProps.clients.length != this.props.clients.length){
+			this.loadClients(nextProps.clients);
+			success("Clients are deleted successfully");
+		} 
 	}
 
 componentDidMount(){

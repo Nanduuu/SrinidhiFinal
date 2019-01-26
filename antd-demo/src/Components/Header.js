@@ -10,14 +10,14 @@ import {Redirect} from 'react-router-dom'
 const baseStyle = {
 	width:'100%',
 	background: '#4292f4',
-	borderBottom : "5px solid lightblue",
-	boxShadow:"0px 3px 3px lightblue",
+	//borderBottom : "5px solid lightblue",
+	//boxShadow:"0px 3px 3px lightblue",
 	color:"white",
 	padding:"10px"
 }
 
 const imgBorder ={
-	borderRadius: "50px",
+	borderRadius: "0px",
 	float:"left",
 	padding:"5px"
 }

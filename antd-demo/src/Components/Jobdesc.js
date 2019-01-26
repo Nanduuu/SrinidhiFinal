@@ -7,7 +7,7 @@ import moment from 'moment';
 import {Redirect}  from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getClients} from '../Redux/Actions';
-import {addJob} from '../Redux/Actions';
+import {addJob,setaddjob} from '../Redux/Actions';
 
 const format = 'HH:mm:ss';
 const Option = Select.Option;
@@ -23,10 +23,21 @@ const LabelStyle = {
 const submitStyle = {
 	width:"90%"
 }
+
+const success = (text)=>{
+    message.success(text);
+}
+
+const error = (text)=>{
+  message.error(text);
+}
+
 const mapStateToProps = (state)=>{
 	return {
 		role : state.user.Role,
 		clients:state.clients,
+		addJobflag : state.addJobflag,
+		addJobMsg : state.addJobMsg,
 	}
 }
 const mapDispatchToProps = (dispatch)=>{
@@ -36,6 +47,9 @@ const mapDispatchToProps = (dispatch)=>{
 		},
 		addJob : (data)=>{
 			dispatch(addJob(data));
+		},
+		setaddjob : ()=>{
+			dispatch(setaddjob());
 		}		
 	}
 
@@ -72,6 +86,22 @@ class Jobdesc extends React.Component {
 		this.OnchangeFromTime = this.OnchangeFromTime.bind(this);
 		this.OnchangeToTime = this.OnchangeToTime.bind(this);
 		this.disabledDate = this.disabledDate.bind(this);
+	}
+
+	componentWillReceiveProps = (nextProps)=>{
+
+		if ( nextProps.addJobflag == true && nextProps.addJobMsg.length > 0){
+			this.reset();
+			this.props.setaddjob();
+			success(nextProps.addJobMsg);
+		}
+
+		if( nextProps.addJobflag == false && nextProps.addJobflag.length > 0){	
+				error(nextProps.addJobMsg);
+		}
+		
+
+
 	}
 
 	disabledDate = (current)=>{
@@ -132,7 +162,7 @@ class Jobdesc extends React.Component {
 			staff : null,
 			client : null,
 			date : null,
-			count : 5,
+			count : null,
 			from_time : null,
 			to_time : null,
 			
@@ -251,7 +281,7 @@ class Jobdesc extends React.Component {
 										<label>Number of positions</label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
-										<InputNumber onChange={this.OnchangeCount}  min={1} max={100} defaultValue={5}style={{width:"97%"} } required/>
+										<InputNumber onChange={this.OnchangeCount}  min={1} max={100} defaultValue={0}style={{width:"97%"} } required/>
 									</Col>
 								</Row>
 								<Row>

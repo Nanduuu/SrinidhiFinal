@@ -18,8 +18,8 @@ const LabelStyle = {
 
 const InputStyle={
 	width:"100%",
-	padding:"5px",
-	margin:'5px',
+	padding:"1px",
+	margin:'1px',
 }
 
 const error = (text)=>{

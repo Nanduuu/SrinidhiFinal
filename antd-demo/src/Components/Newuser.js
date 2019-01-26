@@ -1,11 +1,12 @@
 import React from 'react';
-import { Modal, Button ,Input} from 'antd';
+import { Modal, Button ,Input,Select} from 'antd';
 import  {Row,Col}  from 'antd';
 import axios from 'axios';
 import {message} from 'antd';
 import {Redirect  } from 'react-router';
 import {Link} from 'react-router-dom'
 
+const Option = Select.Option;
 
 const success = (text)=>{
     message.success(text);
@@ -13,6 +14,11 @@ const success = (text)=>{
 
 const error = (text)=>{
   message.error(text);
+}
+
+const InputStyle={
+  width:"100%",
+  padding:"2px 2px"
 }
 
 const header = {
@@ -54,6 +60,7 @@ class Newuser extends React.Component {
 			Fname:"",
 			Lname:"",
 			Email:'',
+      Stafftype:"",
 			Tel:'',
 			Pword:"",
 			Rpword:"",
@@ -68,6 +75,13 @@ showModal = () => {
       visible: true,
 
     });
+  }
+
+  handleChangeStaff = (value)=> {
+    
+    this.setState({
+      Stafftype : value
+    })
   }
 
   Onchange = (event)=>{
@@ -118,12 +132,13 @@ showModal = () => {
     	formData.append('Email',this.state.Email);
     	formData.append('Tel',this.state.Tel);
     	formData.append('Pword',this.state.Pword);
+      formData.append('Stafftype',this.state.Stafftype);
 
     	const config = {     
 						    headers: { 'content-type': 'multipart/form-data' }
 						}
 		//console.log(formData.getAll());
-    	axios.post('/newuser/',formData)
+    	axios.post('/api/newuser/',formData)
     		  .then( (res) =>{
 
     		  	if(res.data.success != true){
@@ -140,7 +155,7 @@ showModal = () => {
     		  	}
 
     		  }).catch((error)=>{
-    		  		error("Error")
+    		  	//	error("Error");
     		  });
 
   	 
@@ -172,12 +187,20 @@ render (){
               NEW USER FORM
             </div>
 					<form onSubmit = {this.handleOk}>
-						<Input name="Fname" placeholder="Enter first name" onChange={this.Onchange} required />
-						<Input name="Lname" placeholder="Enter last name" onChange={this.Onchange} />
-						<Input name="Email" type="email" placeholder="Enter email Id" onChange={this.Onchange} required/>
-						<Input name="Tel" type="tel" placeholder="Enter Phone Number"  onChange={this.Onchange} required/>
-						<Input name="Pword" type="password" placeholder={'Enter password'} onChange={this.Onchange} required/>
-						<Input name="Rpword" type="password" placeholder={'Confirm password'} onBlur={this.onCheck}  onChange={this.Onchange} required/>
+						<Input name="Fname" placeholder="Enter first name" onChange={this.Onchange} style={InputStyle} required />
+						<Input name="Lname" placeholder="Enter last name" onChange={this.Onchange} style={InputStyle} />
+            <Input name="Email" type="email" placeholder="Enter email Id" onChange={this.Onchange} style={InputStyle} required/>
+            <Select value = {this.state.Stafftype} onChange={this.handleChangeStaff} placeholder={"Select Job Type"}  required>
+                            <Option value="Doctor">Doctor</Option>
+                            <Option value="Nurse">Nurse</Option>
+                            <Option value="Health Care assistant (HCA)">Health Care assistant (HCA)</Option>
+                            <Option value="Domestic worker">Domestic worker</Option>
+                            <Option value="Domestic assistant">Domestic assistant</Option>
+                            <Option value="Domiciliary carer">Domiciliary carer</Option>
+                          </Select>
+						<Input name="Tel" type="tel" placeholder="Enter Phone Number"  onChange={this.Onchange} style={InputStyle} required/>
+						<Input name="Pword" type="password" placeholder={'Enter password'} onChange={this.Onchange} style={InputStyle} required/>
+						<Input name="Rpword" type="password" placeholder={'Confirm password'} onBlur={this.onCheck} style={InputStyle}  onChange={this.Onchange} required/>
 						
 
 

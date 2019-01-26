@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(upload.array()); 
 app.use(express.static('public'));
 
-app.use('/newuser/',newuser);
+app.use('/api/newuser/',newuser);
 app.use('/api/login/',login);
 app.use('/api/addclient',addclient);
 app.use('/api/getClients',getClients);

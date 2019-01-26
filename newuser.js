@@ -37,8 +37,8 @@ router.post('/',function(req,res){
 					}else{
 						userid = result[0].max + 1;
 					}
-					var sql = 'insert into user (Emailid, Fname, Lname, Tel, Pword, role,userid) values' +
-		  		 			'("'+ req.body.Email +'","' +req.body.Fname +'","'+ req.body.Lname +'","'+req.body.Tel +'","'+ encrypt +'","'+ "staff"+ '","' + userid + '")';
+					var sql = 'insert into user (Emailid, Fname, Lname, Tel, Pword, role,userid, stafftype) values' +
+		  		 			'("'+ req.body.Email +'","' +req.body.Fname +'","'+ req.body.Lname +'","'+req.body.Tel +'","'+ encrypt +'","'+ "staff"+ '",' + userid + ',"' + req.body.Stafftype + '")';
 
 		  		 	con.query(sql, function(err,result){
 		  			console.log(err);

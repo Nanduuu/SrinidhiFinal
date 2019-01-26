@@ -8,6 +8,7 @@
           actions:{
             addclient : false,
           },
+
           addClientMsg : "",
           addClientSuccess : false,
           clients:[],
@@ -19,6 +20,8 @@
           jobDetails : [],
 
           job:{},
+
+          
 
  
  };
@@ -72,9 +75,9 @@
             {},
             state,
             {
-              actions: {addclient : true},
-              addClientSuccess : false,
               
+              addClientSuccess : false,
+              addClientMsg : "",
             }
           )
         break;
@@ -83,7 +86,7 @@
             {},
             state,
             {
-              actions: {addclient : false},
+              
               addClientSuccess : action.success,
               addClientMsg : action.msg,
               
@@ -114,7 +117,8 @@
             {},
             state,
             {
-             
+              addJobflag : false,
+              addJobMsg : "",
               
             }
           )
@@ -124,8 +128,8 @@
             {},
             state,
             {
-              
-              
+              addJobflag : action.success,
+              addJobMsg : action.msg,
             }
           )
          break;

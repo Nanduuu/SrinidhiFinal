@@ -37,6 +37,19 @@ export function addJob(data){
 		payload:data
 	}
 }
+
+export function setaddclient() {
+	return{
+		type:"SET_ADD_CLIENT",
+	}
+}
+
+export function setaddjob( ){
+	return{
+		type:"SET_ADD_JOB",
+		
+	}
+}
 export function getJobDetails(data){
 	return{
 		type:"GETJOBDETAILS",

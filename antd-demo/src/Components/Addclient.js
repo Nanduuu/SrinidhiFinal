@@ -6,7 +6,7 @@ import {Select,message,DatePicker ,InputNumber} from 'antd';
 import moment from 'moment';
 import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
-import {addClient,beginAddCleint} from '../Redux/Actions';
+import {addClient,beginAddCleint,setaddclient} from '../Redux/Actions';
 
 const format = 'HH:mm';
 const { TextArea } = Input;
@@ -49,6 +49,9 @@ const mapDispatchToProps = (dispatch)=>{
 		},
 		beginAddCleint : ()=>{
 			dispatch(beginAddCleint());
+		},
+		setaddclient : ()=>{
+			dispatch(setaddclient());
 		}
 		
 	}
@@ -78,10 +81,26 @@ class Addclient extends React.Component {
 			  console.log('click', e);
 		}
 
+	componentWillReceiveProps = (nextProps)=>{
+
+		if ( nextProps.addClientSuccess == true && nextProps.msg.length > 0){
+			this.reset();
+			this.props.setaddclient();
+			success(nextProps.msg);
+		}
+
+		if( nextProps.addClientSuccess == false && nextProps.msg.length > 0){	
+				error(nextProps.msg);
+		}
+		
+
+
+	}
+
 	componentDidMount(){
 	  
 	  
-	   this.props.beginAddCleint();
+	   this.props.setaddclient();
 	   
 		
 	}
@@ -115,8 +134,6 @@ class Addclient extends React.Component {
 	   		} else {
 	   			error(this.props.msg)
 	   		}
-			
-					
 		} 
 
 	}

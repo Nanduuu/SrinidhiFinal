@@ -10,13 +10,11 @@ function* do_login(action){
 		const config = {     
 						    headers: { 'content-type': 'multipart/form-data' }
 						}
-		var response = yield call(axios.post, "http://localhost:8080/api/login/",{"Data" : action.payload});
-
+		var response = yield call(axios.post, "/api/login/",{"Data" : action.payload});
 		if (response.data.success === true){
 			const token = response.data.Token;
 			localStorage.setItem('jwtToken',token);
 			setAuthJwt(token);
-
 			yield put({type : "SET_CURRENT_USER", user : response.data});
 			if (response.data.Role === "admin"){
 				yield put(push('/admin'));
@@ -24,11 +22,9 @@ function* do_login(action){
 				
 				yield put(push('/staff'));
 			}
-		
 		}else{
 			yield put({type:"AUTH_ERROR"});	
 		}
-
 }
 
 function* do_logout(){
@@ -41,7 +37,7 @@ function* do_logout(){
 
 function* do_addclient(action){
 	yield put({type:"SET_ADD_CLIENT"});
-	var response = yield call(axios.post, "http://localhost:8080/api/addclient/",{"Data" : action.payload});
+	var response = yield call(axios.post, "/api/addclient/",{"Data" : action.payload});
 			if (response.data.success === true){
 				console.log(response);
 				yield put({type:"RESET_ADD_CLIENT",msg:response.data.msg,success:response.data.success});
@@ -54,7 +50,7 @@ function* do_addclient(action){
 }
 
  function* do_getClients(){
-	var response = yield call(axios.post, "http://localhost:8080/api/getClients/",{});
+	var response = yield call(axios.post, "/api/getClients/",{});
 
 	var clients = response.data.clients.map((client)=>{
 		return client.ct_branch;
@@ -66,7 +62,7 @@ function* do_addclient(action){
 
  function* do_addjob(action){
  	yield put({type:"SET_ADD_JOB"});
- 	var response = yield call(axios.post, "http://localhost:8080/api/addJob/", {"Data" : action.payload});
+ 	var response = yield call(axios.post, "/api/addJob/", {"Data" : action.payload});
  		if(response.data.success === true){
 
  		}
@@ -75,19 +71,19 @@ function* do_addclient(action){
 
  function* do_deleteClients(action){
  	console.log(action.payload);
- 	var response = yield call(axios.post, "http://localhost:8080/api/deleteClients/",{'Data' : action.payload});
+ 	var response = yield call(axios.post, "/api/deleteClients/",{'Data' : action.payload});
  }
 
  function* do_getJobDetails(action){
  	console.log(action.payload);
- 	var response = yield call (axios.post, "http://localhost:8080/api/getJobDetails/",{'Data' : action.payload});
+ 	var response = yield call (axios.post, "/api/getJobDetails/",{'Data' : action.payload});
  	console.log(response.data.jobs)
  	yield put({type:"SET_JOB_DETAILS",jobDetails:response.data.jobs})
  }
 
  function* do_getJob(action){
  	console.log(action.payload);
- 	var response = yield call (axios.post, "http://localhost:8080/api/getJob/",{'Data' : action.payload});
+ 	var response = yield call (axios.post, "/api/getJob/",{'Data' : action.payload});
  	console.log(response.data.job)
  	yield put({type:"SET_JOB",job:response.data.job})
  }
@@ -95,7 +91,7 @@ function* do_addclient(action){
  function* do_deleteJobs(action){
  	console.log("In delete Jobs");
  	console.log(typeof action.payload)
- 	var response = yield call (axios.post, "http://localhost:8080/api/deleteJobs/",{'Data': action.payload});
+ 	var response = yield call (axios.post, "/api/deleteJobs/",{'Data': action.payload});
  }
 
 export function* rootSaga() {

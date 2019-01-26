@@ -1,6 +1,6 @@
 import React from 'react';
-import { Table, Divider, Tag } from 'antd';
-import {Row, DatePicker,Col ,Button} from 'antd';
+import { Table, Divider, Tag ,Popconfirm} from 'antd';
+import {Row, DatePicker,Col ,Button,message} from 'antd';
 import moment from 'moment';
 import {getJobDetails,deleteJobs} from '../Redux/Actions';
 import {connect} from 'react-redux';
@@ -9,6 +9,9 @@ import {connect} from 'react-redux';
 const { MonthPicker, RangePicker } = DatePicker;
 const { Column, ColumnGroup } = Table;
 
+const error = (text)=>{
+	message.error(text);
+}
 
 const mapDispatchToProps = (dispatch)=>{
 	return{
@@ -37,7 +40,7 @@ class JobTable extends React.Component{
 		super(props)
 		this.state = {
 			rowsSelected : true,
-			selectedRows:null,
+			selectedRows:[],
 			selectedRowKeys: [],
 			from_date : null,
 			to_date : null,
@@ -81,6 +84,7 @@ class JobTable extends React.Component{
 	OnDeleteJobs= ()=>{
 		debugger;
 		var jobs = [];
+		if(this.state.selectedRows.length > 0) {
 		jobs = this.state.selectedRows.map((row)=>{
 			return row.JobID;
 		})
@@ -93,6 +97,9 @@ class JobTable extends React.Component{
 		this.setState({
 			rowsSelected : true,
 		})
+		}else{
+			error("Please select jobs to delete");
+		}
 	}
 
 
@@ -140,15 +147,11 @@ class JobTable extends React.Component{
 			        >
 			        Load
 			        </Button>
-			        <Button 
-			            type="primary"
-			            style={{margin:"5px"}}
-			            onClick = {this.OnDeleteJobs}
-			            disabled = {this.state.rowsSelected}
-			        >
-			        Delete
-			        </Button>
-
+			        <Popconfirm  style={{margin:"5px"}} okType="primary" title="Are you sure delete jobs ?" onConfirm={this.OnDeleteJobs } disabled = {this.state.disabled} onCancel={null} okText="Yes" cancelText="No" >
+			        
+			        	<Button>Delete</Button>
+			        
+			        </Popconfirm>
 			      </div>
 			      </Col>
 			      </Row>
