@@ -4,7 +4,7 @@ import {Row, DatePicker,Col ,Button,message} from 'antd';
 import moment from 'moment';
 import {getJobDetails,deleteJobs} from '../Redux/Actions';
 import {connect} from 'react-redux';
-
+import {Redirect} from 'react-router-dom';
 
 const { MonthPicker, RangePicker } = DatePicker;
 const { Column, ColumnGroup } = Table;
@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch)=>{
 }
 const mapStateToProps = (state)=>{
 	return{
-		role : state.user.role,
+		role : state.user.Role,
 		jobDetails : state.jobDetails,
 
 	}
@@ -51,6 +51,7 @@ class JobTable extends React.Component{
 		this.loadJobs = this.loadJobs.bind(this);
 		this.onSelectChange = this.onSelectChange.bind(this);
 		this.OnChangeDate = this.OnChangeDate.bind(this);
+		this.isvalidated = this.isvalidated.bind(this);
 	}
 
 	onSelectChange = (selectedRowKeys, selectedRows)  => {
@@ -102,6 +103,12 @@ class JobTable extends React.Component{
 		}
 	}
 
+	isvalidated = ()=>{
+		if (this.props.role !== 'staff'){
+			return true;
+		}
+	}
+
 
 	componentDidMount (){
 
@@ -136,6 +143,7 @@ class JobTable extends React.Component{
 			
 		return(
 			<div>
+				{this.isvalidated() ? null : <Redirect to ='/PageNotFound'/>}
 				<Row>
 					<Col>
 					<div style={{margin:"5px"}}>
@@ -210,6 +218,7 @@ class JobTable extends React.Component{
 			      	<Col xs= {1} sm={1} md={2} lg={3}>
 			      	</Col>
 					</Row>
+				}
 
 			</div>
 

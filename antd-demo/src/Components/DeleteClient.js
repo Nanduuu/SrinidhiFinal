@@ -3,6 +3,7 @@ import {Row, Col} from 'antd';
 import { Select,Input,Button ,message} from 'antd';
 import {connect} from 'react-redux';
 import {getClients,deleteClients} from '../Redux/Actions';
+import {Redirect} from 'react-router-dom';
 const Option = Select.Option;
 
 const LabelStyle = {
@@ -48,6 +49,7 @@ class DeleteClient extends React.Component{
 		this.loadClients = this.loadClients.bind(this);
 		this.OnSelect = this.OnSelect.bind(this);
 		this.OnDeselect = this.OnDeselect.bind(this);
+		this.isvalidated = this.isvalidated.bind(this);
 	}
 
 	componentWillReceiveProps = (nextProps)=>{
@@ -84,6 +86,12 @@ OnDeselect = (value)=>{
 
 }
 
+isvalidated = ()=>{
+		if (this.props.role !== 'staff'){
+			return true;
+		}
+	}
+
 loadClients = (clients)=>{
      const listItems = clients.map((number) =>
 						  <Option key = {number} value={number}>{number}</Option>
@@ -99,6 +107,7 @@ OnSubmit = (e)=>{
 render(){
 	return(
 				<div>
+					{this.isvalidated() ? null : <Redirect to ='/PageNotFound'/>}
 					<Row style={{padding:"5px"}}>
 						<Col xs={1} sm={2} md={2} lg={3}>
 						</Col>

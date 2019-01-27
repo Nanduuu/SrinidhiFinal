@@ -44,11 +44,7 @@ class Header extends React.Component{
 	constructor(props){
 		super(props);
 	}
-	isredirect = ()=>{
-		if(this.authenticated){
-			return <Redirect to = '/' />
-		}
-	}
+	
 
 
 	render(){

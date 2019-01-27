@@ -2,6 +2,8 @@ import React from 'react';
 import  {Row,Col} from 'antd';
 import { Calendar, Badge,Icon,Popover,Divider } from 'antd';
 import {Table} from 'antd';
+import {Redirect}  from 'react-router-dom';
+import {connect} from 'react-redux';
 
 function getListData(value) {
   let listData;
@@ -48,6 +50,21 @@ const dataSource = [{
 },];
 
 
+const mapStateToProps = (state)=>{
+  console.log(state.user.Role)
+  return {
+    role : state.user.Role,
+    
+  }
+
+}
+const mapDispatchToProps = (dispatch)=>{
+  
+
+}
+
+
+
 class Userdashboard extends React.Component{
 
 	constructor(props){
@@ -56,7 +73,12 @@ class Userdashboard extends React.Component{
 		this.dateCellRender = this.dateCellRender.bind(this);
 		
 	}
- 
+  isvalidated = ()=>{
+    if (this.props.role === 'staff'){
+      return true;
+    }
+  }
+
   onSelect = (value) => {
     //alert(value)
   }
@@ -73,6 +95,7 @@ class Userdashboard extends React.Component{
 
   return (
     <div style={{padding:"2px"}}>
+
       <Popover placement="topLeft" title={text} content={content} >
           <Badge count={2} style={{ backgroundColor: '#3366ff' }} >
           </Badge>
@@ -85,6 +108,7 @@ class Userdashboard extends React.Component{
 render(){
 	return(
 		<div>
+      {this.isvalidated() ? null : <Redirect to ='/'/>}
 			<Row>
 				 <Col xs={0} sm={2} md={4} lg={5} xl={5}> 
         </Col>
@@ -112,4 +136,4 @@ render(){
 }
 }
 
-export default Userdashboard;
+export default connect(mapStateToProps,mapDispatchToProps) (Userdashboard);

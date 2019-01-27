@@ -3,11 +3,11 @@ import {Switch, Route} from 'react-router-dom';
 import Header from './Header';
 import Media from "react-media";
 import Userdashboard from './Userdashboard';
-import {StaffCcDropdown} from './StaffCcDropdown';
 import {StaffCcMenu} from './StaffCcMenu';
-import StaffJobDetails from './StaffJobDetails';
+import StaffCcDropdown from './StaffCcDropdown';
 import SubmitTimeSheet from './SubmitTimeSheet';
 import PersonalDetails from './PersonalDetails';
+import StaffJobDetails from './StaffJobDetails';
 
 
 class Staff extends React.Component{
@@ -30,7 +30,7 @@ render(){
 								            )
 								          }
 				</Media>	
-				<Route path = '/staff/' exact component={Userdashboard} />
+				<Route exact path = '/staff/' component={Userdashboard} />
 			    <Route path ='/staff/jobdetails' component={StaffJobDetails} />
 			    <Route path ='/staff/Submittimesheet' component={SubmitTimeSheet} />
 			    <Route path ='/staff/personaldetails' component={PersonalDetails} />		

@@ -38,6 +38,7 @@ const mapStateToProps = (state) => {
         authenticated:state.isauthenticated,
         statusInd : state.actions.addclient,
         msg:state.addClientMsg,
+        role : state.user.Role,
         addClientSuccess: state.addClientSuccess,
        
     }
@@ -126,6 +127,12 @@ class Addclient extends React.Component {
 
 	}
 
+	isvalidated = ()=>{
+		if (this.props.role !== 'staff'){
+			return true;
+		}
+	}
+
 	status =() =>{
 
 		if (this.props.msg != "") {
@@ -176,7 +183,7 @@ class Addclient extends React.Component {
 
 		return(
 			<div>
-			
+			{this.isvalidated() ? null : <Redirect to ='/PageNotFound'/>}
 			{
 
 			this.state.isauthenticated ?

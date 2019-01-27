@@ -33,12 +33,14 @@ const error = (text)=>{
 }
 
 const mapStateToProps = (state)=>{
+	console.log(state.user.Role)
 	return {
 		role : state.user.Role,
 		clients:state.clients,
 		addJobflag : state.addJobflag,
 		addJobMsg : state.addJobMsg,
 	}
+
 }
 const mapDispatchToProps = (dispatch)=>{
 	return{
@@ -241,10 +243,10 @@ class Jobdesc extends React.Component {
 						<Row>
 							<Col>
 								<Row>
-									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle} >
+									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle} >
 										<label >Docter/Nurse</label>
 									</Col>
-									<Col xs={12} sm={12} md={12} lg={12}>
+									<Col xs={16} sm={16} md={12} lg={12}>
 										<Select value = {this.state.staff} onChange={this.handleChangeStaff}  style={InputStyle} required>
 								            <Option value="Doctor">Doctor</Option>
 								            <Option value="Nurse">Nurse</Option>
@@ -257,10 +259,10 @@ class Jobdesc extends React.Component {
 
 								</Row>
 								<Row>
-									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
+									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
 										<label>Select Client</label>
 									</Col>
-									<Col xs={12} sm={12} md={12} lg={12}>
+									<Col xs={16} sm={16} md={12} lg={12}>
 										<Select value={this.state.client} onChange={this.handleChangeClient} required style={InputStyle}>
 								            {this.loadClients(this.props.clients)}
 								          </Select>
@@ -268,27 +270,27 @@ class Jobdesc extends React.Component {
 									</Col>
 								</Row>
 								<Row>
-									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
+									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
 										<label style={LabelStyle}>Date</label>
 									</Col>
-									<Col xs={12} sm={12} md={12} lg={12}>
+									<Col xs={16} sm={16} md={12} lg={12}>
 										<DatePicker  disabledDate={this.disabledDate}  onChange = {this.OnchangeDate} required size={this.size} style={InputStyle}/>
 
 									</Col>
 								</Row>
 								<Row>
-									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
+									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
 										<label>Number of positions</label>
 									</Col>
-									<Col xs={12} sm={12} md={12} lg={12}>
+									<Col xs={16} sm={16} md={12} lg={12}>
 										<InputNumber onChange={this.OnchangeCount}  min={1} max={100} defaultValue={0}style={{width:"97%"} } required/>
 									</Col>
 								</Row>
 								<Row>
-									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
+									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
 										<label>Duration</label>
 									</Col>
-									<Col xs={12} sm={12} md={12} lg={12}>
+									<Col xs={16} sm={16} md={12} lg={12}>
 										<Row>
 										<Col xs={12} sm={12} md={12} lg={12}>
 											<TimePicker value={this.state.from_time} onChange = {this.OnchangeFromTime} defaultValue={moment('08', format)} format={format} style={InputStyle} required/>

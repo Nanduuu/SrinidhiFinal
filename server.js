@@ -17,6 +17,7 @@ const addJob = require('./addJob');
 const getJobDetails = require('./getJobDetails');
 const deleteClients = require('./deleteClients');
 const deleteJobs = require('./deleteJobs');
+const updateEditJob = require('./updateEditJob');
 const getJob = require('./getJob');
 var path = require("path");
 
@@ -42,6 +43,7 @@ app.use('/api/addJob',addJob);
 app.use('/api/getJobDetails',getJobDetails);
 app.use('/api/deleteClients',deleteClients);
 app.use('/api/deleteJobs',deleteJobs);
+app.use('/api/updateeditjob',updateEditJob);
 // var j = schedule.scheduleJob( '1 * * * * *', function(){
 //   console.log('The answer to life, the universe, and everything!');
 //   var con = mysql.createConnection({

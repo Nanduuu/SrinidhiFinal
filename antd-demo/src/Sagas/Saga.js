@@ -94,6 +94,13 @@ function* do_addclient(action){
  	var response = yield call (axios.post, "/api/deleteJobs/",{'Data': action.payload});
  }
 
+ function* do_updatejobdetails(action) {
+ 	var response = yield call (axios.post, "/api/updateeditjob/",{'Data':action.payload});
+
+ 	yield put ({type:"SET_EDIT_JOB", success:response.data.success, msg:response.data.msg})
+
+ }
+
 export function* rootSaga() {
 
 	yield takeEvery("LOGIN",do_login);
@@ -105,5 +112,6 @@ export function* rootSaga() {
 	yield takeLatest("GETJOBDETAILS",do_getJobDetails);
 	yield takeLatest("GETJOB",do_getJob);
 	yield takeLatest("DELETEJOBS",do_deleteJobs);
+	yield takeLatest("UPDATEJOBDETAILS",do_updatejobdetails);
 
 } 

@@ -68,3 +68,16 @@ export function getJob(data) {
 		payload:data,
 	}
 }
+
+export function updatejobdetails(data) {
+	return{
+		type:"UPDATEJOBDETAILS",
+		payload : data,
+	}
+}
+
+export function resetEditJob() {
+	return{
+		type:"RESET_EDIT_JOB",
+	}
+}

@@ -29,7 +29,7 @@ class App extends Component {
     return (
       <div className="App">
       	 <Switch>
-          <Route path = '/' exact component={Login} />
+          <Route exact path = '/' component={Login} />
           <Route path ='/newuser' component={Newuser} />
       		<Route path ='/staff' component={Staff} />
       		<Route path ='/admin' component={Admin}  />

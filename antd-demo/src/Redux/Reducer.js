@@ -21,6 +21,9 @@
 
           job:{},
 
+          editJobMsg : "",
+          editJobFlag : false,
+
           
 
  
@@ -184,6 +187,27 @@
 
         break;
 
+        case "SET_EDIT_JOB" :
+            return Object.assign(
+              {},
+              state,
+              {
+                editJobMsg : action.msg,
+                editJobFlag : action.success,
+              }
+            )
+          break;
+
+        case "RESET_EDIT_JOB" :
+            return Object.assign(
+              {},
+              state,
+              {
+                editJobMsg : "",
+                editJobFlag : false,
+              }
+            )
+          break;
   	}
 
   return state

@@ -1,10 +1,11 @@
 import React from 'react';
 import {Button} from 'antd';
 import {Row,Dropdown,Menu, Col,Icon} from 'antd';
-import { Link } from 'react-router-dom';
+import { Link ,Select} from 'react-router-dom';
 
 
-export  class StaffCcDropdown extends React.Component{
+
+export  default class StaffCcDropdown extends React.Component{
 
 	constructor (props){
 		super(props);
@@ -13,13 +14,16 @@ export  class StaffCcDropdown extends React.Component{
 		const menu = (
 					  <Menu>
 					    <Menu.Item>
-					    <Link to={'/admin/'}>  <Icon type="plus-square" />Add Job </Link>
+					    <Link to={'/staff/'}>  <Icon type="plus-square" />Dash Board </Link>
 					    </Menu.Item>
 					    <Menu.Item>
-					     <Link to ='/admin/jobdetails'> <Icon type="clock-circle" />Job Details </Link>
+					     <Link to ='/staff/jobdetails'> <Icon type="clock-circle" />Job Details </Link>
 					    </Menu.Item>
 					    <Menu.Item>
-					     <Link to='/admin/addclient'>  <Icon type="user" />Add Client </Link>
+					     <Link to='/staff/Submittimesheet'>  <Icon type="user" />Submit TimeSheet </Link>
+					    </Menu.Item>
+					    <Menu.Item>
+					    <Link to ="/staff/personaldetails">  <Icon type = "user" />  Personal Details </Link>
 					    </Menu.Item>
 					  </Menu>
 					);

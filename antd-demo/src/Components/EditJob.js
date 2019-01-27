@@ -5,7 +5,7 @@ import { Divider,TimePicker ,InputNumber,DatePicker} from 'antd';
 import moment from'moment';
 import {message} from 'antd';
 import {connect} from 'react-redux';
-import {getClients,getJob} from '../Redux/Actions';
+import {getClients, getJob, updatejobdetails, resetEditJob} from '../Redux/Actions';
 
 
 const format = 'HH:mm:ss';
@@ -35,6 +35,8 @@ const mapStateToProps = (state)=>{
 		role : state.user.Role,
 		clients:state.clients,
 		job : state.job,
+		editJobMsg : state.editJobMsg,
+		editJobFlag : state.editJobFlag,
 	}
 }
 const mapDispatchToProps = (dispatch)=>{
@@ -44,6 +46,12 @@ const mapDispatchToProps = (dispatch)=>{
 		},
 		getJob:(data)=>{
 				dispatch(getJob(data));
+		},
+		updatejobdetails :(data)=>{
+			dispatch(updatejobdetails(data));
+		},
+		resetEditJob :()=>{
+			dispatch(resetEditJob());
 		}
 	}
 }
@@ -62,10 +70,11 @@ class EditJob extends React.Component{
 			from_time_string:null,
 			to_time : null,
 			to_time_string:null,
+			save_enable : true,
+			edit_enable : false,
 		}
 		this.reset = this.reset.bind(this);
 		this.jobidOnChange = this.jobidOnChange.bind(this);
-		//this.isvalidated = this.isvalidated.bind(this);
 		this.loadClients = this.loadClients.bind(this);
 		this.OnchangeDate = this.OnchangeDate.bind(this);
 		this.Onsubmit = this.Onsubmit.bind(this);
@@ -112,9 +121,8 @@ class EditJob extends React.Component{
 				from_time_string: this.state.from_time_string,
 				to_time_string:this.state.to_time_string,
 				count: this.state.count,
-
 			}
-			//this.props.addJob(data)
+			this.props.updatejobdetails(data);
 			console.log(data);
 		}
 	}
@@ -127,18 +135,38 @@ class EditJob extends React.Component{
 	}
 	componentWillReceiveProps(nextProps){
 			
-		  if(nextProps.job != this.props.job){
+
+			if(nextProps.editJobFlag == true && nextProps.editJobMsg != "" ){
+		   	
+		   		success(nextProps.editJobMsg);
+
+		   		this.reset();
+		   		this.props.resetEditJob();
+		   }
+
+		   if(nextProps.editJobFlag == false && nextProps.editJobMsg != ""){
+		   		 error(nextProps.editJobMsg);
+		   		 this.props.resetEditJob();
+		   }
+
+		  if(nextProps.job != this.props.job && nextProps.job != null){
 		   console.log(nextProps.job);	
+		   debugger;
+		   
+
+
 		    this.setState({staff: nextProps.job.Staff,
 		    				date: moment(nextProps.job.Date),
 		    				disabled:false ,
 		    				disabledJobId:true,
+		    				save_enable : false,
 		    				client : nextProps.job.Client,
 		    				count : nextProps.job.Requested,
 		    				from_time :moment(nextProps.job.Date + ' ' + nextProps.job.from_time),
 		    				to_time :moment(nextProps.job.Date + ' ' + nextProps.job.to_time),
 		    				from_time_string :nextProps.job.from_time,
 		    				to_time_string :nextProps.job.to_time,
+		    				edit_enable : true,
 
 		    			});
 		   
@@ -167,13 +195,18 @@ class EditJob extends React.Component{
 			to_time : null,
 			disabled:true,
 			disabledJobId:false,
+			save_enable : true,
+			edit_enable : false,
 		})
 	}
 
 	OnchangeDate = (value, datestring)=>{
 		this.setState({
-			date : value
+			date : moment(datestring),
+			
 		})
+
+		alert(value)
 	}
 	OnchangeCount = (value)=>{
 
@@ -285,7 +318,7 @@ class EditJob extends React.Component{
 										<TimePicker disabled={this.state.disabled} value={this.state.from_time} onChange = {this.OnchangeFromTime} defaultValue={moment('08:00:00', format)} format={format} style={InputStyle} required/>
 										</Col>
 										<Col xs={12} sm={12} md={12} lg={12} >
-										<TimePicker disabled={this.state.disabled} value={this.state.to_time} onChange = {this.OnchangeFromTime} defaultValue={moment('08:00:00', format)} format={format} style={InputStyle} required/>
+										<TimePicker disabled={this.state.disabled} value={this.state.to_time} onChange = {this.OnchangeToTime} defaultValue={moment('08:00:00', format)} format={format} style={InputStyle} required/>
 										</Col>
 									</Row>
 									
@@ -306,9 +339,9 @@ class EditJob extends React.Component{
 							</Row>
 							<Row>
 								<Col style={LabelStyle} >
-								<Button onClick={this.loadJob}  type="primary">Edit Job</Button>
-								<Button onClick ={this.Onsubmit}>Save</Button>
-								<Button onClick = {this.reset}>Cancel</Button>
+								<Button disabled={this.state.edit_enable} onClick={this.loadJob}  type="primary">Edit Job</Button>
+								<Button disabled = {this.state.save_enable} onClick ={this.Onsubmit}>Save</Button>
+								<Button disabled = {this.state.save_enable} onClick = {this.reset}>Cancel</Button>
 								</Col>
 								
 							</Row>
