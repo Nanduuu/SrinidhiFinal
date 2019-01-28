@@ -11,6 +11,7 @@ const columns = [{
   title: 'JobId',
   dataIndex: 'JobId',
   key: 'JobId',
+  fixed :'left',
 
 },{
   title: 'Hospital',
@@ -27,6 +28,8 @@ const columns = [{
   title: 'Action',
   dataIndex: 'Action',
   key: 'Action',
+  fixed : 'right',
+  width: 100,
   render: (text, record) => (
     <span>
        <a href="javascript:;">Decline</a>
@@ -89,7 +92,7 @@ render(){
 			        			</Button>
 			        	     </div>
 			     			<div>
-           						 <Table columns={columns} size="medium" dataSource={dataSource} />
+           						 <Table columns={columns} scroll={{ x: 1000 }} size="medium" dataSource={dataSource} />
 					   			
           					</div>
 						</Col>
