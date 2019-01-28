@@ -18,6 +18,7 @@
           addJobMsg:"",
 
           jobDetails : [],
+          staffjobDetails : [],
 
           job:{},
 
@@ -43,7 +44,8 @@
   						user: { 
   								Fname : action.user.Fname,
   								Email : action.user.Emailid,
-  								Role : action.user.Role
+  								Role : action.user.Role,
+                  Stafftype : action.user.Stafftype,
     						}
   					}
   				)
@@ -150,7 +152,7 @@
                             'from_time' : details[i].start_time,
                             'to_time': details[i].end_time,
                             'Requested' : details[i].count,
-                            'Availability':details[i].left,
+                            'Filled':details[i].filled,
                        })
                  }
                  }  
@@ -205,6 +207,33 @@
               {
                 editJobMsg : "",
                 editJobFlag : false,
+              }
+            )
+          break;
+        case "SET_STAFF_JOB_DETAILS" : 
+                console.log(action.jobs)
+                var details = action.jobDetails;
+                var data = [];
+                 if(details.length != 0){
+                   for (var i = 0 ; i <= details.length - 1; i++){
+                          data.push({
+                            'key' : details[i].jobid,
+                            'JobID' : details[i].jobid,
+                            'Client': details[i].client,
+                            'Date' : details[i].date.slice(0,10),
+                            'Staff' : details[i].worker,
+                            'from_time' : details[i].start_time,
+                            'to_time': details[i].end_time,
+                            'Requested' : details[i].count,
+                            'Availability':details[i].left,
+                       })
+                 }
+                 }  
+          return Object.assign(
+              {},
+              state,
+              {
+                staffjobDetails:data,
               }
             )
           break;

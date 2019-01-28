@@ -101,6 +101,13 @@ function* do_addclient(action){
 
  }
 
+ function* do_staffgetjobdetails(action){
+ 	var response = yield call (axios.post, "/api/staffgetjobdetails/",{'Data':action.payload});
+ 	console.log("In saga");
+ 	yield put({ type : "SET_STAFF_JOB_DETAILS",success:response.data.success, jobDetails:response.data.jobs});
+
+ }
+
 export function* rootSaga() {
 
 	yield takeEvery("LOGIN",do_login);
@@ -113,5 +120,6 @@ export function* rootSaga() {
 	yield takeLatest("GETJOB",do_getJob);
 	yield takeLatest("DELETEJOBS",do_deleteJobs);
 	yield takeLatest("UPDATEJOBDETAILS",do_updatejobdetails);
+	yield takeLatest("STAFFGETJOBDETAILS",do_staffgetjobdetails);
 
 } 

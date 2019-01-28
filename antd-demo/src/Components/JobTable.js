@@ -207,9 +207,9 @@ class JobTable extends React.Component{
 								 dataIndex="Requested"
 								 key="Requested"/>
 							<Column
-								title="Availability"
-								dataIndex="Availability"
-								key="Status" />
+								title="Filled"
+								dataIndex="Filled"
+								key="Filled" />
 
 					
 					</Table>
@@ -218,7 +218,7 @@ class JobTable extends React.Component{
 			      	<Col xs= {1} sm={1} md={2} lg={3}>
 			      	</Col>
 					</Row>
-				}
+				
 
 			</div>
 

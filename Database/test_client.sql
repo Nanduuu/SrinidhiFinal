@@ -39,7 +39,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES ('NARAYANA',6,'Bangalore','NARAYANA-1','560029'),('Appolo',27,'Bangalore','Appolo 1','560025'),('Appolo',28,'Bangalore','Appolo-2','562201'),('Medsick',29,'Bangalore','BSK-MedSick','560029');
+INSERT INTO `client` VALUES ('Appolo',27,'Bangalore','Appolo 1','560025'),('Appolo',28,'Bangalore','Appolo-2','562201'),('Medsick',29,'Bangalore','BSK-MedSick','560029'),('OK ',30,'ok','ok','132456'),('St John',31,'Bangalore','StJohn-1','560025');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-24 12:51:02
+-- Dump completed on 2019-01-28 10:48:10

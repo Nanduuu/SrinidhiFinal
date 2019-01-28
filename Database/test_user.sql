@@ -30,6 +30,7 @@ CREATE TABLE `user` (
   `Pword` char(250) NOT NULL,
   `role` varchar(45) NOT NULL,
   `userid` int(11) NOT NULL,
+  `stafftype` varchar(45) NOT NULL,
   PRIMARY KEY (`userid`),
   UNIQUE KEY `Emailid_UNIQUE` (`Emailid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -41,7 +42,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('nandakumarvn01@gmail.com','Nanda','Kumar','9945215941','912ec803b2ce49e4a541068d495ab570','staff',1),('ajaymr2345@gmail.com','Ajay','Kumar','9945215941','fd2cc6c54239c40495a0d3a93b6380eb','admin',2),('bharathbabukm93@gmail.com','Bharath','Babu','9945215941','962012d09b8170d912f0669f6d7d9d07','staff',3),('bharathbabukm931@gmail.com','Bharath','Babu','9945215941','962012d09b8170d912f0669f6d7d9d07','staff',4),('nandakumarvn02@gmail.com','Bharath','Babu','9945215941','962012d09b8170d912f0669f6d7d9d07','staff',5),('bharathbabukm94@gmail.com','Bharath','Babu','9945215941','202cb962ac59075b964b07152d234b70','staff',6),('bharathbabukm95@gmail.com','Bharath','Babu','9945215941','962012d09b8170d912f0669f6d7d9d07','staff',7),('bharathbabukm96@gmail.com','Bharath','Babu','9945215941','962012d09b8170d912f0669f6d7d9d07','staff',8);
+INSERT INTO `user` VALUES ('nandakumarvn01@gmail.com','Nanda','Kumar','9945215941','912ec803b2ce49e4a541068d495ab570','staff',1,'Doctor'),('ajaymr2345@gmail.com','Ajay','Kumar','9945215941','fd2cc6c54239c40495a0d3a93b6380eb','admin',2,''),('bharathbabukm93@gmail.com','Bharath','Babu','9945215941','962012d09b8170d912f0669f6d7d9d07','staff',3,''),('bharathbabukm931@gmail.com','Bharath','Babu','9945215941','962012d09b8170d912f0669f6d7d9d07','staff',4,''),('nandakumarvn02@gmail.com','Bharath','Babu','9945215941','962012d09b8170d912f0669f6d7d9d07','staff',5,''),('bharathbabukm94@gmail.com','Bharath','Babu','9945215941','202cb962ac59075b964b07152d234b70','staff',6,''),('bharathbabukm95@gmail.com','Bharath','Babu','9945215941','962012d09b8170d912f0669f6d7d9d07','staff',7,''),('bharathbabukm96@gmail.com','Bharath','Babu','9945215941','962012d09b8170d912f0669f6d7d9d07','staff',8,''),('hareesh@gmail.com','Hareesh','Ram','9945215941','912ec803b2ce49e4a541068d495ab570','staff',9,'Domestic worker');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-24 12:51:02
+-- Dump completed on 2019-01-28 10:48:11

@@ -27,7 +27,7 @@ router.post('/',function(req,res){
 					  			'start_time' : req.body.Data.from_time_string,
 					  			'end_time' : req.body.Data.to_time_string,
 					  			'count' :req.body.Data.count,
-					  			'left':0
+					  			'filled':0
 					 }
 		console.log(data);
 		con.connect(function(err){

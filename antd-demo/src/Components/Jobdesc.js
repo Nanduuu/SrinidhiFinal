@@ -280,7 +280,7 @@ class Jobdesc extends React.Component {
 								</Row>
 								<Row>
 									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
-										<label>Number of positions</label>
+										<label>No. of positions</label>
 									</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
 										<InputNumber onChange={this.OnchangeCount}  min={1} max={100} defaultValue={0}style={{width:"97%"} } required/>

@@ -30,7 +30,7 @@ CREATE TABLE `jobs` (
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
   `count` int(10) NOT NULL,
-  `left` int(10) DEFAULT NULL,
+  `filled` int(10) DEFAULT '0',
   PRIMARY KEY (`jobid`),
   UNIQUE KEY `jobid_UNIQUE` (`jobid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -42,7 +42,7 @@ CREATE TABLE `jobs` (
 
 LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
-INSERT INTO `jobs` VALUES (1,'Doctor','Appolo-2','2019-01-29','10:00:00','17:00:00',10,0);
+INSERT INTO `jobs` VALUES (1,'Health Care assistant (HCA)','Appolo-2','2020-01-24','07:42:12','12:42:12',15,0),(2,'Nurse','Appolo 1','2019-01-29','09:24:19','19:24:19',5,0),(3,'Doctor','Appolo 1','2019-01-31','10:25:12','23:23:11',5,0),(4,'Doctor','BSK-MedSick','2019-01-30','09:46:15','17:46:15',10,0),(5,'Domestic worker','BSK-MedSick','2019-02-21','10:06:42','17:06:42',10,0);
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-24 12:51:02
+-- Dump completed on 2019-01-28 10:48:11

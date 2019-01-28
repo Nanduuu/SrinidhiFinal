@@ -25,7 +25,7 @@ router.post('/', function(req,res){
 		  		console.log(req.body);
 		  		 
 
- 				var sql = "select Emailid, Fname, Lname,  Tel, Role from user where Emailid = '" + req.body.Data.email + "' AND Pword = '" + encrypt + "';";							
+ 				var sql = "select Emailid, Fname, Lname,  Tel, Role, stafftype from user where Emailid = '" + req.body.Data.email + "' AND Pword = '" + encrypt + "';";							
 		  		 con.query(sql, function(error,result,fields){
 		  			//console.log(err);
 		  			//console.log(result);
@@ -46,7 +46,8 @@ router.post('/', function(req,res){
 		  					const token = jwt.sign({
 		  						"Emailid":result[0].Emailid,
 		  						"Fname" : result[0].Fname,
-		  						"Role" : result[0].Role
+		  						"Role" : result[0].Role,
+		  						"Stafftype" : result[0].stafftype,
 
 		  					}, 'secretKey');
 		  					console.log(token);
@@ -56,6 +57,7 @@ router.post('/', function(req,res){
 		  							  "Lname" : result[0].Lname,
 		  							  "Tel"   : result[0].Tel,
 		  							   "Role" :result[0].Role,
+		  							   "Stafftype" : result[0].stafftype,
 		  							   "Token" : token	});
 		  				}
 		  				

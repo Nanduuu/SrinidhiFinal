@@ -81,3 +81,10 @@ export function resetEditJob() {
 		type:"RESET_EDIT_JOB",
 	}
 }
+
+export function staffgetjobdetails(data) {
+	return{
+		type : "STAFFGETJOBDETAILS",
+		payload : data,
+	}
+}
