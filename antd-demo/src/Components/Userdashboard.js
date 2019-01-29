@@ -17,8 +17,7 @@ const columns = [{
   title: 'Client',
   dataIndex: 'Client',
   key: 'Client',
-  fixed : 'left',
-},
+ },
 {
   title: 'Date',
   dataIndex: 'Date',
@@ -29,18 +28,20 @@ const columns = [{
   title: 'From Time',
   dataIndex: 'from_time',
   key: 'from_time',
+  
 }, 
  {
   title: 'To Time',
   dataIndex: 'to_time',
   key: 'to_time',
+  
 },
 {
   title: 'Action',
   dataIndex: 'Action',
   key: 'Action',
+  width: 100,
   fixed : 'right',
-  width : 75,
   render: (text, record) => (
     <span>
        <a href="javascript:;">Accept</a>
@@ -91,7 +92,7 @@ class Userdashboard extends React.Component{
    var date = value.format("YYYY-MM-DD");
     
     var selectedDateJobs = this.props.jobs.filter(function(item){
-       return item.Date = date;
+       return item.Date === date;
     })
 
     this.setState({
@@ -181,12 +182,12 @@ render(){
 			</Row>	
       <Divider orientation="left">Accept Job</Divider>
       <Row>
-         <Col xs={2} sm={2} md={4} lg={5} xl={5}> 
+         <Col xs={0} sm={0} md={4} lg={5} xl={5}> 
         </Col>
-        <Col xs={20} sm={20} md={16} lg={14} xl={14}> 
-            <Table columns={columns} scroll={{ x: 800 }} size="medium" dataSource={this.state.selectedDateJobs}/>
+        <Col xs={24} sm={24} md={16} lg={14} xl={14}> 
+            <Table size='medium' style={{margin:'0px'}} bordered columns={columns} scroll={{ x: 1000 }} size="medium" dataSource={this.state.selectedDateJobs}/>
         </Col>
-        <Col xs={2} sm={2} md={4} lg={5} xl={5}> 
+        <Col xs={0} sm={0} md={4} lg={5} xl={5}> 
         </Col>
       </Row>  
 

@@ -19,13 +19,25 @@ const deleteClients = require('./deleteClients');
 const deleteJobs = require('./deleteJobs');
 const updateEditJob = require('./updateEditJob');
 const staffgetJobDetails = require('./staffgetJobDetails');
+const email = require('./email');
 const getJob = require('./getJob');
 var path = require("path");
 
 const PDFDocument = require ('pdfkit');
 
+ 
 app.use(express.static('public'));
 
+var data = {};
+data.toList = "nandakumarvn01@gmail.com"
+data.info = {
+	hospital : 'Narayana',
+	date : "01-02-2019",
+	from_time : "10:00:00",
+	to_time : '17:00:00'
+}
+
+//email.sendEmail(data);
 // for parsing application/json
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 

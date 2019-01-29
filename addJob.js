@@ -4,6 +4,7 @@ const mysql = require('mysql');
 var multer = require('multer');
 var upload = multer();
 const app = express();
+const email = require('./email');
 const router = express.Router();
 
 var jwt = require('jsonwebtoken');
@@ -59,7 +60,29 @@ router.post('/',function(req,res){
 								res.send({success:false, msg:"Issue with database"});
 								}
 							}else {
-								con.end();
+								
+								var emailData = {};
+								var toList_sql = 'select Emailid from user where stafftype = "' + req.body.Data.staff +'";';
+								con.query(toList_sql,function(err,result){
+										if(err){
+
+										}
+										var emailData = {};
+										emailData.toList = result.map((item)=>{
+											return item.Emailid
+										}).toString(",");
+										
+										console.log(toList_sql);
+										emailData.info = {
+											hospital : req.body.Data.client,
+												date : date.toISOString().slice(0,10),
+												from_time : req.body.Data.from_time_string,
+												to_time : req.body.Data.to_time_string,
+										}
+										email.sendEmail(emailData);
+										console.log(emailData);
+										con.end();
+								})
 								res.send({success:true,msg:"Job added Successfully"});
 						}
 				})

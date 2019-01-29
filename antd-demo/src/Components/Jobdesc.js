@@ -69,7 +69,7 @@ class Jobdesc extends React.Component {
 			staff : "",
 			client : "",
 			date : null,
-			count : 5,
+			count : 0,
 			from_time : null,
 			from_time_string:null,
 			to_time : null,
@@ -274,7 +274,7 @@ class Jobdesc extends React.Component {
 										<label style={LabelStyle}>Date</label>
 									</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
-										<DatePicker  disabledDate={this.disabledDate}  onChange = {this.OnchangeDate} required size={this.size} style={InputStyle}/>
+										<DatePicker value={this.state.date}  disabledDate={this.disabledDate}  onChange = {this.OnchangeDate} required size={this.size} style={InputStyle}/>
 
 									</Col>
 								</Row>
@@ -283,7 +283,7 @@ class Jobdesc extends React.Component {
 										<label>No. of positions</label>
 									</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
-										<InputNumber onChange={this.OnchangeCount}  min={1} max={100} defaultValue={0}style={{width:"97%"} } required/>
+										<InputNumber value = {this.state.count }onChange={this.OnchangeCount}  min={1} max={100} defaultValue={null} style={{width:"97%"} } required/>
 									</Col>
 								</Row>
 								<Row>
