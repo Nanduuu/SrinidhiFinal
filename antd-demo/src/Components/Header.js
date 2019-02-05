@@ -9,17 +9,17 @@ import {Redirect} from 'react-router-dom'
 
 const baseStyle = {
 	width:'100%',
-	background: '#4292f4',
-	//borderBottom : "5px solid lightblue",
-	//boxShadow:"0px 3px 3px lightblue",
+	background: '#4479a1',
 	color:"white",
-	padding:"10px"
+	padding:"5px"
 }
 
 const imgBorder ={
+	width:"100px",
 	borderRadius: "0px",
 	float:"left",
-	padding:"5px"
+	padding:"1px",
+	borderRadius:"50px 50px"
 }
 
 const mapStateToProps = (state) => {
@@ -27,8 +27,7 @@ const mapStateToProps = (state) => {
     return {
         userName: state.user.Fname,
         authenticated:state.isauthenticated
-                
-    }
+   }
 }
 
 const mapDispatchToProps = (dispatch)=>{
@@ -44,30 +43,27 @@ class Header extends React.Component{
 	constructor(props){
 		super(props);
 	}
-	
-
-
 	render(){
 		return(
 			<div>
 				{this.props.authenticated ? null : <Redirect to='/'/>}
 				<Row style={baseStyle}>	
-					<Col xs={6} sm={6} md={4} lg={4} xl={4} >
-						<img src={Logo}  width="40%" style={imgBorder}/>
+					<Col xs={6} sm={3} md={3} lg={2} xl={2} >
+						<img src={Logo}  width="75%" style={imgBorder}/>
 					</Col>
-					<Col xs={12} sm={12} md={16} lg={16} xl={16} >
-						<p> <span > Mr </span><b>{this.props.userName}</b></p>
-						<span>{this.props.count}</span>
+					<Col xs={12} sm={16} md={18} lg={20} xl={20} >
 					</Col>
-					<Col xs={6} sm={6} md={4} lg={4} xl={4} style={{display:"block-inline"}}>
-						  <span style={{display:"display"}}>
-     						 <Badge dot><Avatar shape="circle" icon="user" /></Badge>
-     									  </span>
-							<Button onClick={this.props.logout} >Logout </Button>
+					<Col xs={6} sm={5} md={3} lg={2} xl={2} style={{display:"block-inline"}}>
+							
+						  <span style={{aligh:"right"}}>
+     						 <Badge status="success" dot ><Avatar shape="circle" icon="user" /></Badge>
+     						 <p> <span > Mr </span><b>{this.props.userName}</b></p>
+     					 </span>
+     					
+							<Button style={{ margin:"auto",position:"relative"}} onClick={this.props.logout} >Logout </Button>
 						
 					</Col>
 				</Row>
-						
 			</div>
 			)
 	}

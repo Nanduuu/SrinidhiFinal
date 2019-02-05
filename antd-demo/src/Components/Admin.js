@@ -11,6 +11,7 @@ import Jobdesc from './Jobdesc';
 import PageNotForund from './PageNotFound';
 import DeleteClient from './DeleteClient';
 import InvoiceProcess from './InvoiceProcess';
+import AdminDashboard from './AdminDashboard';
 
 
 const mapStateToProps = (state) => {
@@ -73,7 +74,7 @@ class Admin extends React.Component{
 				     
 				    
 					<Switch>
-			         	<Route path = '/admin/' exact component={Jobdesc} />
+			         	<Route path = '/admin/' exact component={AdminDashboard} />
 			          	<Route path ='/admin/addclient' component={Addclient} />
 			      		<Route path ='/admin/Jobdetails' component={JobDetails} />
 			      		<Route path ='/admin/deleteclient' component={DeleteClient} />

@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch)=>{
 	return{
 		getJobDetails :(data)=>{
 			dispatch(getJobDetails(data))
-		} ,
+		},
 		deleteJobs : (data)=>{
 			dispatch(deleteJobs(data))
 		},
@@ -28,9 +28,7 @@ const mapStateToProps = (state)=>{
 	return{
 		role : state.user.Role,
 		jobDetails : state.jobDetails,
-
 	}
-
 }
 
      

@@ -19,7 +19,7 @@ const sagaMiddleware =  createSagaMiddleware();
 const store = createStore(Reducer, 
 				composeWithDevTools(
   				applyMiddleware(sagaMiddleware)));
-		//		applyMiddleware(sagaMiddleware));
+	
 
 
 sagaMiddleware.run(rootSaga);
@@ -28,7 +28,7 @@ if(localStorage.jwtToken){
 		setAuthJwt(localStorage.jwtToken);
 		var decode = jwtDecode(localStorage.jwtToken);
 		store.dispatch({type:'SET_CURRENT_USER',user:decode});
-		//store.dispatch({type:"SET_NEXT_CLIENT_ID",nextClientId : "ABC123"})
+		
 }
 
 

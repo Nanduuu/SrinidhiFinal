@@ -244,7 +244,7 @@ class Jobdesc extends React.Component {
 							<Col>
 								<Row>
 									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle} >
-										<label >Docter/Nurse</label>
+										<label >Doctor/Nurse</label>
 									</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
 										<Select value = {this.state.staff} onChange={this.handleChangeStaff}  style={InputStyle} required>
@@ -283,7 +283,7 @@ class Jobdesc extends React.Component {
 										<label>No. of positions</label>
 									</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
-										<InputNumber value = {this.state.count }onChange={this.OnchangeCount}  min={1} max={100} defaultValue={null} style={{width:"97%"} } required/>
+										<InputNumber value = {this.state.count}onChange={this.OnchangeCount}  min={1} max={100} defaultValue={null} style={{width:"97%"} } required/>
 									</Col>
 								</Row>
 								<Row>

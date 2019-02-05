@@ -7,6 +7,10 @@ import moment from 'moment';
 import {Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {addClient,beginAddCleint,setaddclient} from '../Redux/Actions';
+import { Divider } from 'antd';
+import DeleteClient from "./DeleteClient";
+import EditClient from "./EditClient";
+import DeleteShifts from "./DeleteShifts";
 
 const format = 'HH:mm';
 const { TextArea } = Input;
@@ -166,10 +170,6 @@ class Addclient extends React.Component {
 		data.ct_add = this.state.ct_add;
 		data.ct_pin = this.state.ct_pin;
 		this.props.addClient(data);
-		//alert(this.props.addClientSuccess);
-		//success(this.props.addClientMsg);
-		
-		
 	}
 	
 	render(){
@@ -188,6 +188,9 @@ class Addclient extends React.Component {
 
 			this.state.isauthenticated ?
 			<div>
+				<Divider style={{backgroundColor:"#4479a1"}}>
+					<span style={{color:"white"}}>ADD CLIENT</span> 
+				</Divider>
 				<Row style={{padding:'5px'}}>
 					<Col xs={2} sm={2} md={4} lg={5} >
 					{ this.props.addClientSuccess ? this.status : null}
@@ -253,10 +256,86 @@ class Addclient extends React.Component {
 					<Col xs={2} sm={2} md={4} lg={5} >
 					</Col>
 				</Row>
+				<Divider style={{backgroundColor:"#4479a1"}}>
+					<span style={{color:"white"}}>ENABLE / DISABLE CLIENT</span> 
+				</Divider>
+				<DeleteClient/>
+				<Divider style={{backgroundColor:"#4479a1"}}>
+					<span style={{color:"white"}}>EDIT CLIENT</span> 
+				</Divider>
+				<EditClient/>
+				<Divider style={{backgroundColor:"#4479a1"}}>
+					<span style={{color:"white"}}>ADD SHIFTS</span> 
+				</Divider>
+				<Row>
+					<Col xs={2} sm={2} md={4} lg={5} >
+					</Col>
+					<Col xs={20} sm={20} md={16} lg={14} >
+						<Row>
+								<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
+										<label>Select Client</label>
+								</Col>
+								<Col xs={16} sm={16} md={12} lg={12}>
+									<Select value={this.state.client} onChange={this.handleChangeClient} required style={InputStyle}>
+								           {}
+								    </Select>
+								</Col>
+						</Row>
+						<Row>
+								<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
+									<label>Duration</label>
+								</Col>
+									<Col xs={16} sm={16} md={12} lg={12}>
+										<Row>
+										<Col xs={12} sm={12} md={12} lg={12}>
+											<TimePicker value={this.state.from_time} onChange = {this.OnchangeFromTime} defaultValue={moment('08', format)} format={format} style={InputStyle} required/>
+										</Col>
+
+										<Col xs={12} sm={12} md={12} lg={12}>
+											<TimePicker value={this.state.to_time} onChange = {this.OnchangeToTime} defaultValue={moment('08', format)} format={format} style={InputStyle} required />
+										</Col>
+										</Row>
+									</Col>
+
+						</Row>
+						<Row>
+									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle} >
+										<label >Shift Type</label>
+									</Col>
+									<Col xs={16} sm={16} md={12} lg={12}>
+										<Select  onChange={this.handleChangeStaff}  style={InputStyle} required>
+								            <Option value="Early">Early</Option>
+								            <Option value="Late">Late</Option>
+								            <Option value="Long Day">Long Day</Option>
+								            <Option value="Night">Night</Option>
+								            <Option value="Saturday">Saturday</Option>
+								            <Option value="Sunday">Sunday</Option>
+								            <Option value="Sleep Night">Sleep Night</Option>
+								          </Select>
+									</Col>
+
+						</Row>
+						<Row style={{paddingTop:"10px"}}>
+									<Col xs={12} sm={12} md={12} lg={12}>
+										<Button type="primary" style={submitStyle} >Add </Button>
+									</Col>
+									<Col xs={12} sm={12} md={12} lg={12}>
+										<Button type="danger " style={submitStyle} disabled={this.props.statusInd}>Reset</Button>
+									</Col>
+						</Row>
+					</Col>
+					<Col xs={2} sm={2} md={4} lg={5} >
+					</Col>
+				</Row>
+				<Divider style={{backgroundColor:"#4479a1"}}>
+					<span style={{color:"white"}}>DELETE SHIFTS</span> 
+				</Divider>
+				<DeleteShifts/>
+				
+
 			</div>
 			:
 			 <Redirect to='/PageNotFound'/>
-
 		}
 		</div>
 			

@@ -53,19 +53,17 @@ export class CcMenu extends React.Component{
 
 		      >
 		        <Menu.Item key="Add Job">
-		          <Link to={this.props.match.url}>  <Icon type="plus-square" />Add Job </Link>
+		          <Link to={this.props.match.url}>  <Icon type="plus-square" />  DASHBOARD  </Link>
 		        </Menu.Item>
 		        <Menu.Item key="Job Details">
-		          <Link to = { this.props.match.url + '/jobdetails'}> <Icon type="clock-circle" />Job Details </Link>
+		          <Link to = { this.props.match.url + '/jobdetails'}> <Icon type="clock-circle" />JOB DETAILS </Link>
 		        </Menu.Item>
 		        <Menu.Item key="Add Client">
-		          <Link to= { this.props.match.url + '/addclient'}>  <Icon type="user" />Add Client </Link>
+		          <Link to= { this.props.match.url + '/addclient'}>  <Icon type="user" />CLIENT DETAIL </Link>
 		        </Menu.Item>
-		        <Menu.Item key="Delete Client">
-		          <Link to= { this.props.match.url + '/deleteclient'}>  <Icon type="user" />Delete Client </Link>
-		        </Menu.Item>
+		        
 		        <Menu.Item key="Invoice Process">
-		          <Link to= { this.props.match.url + '/invoiceprocess'}>  <Icon type="user" />Invoice Process </Link>
+		          <Link to= { this.props.match.url + '/invoiceprocess'}>  <Icon type="user" />INVOICE </Link>
 		        </Menu.Item>
 		        
 		      </Menu>

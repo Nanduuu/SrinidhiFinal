@@ -9,7 +9,7 @@ const Option = Select.Option;
 const LabelStyle = {
 
 	textAlign:"center",
-	paddingTop:"10px"
+	paddingTop:"5px"
 }
 
 const submitStyle = {
@@ -109,36 +109,49 @@ render(){
 				<div>
 					{this.isvalidated() ? null : <Redirect to ='/PageNotFound'/>}
 					<Row style={{padding:"5px"}}>
-						<Col xs={1} sm={2} md={2} lg={3}>
+						<Col xs={2} sm={2} md={4} lg={5} >
 						</Col>
-						<Col xs={22} sm={20} md={20} lg={18}>
+						<Col xs={20} sm={20} md={16} lg={14}>
 							<form onSubmit = {this.OnSubmit}>
-								<Row>
-									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
-										<lable>Select Client </lable>
+								<Row style={{padding:"5px"}}>
+									<Col xs={8} sm={8} md={8} lg={8} style={LabelStyle}>
+										<lable> Select cleints to disable  </lable>
 									</Col>
-									<Col xs={12} sm={12} md={12} lg={12}>
+									<Col xs={8} sm={8} md={8} lg={8}>
 										<Select 
 											mode="tags"
 											onSelect = {this.OnSelect}
 											onDeselect = {this.OnDeselect}
 											style={{ width: '90%' }}>
-											
 											{this.loadClients(this.props.clients)}
 										</Select>
 									</Col>
-								</Row>
-								<Row style={{paddingTop:"10px"}}>
-									<Col xs={24} sm={24} md={24} lg={24}>
-										<Input type="submit" disabled = {this.props.statusInd} style={submitStyle} value = "Delete"/>
+									<Col xs={8} sm={8} md={8} lg={8}>
+										<Button type="primary" disabled = {this.props.statusInd} style={submitStyle}> Disable </Button>
 									</Col>
-																
 								</Row>
+								<Row style={{padding:"5px"}}>
+									<Col xs={8} sm={8} md={8} lg={8} style={LabelStyle}>
+										<lable> Select cleints to enable  </lable>
+									</Col>
+									<Col xs={8} sm={8} md={8} lg={8}>
+										<Select 
+											mode="tags"
+											onSelect = {this.OnSelect}
+											onDeselect = {this.OnDeselect}
+											style={{ width: '90%' }}>
+											{this.loadClients(this.props.clients)}
+										</Select>
+									</Col>
+									<Col xs={8} sm={8} md={8} lg={8}>
+										<Button type="primary" disabled = {this.props.statusInd} style={submitStyle}> Enable</Button>
+									</Col>
+								</Row>
+								
 							</form>
 						</Col>
-						<Col xs={1} sm={2} md={2} lg={3}>
-						</Col>
-
+						<Col xs={2} sm={2} md={4} lg={5} >
+					</Col>
 					</Row>
 				</div>
 		)

@@ -13,18 +13,15 @@ export class CcDropdown extends React.Component{
 		const menu = (
 					  <Menu>
 					    <Menu.Item>
-					    <Link to={'/admin/'}>  <Icon type="plus-square" />Add Job </Link>
+					    <Link to={'/admin/'}>  <Icon type="plus-square" />DASHBOARD</Link>
 					    </Menu.Item>
 					    <Menu.Item>
-					     <Link to ='/admin/jobdetails'> <Icon type="clock-circle" />Job Details </Link>
+					     <Link to ='/admin/jobdetails'> <Icon type="clock-circle" />JOB DETAILS </Link>
 					    </Menu.Item>
 					    <Menu.Item>
-					     <Link to='/admin/addclient'>  <Icon type="user" />Add Client </Link>
+					     <Link to='/admin/addclient'>  <Icon type="user" />CLIENT DETAILS </Link>
 					    </Menu.Item>
-					    <Menu.Item key="Delete Client">
-				          <Link to= { this.props.match.url + '/deleteclient'}>  <Icon type="user" />Delete Client </Link>
-				        </Menu.Item>
-				        <Menu.Item key="Invoice Process">
+					    <Menu.Item key="Invoice Process">
 				          <Link to= { this.props.match.url + '/invoiceprocess'}>  <Icon type="user" />Invoice Process </Link>
 				        </Menu.Item>
 					  </Menu>

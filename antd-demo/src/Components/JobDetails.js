@@ -4,6 +4,7 @@ import {Row, Col } from 'antd';
 import JobTable from './JobTable';
 import EditJob from './EditJob';
 import DeleteJob from './DeleteJob';
+import Jobdesc from './Jobdesc';
 	
 class JobDetails extends React.Component{
 
@@ -18,8 +19,18 @@ render(){
 				<Col>
 				</Col>
 				<Col>
-					<JobTable/>
+					<Divider style={{backgroundColor:"#4479a1"}}>
+						<span style={{color:"white"}}>ADD JOB</span> 
+					</Divider>
+					<Jobdesc/>
+					<Divider style={{backgroundColor:"#4479a1"}}>
+						<span style={{color:"white"}}>EDIT JOB</span> 
+					</Divider>
 					<EditJob/>
+					<Divider style={{backgroundColor:"#4479a1"}}>
+						<span style={{color:"white"}}>JOB LIST</span> 
+					</Divider>
+					<JobTable/>
 					
 				</Col>
 				<Col>

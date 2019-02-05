@@ -1,7 +1,7 @@
 import React from 'react';
 import {Row,Col} from 'antd';
 import { Calendar, Badge,Icon,Popover,Divider } from 'antd';
-import {Table} from 'antd';
+import {Table,Button} from 'antd';
 import {Redirect}  from 'react-router-dom';
 import {connect} from 'react-redux';
 import {staffgetjobdetails} from '../Redux/Actions';
@@ -13,44 +13,8 @@ const calStyle = {
 
 }
 
-const columns = [{
-  title: 'Client',
-  dataIndex: 'Client',
-  key: 'Client',
- },
-{
-  title: 'Date',
-  dataIndex: 'Date',
-  key: 'Date',
-
-},
- {
-  title: 'From Time',
-  dataIndex: 'from_time',
-  key: 'from_time',
-  
-}, 
- {
-  title: 'To Time',
-  dataIndex: 'to_time',
-  key: 'to_time',
-  
-},
-{
-  title: 'Action',
-  dataIndex: 'Action',
-  key: 'Action',
-  width: 100,
-  fixed : 'right',
-  render: (text, record) => (
-    <span>
-       <a href="javascript:;">Accept</a>
-    </span>
-  ),
-}];
-
 const mapStateToProps = (state)=>{
-  console.log(state.user.Role)
+  
   return {
     role : state.user.Role,
     jobs : state.staffjobDetails,
@@ -66,9 +30,15 @@ const mapDispatchToProps = (dispatch)=>{
         },
 
     }
-
 }
 
+const Accept = (props)=>{
+   return(
+      <div>
+            <Button type ="primary" onClick = {()=>props.click(props.record)}>Accept</Button> 
+      </div>
+    )
+ }
 
 class Userdashboard extends React.Component{
 
@@ -98,8 +68,6 @@ class Userdashboard extends React.Component{
     this.setState({
       selectedDateJobs : selectedDateJobs,
     })
-
-
   }
 
   OnChange = (value)=>{
@@ -116,6 +84,7 @@ class Userdashboard extends React.Component{
       stafftype : this.props.stafftype,
     }
     this.props.staffgetjobdetails(data);
+
   }
 
  dateCellRender =(value,dateString)=> {
@@ -140,15 +109,17 @@ class Userdashboard extends React.Component{
      let listData;
       listData = data.filter(function(list){
         if(list.Date == value.format("YYYY-MM-DD")){
-
         return list;
       }
-      })
+ })
  
   return listData ;
 
 }
-
+onAccept = (input)=>{
+  console.log(input);
+  
+}
 componentDidMount(){
 
     var date = new Date();
@@ -166,10 +137,45 @@ componentDidMount(){
 }
 
 render(){
+    const columns = [{
+        title: 'Client',
+        dataIndex: 'Client',
+        key: 'Client',
+       },
+      {
+        title: 'Date',
+        dataIndex: 'Date',
+        key: 'Date',
+
+      },
+       {
+        title: 'From Time',
+        dataIndex: 'from_time',
+        key: 'from_time',
+        
+      }, 
+       {
+        title: 'To Time',
+        dataIndex: 'to_time',
+        key: 'to_time',
+        
+      },
+      {
+        title: 'Action',
+        dataIndex: 'Action',
+        key: 'Action',
+        width: 100,
+        fixed : 'right',
+        render: (text, record) => (
+          <span>
+              <Accept click = {this.onAccept} record={record}/>
+          </span>
+        ),
+      }];
 	return(
-		<div>
+		<div >
       {this.isvalidated() ? null : <Redirect to ='/'/>}
-			<Row>
+			<Row style={{backgroundColor:"#eaeeef"}}>
 				 <Col xs={0} sm={2} md={4} lg={7} > 
         </Col>
 				<Col xs={24} sm={20} md={16} lg={10} > 

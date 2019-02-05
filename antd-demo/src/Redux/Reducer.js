@@ -4,7 +4,6 @@
          	isauthenticated:false,
          	authFailed:false,
 
-
           actions:{
             addclient : false,
           },

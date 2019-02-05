@@ -19,7 +19,7 @@ const deleteClients = require('./deleteClients');
 const deleteJobs = require('./deleteJobs');
 const updateEditJob = require('./updateEditJob');
 const staffgetJobDetails = require('./staffgetJobDetails');
-const email = require('./email');
+
 const getJob = require('./getJob');
 var path = require("path");
 

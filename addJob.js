@@ -75,7 +75,7 @@ router.post('/',function(req,res){
 										console.log(toList_sql);
 										emailData.info = {
 											hospital : req.body.Data.client,
-												date : date.toISOString().slice(0,10),
+												date : req.body.Data.date,
 												from_time : req.body.Data.from_time_string,
 												to_time : req.body.Data.to_time_string,
 										}

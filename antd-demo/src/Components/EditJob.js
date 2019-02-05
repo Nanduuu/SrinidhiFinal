@@ -250,7 +250,7 @@ class EditJob extends React.Component{
 	render(){
 		return(
 				<div style={{margin:'20px'}}>
-					<Divider orientation="left">Edit Job</Divider>
+					
 					<Row>
 						<Col xs= {1} sm={1} md={2} lg={3}>
 			      		</Col>
