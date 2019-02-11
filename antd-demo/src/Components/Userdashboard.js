@@ -16,9 +16,9 @@ const calStyle = {
 const mapStateToProps = (state)=>{
   
   return {
-    role : state.user.Role,
-    jobs : state.staffjobDetails,
-    stafftype : state.user.Stafftype,
+    role : state.red.user.Role,
+    jobs : state.red.staffjobDetails,
+    stafftype : state.red.user.Stafftype,
     
   }
 
@@ -180,7 +180,9 @@ render(){
         </Col>
 				<Col xs={24} sm={20} md={16} lg={10} > 
           <div style={calStyle} >
-					   <Calendar  fullscreen={false} dateCellRender={this.dateCellRender} onSelect={this.onSelect} onChange = {this.OnChange} mode = "month" fullscreen = {true}/>
+              
+					   <Calendar  dateCellRender={this.dateCellRender} onSelect={this.onSelect} onChange = {this.OnChange} mode = "month" fullscreen = {true}/>
+              
           </div>
 				</Col>
        	<Col xs={0} sm={2} md={4} lg={7}> 

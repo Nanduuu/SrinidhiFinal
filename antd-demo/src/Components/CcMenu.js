@@ -10,7 +10,7 @@ export class CcMenu extends React.Component{
 	constructor (props){
 		super(props);
 		this.state = {
-			current: 'Add Job'
+			current: 'DASHBOARD'
 		}
 	}
 
@@ -26,15 +26,15 @@ export class CcMenu extends React.Component{
 		
 		 switch (current) {
 		 	case "/admin/jobdetails" : this.setState({
-												      current: "Job Details",
+												      current: "JOB DETAILS",
 												    });
 		 			break;
-		 	case "/admin/addclient" : this.setState({
-												      current: "Add Client",
+		 	case "/admin/clientdetails" : this.setState({
+												      current: "CLIENT DETAILS",
 												    });
 		 			break;
-		 	case "/admin/deleteclient" : this.setState({
-												      current: "Delete Client",
+		 	case "/admin/invoiceprocess" : this.setState({
+												      current: "INVOICE",
 												    });
 		 			break;
 
@@ -52,17 +52,17 @@ export class CcMenu extends React.Component{
 		        mode="horizontal"
 
 		      >
-		        <Menu.Item key="Add Job">
+		        <Menu.Item key="DASHBOARD">
 		          <Link to={this.props.match.url}>  <Icon type="plus-square" />  DASHBOARD  </Link>
 		        </Menu.Item>
-		        <Menu.Item key="Job Details">
+		        <Menu.Item key="JOB DETAILS">
 		          <Link to = { this.props.match.url + '/jobdetails'}> <Icon type="clock-circle" />JOB DETAILS </Link>
 		        </Menu.Item>
-		        <Menu.Item key="Add Client">
-		          <Link to= { this.props.match.url + '/addclient'}>  <Icon type="user" />CLIENT DETAIL </Link>
+		        <Menu.Item key="CLIENT DETAILS">
+		          <Link to= { this.props.match.url + '/clientdetails'}>  <Icon type="user" />CLIENT DETAILS </Link>
 		        </Menu.Item>
 		        
-		        <Menu.Item key="Invoice Process">
+		        <Menu.Item key="INVOICE">
 		          <Link to= { this.props.match.url + '/invoiceprocess'}>  <Icon type="user" />INVOICE </Link>
 		        </Menu.Item>
 		        

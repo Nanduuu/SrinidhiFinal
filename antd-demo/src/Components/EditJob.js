@@ -32,11 +32,11 @@ const success = (text)=>{
 
 const mapStateToProps = (state)=>{
 	return {
-		role : state.user.Role,
-		clients:state.clients,
-		job : state.job,
-		editJobMsg : state.editJobMsg,
-		editJobFlag : state.editJobFlag,
+		role : state.Reducer.user.Role,
+		clients:state.Reducer.clients,
+		job : state.Reducer.job,
+		editJobMsg : state.Reducer.editJobMsg,
+		editJobFlag : state.Reducer.editJobFlag,
 	}
 }
 const mapDispatchToProps = (dispatch)=>{

@@ -27,9 +27,12 @@ router.post('/',function(req,res){
 					  		let data  = {
 					  			'ct_id' : null,
 					  			'ct_name' : req.body.Data.ct_name,
-					  			'ct_add' : req.body.Data.ct_add,
-					  			'ct_pin' : req.body.Data.ct_pin,
-					  			'ct_branch' : req.body.Data.ct_branch
+					  			'ct_street_number' : req.body.Data.ct_street_number,
+					  			'ct_street_name' : req.body.Data.ct_street_name,
+					  			'ct_city_name':req.body.Data.ct_city_name,
+					  			'ct_pincode' : req.body.Data.ct_pin,
+					  			'ct_start_date': new Date(),
+					  			'ct_end_date':"9999-12-31"
 					  		}
 					  		let sql_getid = 'SELECT MAX(ct_id) as MAX from client;';
 					  		

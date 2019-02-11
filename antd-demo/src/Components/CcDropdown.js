@@ -19,7 +19,7 @@ export class CcDropdown extends React.Component{
 					     <Link to ='/admin/jobdetails'> <Icon type="clock-circle" />JOB DETAILS </Link>
 					    </Menu.Item>
 					    <Menu.Item>
-					     <Link to='/admin/addclient'>  <Icon type="user" />CLIENT DETAILS </Link>
+					     <Link to='/admin/clientdetails'>  <Icon type="user" />CLIENT DETAILS </Link>
 					    </Menu.Item>
 					    <Menu.Item key="Invoice Process">
 				          <Link to= { this.props.match.url + '/invoiceprocess'}>  <Icon type="user" />Invoice Process </Link>

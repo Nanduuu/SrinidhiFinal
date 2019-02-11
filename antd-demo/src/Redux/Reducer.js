@@ -8,8 +8,7 @@
             addclient : false,
           },
 
-          addClientMsg : "",
-          addClientSuccess : false,
+          
           clients:[],
 
 
@@ -74,48 +73,7 @@
   					)
 
   		break;
-      case 'SET_ADD_CLIENT' :
-        return Object.assign(
-            {},
-            state,
-            {
-              
-              addClientSuccess : false,
-              addClientMsg : "",
-            }
-          )
-        break;
-      case 'RESET_ADD_CLIENT' :
-        return Object.assign(
-            {},
-            state,
-            {
-              
-              addClientSuccess : action.success,
-              addClientMsg : action.msg,
-              
-            }
-          )
-        break;
-      case 'BEGIN_ADD_CLIENT' :
-       return Object.assign(
-        {},
-        state,
-        {
-           addClientMsg:"",
-        }
-
-        ) 
-      break;
-      case "SET_CLIENTS" : 
-      return Object.assign(
-        {},
-        state,
-        {
-            clients:action.clients,
-        })
-        break;
-
+      
       case "SET_ADD_JOB" :
          return Object.assign(
             {},

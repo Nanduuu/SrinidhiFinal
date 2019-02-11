@@ -5,11 +5,10 @@ import Media from "react-media";
 import {CcMenu} from './CcMenu';
 import {connect } from 'react-redux';
 import {CcDropdown} from './CcDropdown';
-import Addclient from './Addclient';
+import ClientDetails from './Client/ClientDetails';
 import JobDetails from "./JobDetails";
 import Jobdesc from './Jobdesc';
 import PageNotForund from './PageNotFound';
-import DeleteClient from './DeleteClient';
 import InvoiceProcess from './InvoiceProcess';
 import AdminDashboard from './AdminDashboard';
 
@@ -24,11 +23,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch)=>{
-	return{
-		
-	}
-}
+
 
 
 
@@ -75,9 +70,8 @@ class Admin extends React.Component{
 				    
 					<Switch>
 			         	<Route path = '/admin/' exact component={AdminDashboard} />
-			          	<Route path ='/admin/addclient' component={Addclient} />
+			          	<Route path ='/admin/clientdetails' component={ClientDetails} />
 			      		<Route path ='/admin/Jobdetails' component={JobDetails} />
-			      		<Route path ='/admin/deleteclient' component={DeleteClient} />
 			      		<Route path ='/admin/invoiceprocess' component={InvoiceProcess} />
 			          
 			      	</Switch>	
@@ -95,4 +89,4 @@ class Admin extends React.Component{
 
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Admin);
+export default connect(mapStateToProps)(Admin);

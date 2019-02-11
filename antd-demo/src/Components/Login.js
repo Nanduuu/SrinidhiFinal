@@ -41,9 +41,9 @@ var border={
 
 const mapStateToProps = (state)=>{
 	return {
-		authFailed : state.authFailed,
-		isauthenticated : state.isauthenticated,
-		Role : state.user.Role
+		authFailed : state.Reducer.authFailed,
+		isauthenticated : state.Reducer.isauthenticated,
+		Role : state.Reducer.user.Role
 	}
 }
 

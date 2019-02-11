@@ -12,30 +12,48 @@ const port = process.env.PORT || 8080;
 const newuser = require('./newuser.js')
 const login = require('./login.js')
 const addclient = require('./addclient.js');
-const getClients = require('./getClients');
+const activegetClients = require('./activegetClients');
+const inactivegetClients = require('./inactivegetClients');
 const addJob = require('./addJob');
 const getJobDetails = require('./getJobDetails');
 const deleteClients = require('./deleteClients');
+
+const disableClient = require('./disableClient');
+const enableClient = require('./enableClient');
+const getEditClient = require('./getEditClient');
+const updateEditClient = require('./updateEditClient')
+const addShift = require('./addShift');
+const getShiftDetails = require('./getShiftDetails');
+
 const deleteJobs = require('./deleteJobs');
 const updateEditJob = require('./updateEditJob');
 const staffgetJobDetails = require('./staffgetJobDetails');
 
+var con = mysql.createConnection({
+		  host: "localhost",
+		  user: "root",
+		  password: "root",
+		  database: "test"
+		});
+
+con.connect(function(err){
+	if(err){
+		console.log(err);
+	}
+});
+
+if(con){
+	app.use(function(req,res,next){
+		req.db = con;
+		next();
+	})
+}
 const getJob = require('./getJob');
 var path = require("path");
 
 const PDFDocument = require ('pdfkit');
 
- 
 app.use(express.static('public'));
-
-var data = {};
-data.toList = "nandakumarvn01@gmail.com"
-data.info = {
-	hospital : 'Narayana',
-	date : "01-02-2019",
-	from_time : "10:00:00",
-	to_time : '17:00:00'
-}
 
 //email.sendEmail(data);
 // for parsing application/json
@@ -47,10 +65,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(upload.array()); 
 app.use(express.static('public'));
 
+
+
 app.use('/api/newuser/',newuser);
 app.use('/api/login/',login);
 app.use('/api/addclient',addclient);
-app.use('/api/getClients',getClients);
+app.use('/api/activegetClients',activegetClients);
+
+app.use('/api/disableClient',disableClient);
+app.use('/api/enableClient',enableClient);
+app.use('/api/getEditClient',getEditClient);
+app.use('/api/updateEditClient',updateEditClient);
+app.use('/api/addShift',addShift);
+app.use('/api/getShiftDetails',getShiftDetails);
+
+app.use('/api/inactivegetClients/',inactivegetClients);
 app.use('/api/getJob',getJob);
 app.use('/api/addJob',addJob);
 app.use('/api/getJobDetails',getJobDetails);
@@ -58,64 +87,7 @@ app.use('/api/deleteClients',deleteClients);
 app.use('/api/deleteJobs',deleteJobs);
 app.use('/api/updateeditjob',updateEditJob);
 app.use('/api/staffgetJobDetails',staffgetJobDetails);
-// var j = schedule.scheduleJob( '1 * * * * *', function(){
-//   console.log('The answer to life, the universe, and everything!');
-//   var con = mysql.createConnection({
-// 		  host: "localhost",
-// 		  user: "root",
-// 		  password: "root",
-// 		  database: "test"
-// 		});
-// 		con.connect(function(err){
-// 			if(err){
-// 				con.end();
-// 			}else{
-// 				var sql = 'select ct_branch from client;';
-// 				con.query(sql,function(err,result){
-// 					console.log(result)
-// 					con.end();
-// 				})
-// 			}
-// 		})
-// 		// Create a document
-// 		doc = new PDFDocument
-// 		doc.pipe (fs.createWriteStream('output'+ new Date().getTime() + '.pdf'))
 
-
-// 		doc.fontSize(25)
-// 		   .text('Some text with an embedded font!', 100, 100)
-
-
-// 		doc.addPage()
-// 		   .fontSize(25)
-// 		   .text('Here is some vector graphics...', 100, 100)
-
-
-// 		doc.save()
-// 		   .moveTo(100, 150)
-// 		   .lineTo(100, 250)
-// 		   .lineTo(200, 250)
-// 		   .fill("#FF3300")
-
-
-// 		doc.scale(0.6)
-// 		   .translate(470, -380)
-// 		   .path('M 250,75 L 323,301 131,161 369,161 177,301 z')
-// 		   .fill('red', 'even-odd')
-// 		   .restore()
-
-
-// 		doc.addPage()
-// 		   .fillColor("blue")
-// 		   .text('Here is a link!', 100, 100)
-// 		   .underline(100, 100, 160, 27, )
-// 		   .link(100, 100, 160, 27, 'http://google.com/')
-
-
-// 		doc.end()
-// });
-
-// for parsing application/xwww-
 
 app.use(express.static(path.join(__dirname, 'public/build')));
   // Handle React routing, return all requests to React app

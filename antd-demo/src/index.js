@@ -7,20 +7,27 @@ import { BrowserRouter , Route} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import { createStore , applyMiddleware} from 'redux';
 import {Reducer} from './Redux/Reducer';
+import {ClientReducer} from './Redux/ClientReducer';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {rootSaga} from './Sagas/Saga';
 import  jwtDecode from 'jwt-decode';
 import setAuthJwt from './utils/setAuthJwt';
+import {combineReducers} from 'redux';
+import {fromJS} from 'immutable';
+import rootReducer  from './Redux/RootReducer';
 
+
+
+//var rootReducer = combineReducers({ red: Reducer, green:ClientReducer})
 
 const sagaMiddleware =  createSagaMiddleware();
 
-const store = createStore(Reducer, 
+const store = createStore(rootReducer,
+				fromJS({}),
 				composeWithDevTools(
   				applyMiddleware(sagaMiddleware)));
 	
-
 
 sagaMiddleware.run(rootSaga);
 

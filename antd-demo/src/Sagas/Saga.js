@@ -35,6 +35,9 @@ function* do_logout(){
 	yield put(push('/'));
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function* do_addclient(action){
 	yield put({type:"SET_ADD_CLIENT"});
 	var response = yield call(axios.post, "/api/addclient/",{"Data" : action.payload});
@@ -49,16 +52,79 @@ function* do_addclient(action){
 	
 }
 
- function* do_getClients(){
-	var response = yield call(axios.post, "/api/getClients/",{});
+ function* do_activegetClients(){
+	var response = yield call(axios.post, "/api/activegetClients/",{});
 
-	var clients = response.data.clients.map((client)=>{
-		return client.ct_branch;
+	var clients = response.data.activeclients.map((client)=>{
+		return client.ct_name;
 	})
-	//console.log(clients);
-	yield put({type:'SET_CLIENTS', clients:clients})
+	yield put({type:'SET_ACTIVE_CLIENTS', clients:clients})
 
 }
+
+function* do_inactivegetClients(){
+	var response = yield call(axios.post, "/api/inactivegetClients/",{});
+	var clients = response.data.inactiveclients.map((client)=>{
+		return client.ct_name;
+	})
+	console.log(clients);
+	yield put({type:'SET_INACTIVE_CLIENTS', clients:clients})
+}
+
+function* do_disableClient(action){
+
+	console.log(action)
+	var response = yield call(axios.post, "/api/disableClient/",{"Data":action.payload});
+	if(response){
+		 yield	put ({type:"SET_DISABLE_CLIENT",success : response.data.success, msg:response.data.msg})
+	}
+}
+
+function* do_enableClient(action){
+
+	console.log("enable")
+	var response = yield call(axios.post, "/api/enableClient/",{"Data":action.payload});
+	if(response){
+		 yield	put ({type:"SET_ENABLE_CLIENT",success : response.data.success, msg:response.data.msg})	
+	}
+}
+
+function* do_getEditClient(action){
+
+	
+	var response = yield call(axios.post, "/api/getEditClient/",{"Data":action.payload});
+	console.log(response.data.getEditClient)
+	if(response){
+		 yield	put ({type:"SET_EDIT_CLIENT",data:response.data.getEditClient})	
+	}
+}
+
+function* do_updateEditClient(action){
+
+	console.log("enable")
+	var response = yield call(axios.post, "/api/updateEditClient/",{"Data":action.payload});
+	if(response){
+		 yield	put ({type:"RESET_EDIT_CLIENT",flag:response.data.success,msg:response.data.msg})	
+	}
+}
+
+function* do_addShift(action){
+	console.log(action.payload);
+	var response = yield call(axios.post, "/api/addShift/",{"Data":action.payload});
+	if(response){
+		 yield	put ({type:"RESET_ADDSHIFT",flag:response.data.success,msg:response.data.msg})	
+	}
+}
+
+function* do_getShiftDetails(action){
+	console.log(action);
+	var response = yield call(axios.post, "/api/getShiftDetails/",{"Data":action.payload});
+	console.log(response.data.shiftDetails);
+	if(response){
+		 yield	put ({type:"SET_SHIFT_DETAILS",flag:response.data.success,shiftDetails:response.data.shiftDetails})	
+	}
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  function* do_addjob(action){
  	yield put({type:"SET_ADD_JOB"});
@@ -112,8 +178,18 @@ export function* rootSaga() {
 
 	yield takeEvery("LOGIN",do_login);
 	yield takeEvery("LOGOUT",do_logout);
+
 	yield takeLatest("ADDCLIENT",do_addclient);
-	yield takeEvery("GETCLIENTS",do_getClients);
+	yield takeEvery("ACTIVEGETCLIENTS",do_activegetClients);
+	yield takeEvery("INACTIVEGETCLIENTS",do_inactivegetClients);
+	yield takeLatest("DISABLECLIENT", do_disableClient);
+	yield takeLatest("ENABLECLINET", do_enableClient);
+	yield takeLatest("GETEDITCLIENT",do_getEditClient);
+	yield takeLatest("UPDATEEDITCLIENT",do_updateEditClient);
+	yield takeLatest("ADDSHIFT",do_addShift);
+	yield takeLatest("GETSHIFTDETAILS",do_getShiftDetails);
+
+
 	yield takeLatest("ADDJOB",do_addjob);
 	yield takeLatest("DELETECLECNTS",do_deleteClients);
 	yield takeLatest("GETJOBDETAILS",do_getJobDetails);

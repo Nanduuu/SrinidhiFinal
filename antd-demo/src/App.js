@@ -5,21 +5,20 @@ import Login from './Components/Login';
 import Admin from './Components/Admin';
 import Schedules from './Components/Schedules';
 import Staff from './Components/Staff';
-import Addclient from './Components/Addclient';
 import Media from "react-media";
 import {Jobdesc} from './Components/Jobdesc';
 import Userdashboard from './Components/Userdashboard';
 import {Switch, Route,Redirect,Link} from 'react-router-dom';
 import Newuser from'./Components/Newuser';
 import PageNotFound from './Components/PageNotFound';
-import { connect } from 'react-redux';
+
 
 const mapStateToProps = (state) => {
 	
     return {
     	
-    	isauthenticated:state.isauthenticated,
-    	user:state.user
+    	isauthenticated:state.red.isauthenticated,
+    	user:state.red.user
         
     }
 }

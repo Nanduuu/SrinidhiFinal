@@ -9,21 +9,16 @@ export function logout(){
 		type : "LOGOUT",
 	}
 }
-export function addClient(data){
-	return{
-		type:'ADDCLIENT',
-		payload:data,
+
+export function beginAddCleint(){
+	return {
+		type:'BEGIN_ADD_CLIENT',
 	}
 }
 export function deleteClients(data){
 	return{
 		type:"DELETECLECNTS",
 		payload:data,
-	}
-}
-export function beginAddCleint(){
-	return {
-		type:'BEGIN_ADD_CLIENT',
 	}
 }
 export function getClients(){

@@ -26,8 +26,8 @@ const mapDispatchToProps = (dispatch)=>{
 }
 const mapStateToProps = (state)=>{
 	return{
-		role : state.user.Role,
-		jobDetails : state.jobDetails,
+		role : state.Reducer.user.Role,
+		jobDetails : state.Reducer.jobDetails,
 	}
 }
 

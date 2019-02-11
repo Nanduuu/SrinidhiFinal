@@ -33,12 +33,12 @@ const error = (text)=>{
 }
 
 const mapStateToProps = (state)=>{
-	console.log(state.user.Role)
+	console.log(state.Reducer.user.Role)
 	return {
-		role : state.user.Role,
-		clients:state.clients,
-		addJobflag : state.addJobflag,
-		addJobMsg : state.addJobMsg,
+		role : state.Reducer.user.Role,
+		clients:state.Reducer.clients,
+		addJobflag : state.Reducer.addJobflag,
+		addJobMsg : state.Reducer.addJobMsg,
 	}
 
 }
