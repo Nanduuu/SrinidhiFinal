@@ -16,12 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping events for database 'test'
+-- Table structure for table `shifts`
 --
 
+DROP TABLE IF EXISTS `shifts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shifts` (
+  `shift_id` int(11) NOT NULL,
+  `ct_id` int(11) NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `shift_type` varchar(45) NOT NULL,
+  PRIMARY KEY (`shift_id`),
+  KEY `ct_id_idx` (`ct_id`),
+  KEY `ct_id_idx1` (`shift_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 --
--- Dumping routines for database 'test'
+-- Dumping data for table `shifts`
 --
+
+LOCK TABLES `shifts` WRITE;
+/*!40000 ALTER TABLE `shifts` DISABLE KEYS */;
+INSERT INTO `shifts` VALUES (1,1,'09:09:00','17:09:00','Long Day'),(2,3,'09:00:00','17:00:00','Long Day'),(3,2,'22:00:00','06:00:00','Night'),(4,3,'09:00:00','17:00:00','Long Day'),(5,1,'14:00:00','20:00:00','Sleep Night');
+/*!40000 ALTER TABLE `shifts` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -32,4 +53,4 @@
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-11 11:21:28
+-- Dump completed on 2019-02-11 11:21:27

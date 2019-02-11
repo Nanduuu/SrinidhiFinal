@@ -23,8 +23,11 @@ DROP TABLE IF EXISTS `userjobs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `userjobs` (
-  `jobid` int(11) NOT NULL,
-  `ct_id` int(11) NOT NULL
+  `jobid` int(11) NOT NULL DEFAULT '0',
+  `userid` int(11) NOT NULL DEFAULT '0',
+  `from_time` time NOT NULL,
+  `to_time` time NOT NULL,
+  `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -34,7 +37,7 @@ CREATE TABLE `userjobs` (
 
 LOCK TABLES `userjobs` WRITE;
 /*!40000 ALTER TABLE `userjobs` DISABLE KEYS */;
-INSERT INTO `userjobs` VALUES (1,1),(1,2),(1,2),(1,2);
+INSERT INTO `userjobs` VALUES (1,1,'00:00:00','00:00:00','0000-00-00'),(1,2,'00:00:00','00:00:00','0000-00-00'),(1,2,'00:00:00','00:00:00','0000-00-00'),(1,2,'00:00:00','00:00:00','0000-00-00'),(1,1,'10:00:00','17:00:00','2019-03-01');
 /*!40000 ALTER TABLE `userjobs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -47,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-28 10:48:10
+-- Dump completed on 2019-02-11 11:21:27

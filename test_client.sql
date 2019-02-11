@@ -16,12 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping events for database 'test'
+-- Table structure for table `client`
 --
 
+DROP TABLE IF EXISTS `client`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `client` (
+  `ct_name` varchar(50) NOT NULL,
+  `ct_id` int(11) NOT NULL,
+  `ct_street_number` varchar(255) NOT NULL,
+  `ct_street_name` varchar(255) NOT NULL,
+  `ct_city_name` varchar(255) NOT NULL,
+  `ct_start_date` date NOT NULL,
+  `ct_end_date` date NOT NULL,
+  `ct_pincode` varchar(45) NOT NULL,
+  PRIMARY KEY (`ct_id`),
+  UNIQUE KEY `ct_name_UNIQUE` (`ct_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 --
--- Dumping routines for database 'test'
+-- Dumping data for table `client`
 --
+
+LOCK TABLES `client` WRITE;
+/*!40000 ALTER TABLE `client` DISABLE KEYS */;
+INSERT INTO `client` VALUES ('Narayana',1,'56','Bannergatta Road','Bangalore','2019-02-10','9999-12-31','560029'),('StJohn',2,'30','Hosur Road','Bangalore-01','2019-02-10','9999-12-31','560085'),('Jayadeva',3,'119','Bannergatta Road','Bangalore','2019-02-10','9999-12-31','560030');
+/*!40000 ALTER TABLE `client` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -32,4 +55,4 @@
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-11 11:21:28
+-- Dump completed on 2019-02-11 11:20:02

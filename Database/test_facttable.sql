@@ -16,34 +16,48 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `client`
+-- Table structure for table `facttable`
 --
 
-DROP TABLE IF EXISTS `client`;
+DROP TABLE IF EXISTS `facttable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `client` (
-  `ct_name` varchar(50) NOT NULL,
+CREATE TABLE `facttable` (
+  `jobid` int(11) NOT NULL,
   `ct_id` int(11) NOT NULL,
-  `ct_street_number` varchar(255) NOT NULL,
-  `ct_street_name` varchar(255) NOT NULL,
-  `ct_city_name` varchar(255) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `Fname` varchar(45) NOT NULL,
+  `Lname` varchar(45) NOT NULL,
+  `emailid` varchar(45) NOT NULL,
+  `stafftype` varchar(45) NOT NULL,
+  `ct_name` varchar(45) NOT NULL,
+  `ct_add` varchar(45) NOT NULL,
+  `ct_branch` varchar(45) NOT NULL,
+  `ct_pin` varchar(45) NOT NULL,
   `ct_start_date` date NOT NULL,
   `ct_end_date` date NOT NULL,
-  `ct_pincode` varchar(45) NOT NULL,
-  PRIMARY KEY (`ct_id`),
-  UNIQUE KEY `ct_name_UNIQUE` (`ct_name`)
+  `user_start_date` date NOT NULL,
+  `user_end_date` date NOT NULL,
+  `job_flag` char(1) NOT NULL,
+  `ct_flag` char(1) NOT NULL,
+  `user_flag` char(1) NOT NULL,
+  `timestamp` datetime NOT NULL,
+  KEY `ct_id_idx` (`ct_id`),
+  KEY `userid_idx` (`userid`),
+  KEY `composite` (`jobid`,`userid`,`ct_id`),
+  CONSTRAINT `ct_id` FOREIGN KEY (`ct_id`) REFERENCES `client` (`ct_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `jobid` FOREIGN KEY (`jobid`) REFERENCES `jobs` (`jobid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `userid` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `client`
+-- Dumping data for table `facttable`
 --
 
-LOCK TABLES `client` WRITE;
-/*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES ('Narayana',1,'56','Bannergatta Road','Bangalore','2019-02-10','9999-12-31','560029'),('StJohn',2,'30','Hosur Road','Bangalore-01','2019-02-10','9999-12-31','560085'),('Jayadeva',3,'119','Bannergatta Road','Bangalore','2019-02-10','9999-12-31','560030');
-/*!40000 ALTER TABLE `client` ENABLE KEYS */;
+LOCK TABLES `facttable` WRITE;
+/*!40000 ALTER TABLE `facttable` DISABLE KEYS */;
+/*!40000 ALTER TABLE `facttable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
