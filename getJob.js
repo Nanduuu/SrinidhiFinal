@@ -20,7 +20,7 @@ router.post('/',function(req,res){
 			if(err){
 				res.send({success:false,message:"Issue with database"});
 			}else{
-				var sql = `select * from jobs where jobid = "${req.body.Data}";`
+				var sql = `select * from jobs where jobid = "${req.body.Data}" and active = "Y";`
 				con.query(sql,function(err,result){
 					console.log(sql)
 					if(err){

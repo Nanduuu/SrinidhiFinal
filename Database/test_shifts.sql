@@ -40,7 +40,7 @@ CREATE TABLE `shifts` (
 
 LOCK TABLES `shifts` WRITE;
 /*!40000 ALTER TABLE `shifts` DISABLE KEYS */;
-INSERT INTO `shifts` VALUES (1,1,'09:09:00','17:09:00','Long Day'),(2,3,'09:00:00','17:00:00','Long Day'),(3,2,'22:00:00','06:00:00','Night'),(4,3,'09:00:00','17:00:00','Long Day'),(5,1,'14:00:00','20:00:00','Sleep Night');
+INSERT INTO `shifts` VALUES (1,1,'09:09:00','17:09:00','Long Day'),(2,3,'09:00:00','17:00:00','Long Day'),(3,2,'22:00:00','06:00:00','Night'),(4,3,'09:00:00','17:00:00','Long Day'),(5,1,'14:00:00','20:00:00','Sleep Night'),(6,3,'00:00:00','05:00:00','Saturday');
 /*!40000 ALTER TABLE `shifts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-11 11:21:27
+-- Dump completed on 2019-02-12 11:10:35

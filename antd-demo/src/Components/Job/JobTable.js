@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Divider, Tag ,Popconfirm} from 'antd';
 import {Row, DatePicker,Col ,Button,message} from 'antd';
 import moment from 'moment';
-import {getJobDetails,deleteJobs} from '../Redux/Actions';
+import {getJobDetails,deleteJobs} from './Actions';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 

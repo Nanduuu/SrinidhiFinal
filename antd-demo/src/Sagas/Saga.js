@@ -135,6 +135,23 @@ function* do_getShiftDetails(action){
  	yield put({type:"RESET_ADD_JOB", msg:response.data.msg, success:response.data.success});
  }
 
+function* do_getJob(action){
+ 	console.log(action.payload);
+ 	var response = yield call (axios.post, "/api/getJob/",{'Data' : action.payload});
+ 	console.log(response.data.job)
+ 	yield put({type:"SET_JOB",job:response.data.job})
+ }
+
+
+
+
+
+
+
+
+
+
+
  function* do_deleteClients(action){
  	console.log(action.payload);
  	var response = yield call(axios.post, "/api/deleteClients/",{'Data' : action.payload});
@@ -147,12 +164,7 @@ function* do_getShiftDetails(action){
  	yield put({type:"SET_JOB_DETAILS",jobDetails:response.data.jobs})
  }
 
- function* do_getJob(action){
- 	console.log(action.payload);
- 	var response = yield call (axios.post, "/api/getJob/",{'Data' : action.payload});
- 	console.log(response.data.job)
- 	yield put({type:"SET_JOB",job:response.data.job})
- }
+ 
 
  function* do_deleteJobs(action){
  	console.log("In delete Jobs");

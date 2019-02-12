@@ -1,31 +1,50 @@
-export function login(data){
-	return{
-		type:"LOGIN",
-		payload:data,
-	}
-}
-export function logout(){
+export function activegetClients(){
 	return {
-		type : "LOGOUT",
+		type:"ACTIVEGETCLIENTS",
 	}
 }
 
-export function beginAddCleint(){
-	return {
-		type:'BEGIN_ADD_CLIENT',
-	}
-}
-export function deleteClients(data){
+export function getShiftDetails(data){
 	return{
-		type:"DELETECLECNTS",
+		type:"GETSHIFTDETAILS",
 		payload:data,
 	}
 }
-export function getClients(){
+
+
+export function addJob(data){
 	return{
-		type:'GETCLIENTS',
+		type:"ADDJOB",
+		payload:data
 	}
 }
+
+export function setaddjob( ){
+	return{
+		type:"SET_ADD_JOB",
+		
+	}
+}
+
+export function getJob(data) {
+	return{
+		type:"GETJOB",
+		payload:data,
+	}
+}
+
+
+
+
+
+
+
+export function setaddclient() {
+	return{
+		type:"SET_ADD_CLIENT",
+	}
+}
+
 
 export function getJobDetails(data){
 	return{
@@ -39,12 +58,7 @@ export function deleteJobs(data) {
 		payload:data,
 	}
 }
-export function getJob(data) {
-	return{
-		type:"GETJOB",
-		payload:data,
-	}
-}
+
 
 export function updatejobdetails(data) {
 	return{

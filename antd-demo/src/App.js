@@ -6,7 +6,6 @@ import Admin from './Components/Admin';
 import Schedules from './Components/Schedules';
 import Staff from './Components/Staff';
 import Media from "react-media";
-import {Jobdesc} from './Components/Jobdesc';
 import Userdashboard from './Components/Userdashboard';
 import {Switch, Route,Redirect,Link} from 'react-router-dom';
 import Newuser from'./Components/Newuser';

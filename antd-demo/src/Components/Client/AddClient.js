@@ -205,7 +205,7 @@ class AddClient extends React.Component {
 										<label >Client Name</label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
-										<Input name = "ct_name" autoFocus value= {this.state.ct_name}style={InputStyle} onChange={this.Onchange} required />
+										<Input name = "ct_name" value= {this.state.ct_name}style={InputStyle} onChange={this.Onchange} required />
 								           
 									</Col>
 								</Row>

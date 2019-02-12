@@ -5,10 +5,8 @@ import { Divider,TimePicker ,InputNumber,DatePicker} from 'antd';
 import moment from'moment';
 import {message} from 'antd';
 import {connect} from 'react-redux';
-import {getClients, getJob, updatejobdetails, resetEditJob} from '../Redux/Actions';
+import { getJob,activegetClients, updatejobdetails, resetEditJob} from './Actions';
 
-
-const format = 'HH:mm:ss';
 const Option = Select.Option;
 
 const LabelStyle = {
@@ -33,7 +31,7 @@ const success = (text)=>{
 const mapStateToProps = (state)=>{
 	return {
 		role : state.Reducer.user.Role,
-		clients:state.Reducer.clients,
+		activeClients : state.ClientDetails.activeClients,
 		job : state.Reducer.job,
 		editJobMsg : state.Reducer.editJobMsg,
 		editJobFlag : state.Reducer.editJobFlag,
@@ -41,8 +39,8 @@ const mapStateToProps = (state)=>{
 }
 const mapDispatchToProps = (dispatch)=>{
 	return{
-		getClients : ( )=>{
-			dispatch(getClients());
+		activegetClients : ( )=>{
+			dispatch(activegetClients());
 		},
 		getJob:(data)=>{
 				dispatch(getJob(data));
@@ -63,13 +61,11 @@ class EditJob extends React.Component{
 			disabledJobId : false,
 			jobid:"",
 			staff : "Doctor",
+			shift_id:null,
 			client : undefined,
 			date : moment("2001-01-01"),
 			count : 10,
-			from_time : moment(),
-			from_time_string:null,
-			to_time : null,
-			to_time_string:null,
+			
 			save_enable : true,
 			edit_enable : false,
 		}
@@ -82,8 +78,6 @@ class EditJob extends React.Component{
 		this.handleChangeStaff = this.handleChangeStaff.bind(this);
 		this.handleChangeClient = this.handleChangeClient.bind(this);
 		this.OnchangeCount = this.OnchangeCount.bind(this);
-		this.OnchangeFromTime = this.OnchangeFromTime.bind(this);
-		this.OnchangeToTime = this.OnchangeToTime.bind(this);
 		this.disabledDate = this.disabledDate.bind(this);
 	}
 	jobidOnChange = (e)=>{
@@ -96,7 +90,7 @@ class EditJob extends React.Component{
 			error("Please enter the numeric jobid");
 		}else{
 			this.props.getJob(this.state.jobid);
-
+			this.props.activegetClients();
 		}
 	}
 	Onsubmit =()=>{
@@ -127,10 +121,7 @@ class EditJob extends React.Component{
 		}
 	}
 	componentDidMount(){
-		this.props.getClients();
-		this.setState({
-			clients:this.props.clients,
-		})
+		
 
 	}
 	componentWillReceiveProps(nextProps){
@@ -155,17 +146,15 @@ class EditJob extends React.Component{
 		   
 
 
-		    this.setState({staff: nextProps.job.Staff,
+		    this.setState({ 
+		    				staff: nextProps.job.Staff,
 		    				date: moment(nextProps.job.Date),
 		    				disabled:false ,
 		    				disabledJobId:true,
 		    				save_enable : false,
 		    				client : nextProps.job.Client,
 		    				count : nextProps.job.Requested,
-		    				from_time :moment(nextProps.job.Date + ' ' + nextProps.job.from_time),
-		    				to_time :moment(nextProps.job.Date + ' ' + nextProps.job.to_time),
-		    				from_time_string :nextProps.job.from_time,
-		    				to_time_string :nextProps.job.to_time,
+		    				shift_id : nextProps.job.shift_id,
 		    				edit_enable : true,
 
 		    			});
@@ -206,7 +195,6 @@ class EditJob extends React.Component{
 			
 		})
 
-		alert(value)
 	}
 	OnchangeCount = (value)=>{
 
@@ -215,25 +203,7 @@ class EditJob extends React.Component{
 		})
 
 	}
-
-	OnchangeFromTime = (time,timestring)=>{
-		console.log(timestring);
-		this.setState({
-			from_time : time,
-			from_time_string:timestring
-		})
-		
-	}
-
-	OnchangeToTime = (time,timestring)=>{
-
-		this.setState({
-			to_time : time,
-			to_time_string:timestring
-		})
-
-	}
-
+	
     handleChangeStaff = (value)=> {
 	  
 	  this.setState({
@@ -272,8 +242,8 @@ class EditJob extends React.Component{
 								</Col>
 								<Col xs={18} sm={8} md={8} lg={8} >
 									<Select disabled={this.state.disabled} value={this.state.client} onChange={this.handleChangeClient} required style={InputStyle}>
-								            {this.loadClients(this.props.clients)}
-								          </Select>
+								            {this.loadClients(this.props.activeClients)}
+								    </Select>
 								</Col>
 								<Col xs={0} sm={8} md={8} lg={8} >
 									
@@ -310,17 +280,12 @@ class EditJob extends React.Component{
 							</Row>
 							<Row>
 								<Col xs={6} sm={8} md={8} lg={8} style={LabelStyle}>
-									<lable> Time </lable>
+									<lable> Shift </lable>
 								</Col>
 								<Col xs={18} sm={8} md={8} lg={8} >
-									<Row>
-										<Col xs={12} sm={12} md={12} lg={12} >
-										<TimePicker disabled={this.state.disabled} value={this.state.from_time} onChange = {this.OnchangeFromTime} defaultValue={moment('08:00:00', format)} format={format} style={InputStyle} required/>
-										</Col>
-										<Col xs={12} sm={12} md={12} lg={12} >
-										<TimePicker disabled={this.state.disabled} value={this.state.to_time} onChange = {this.OnchangeToTime} defaultValue={moment('08:00:00', format)} format={format} style={InputStyle} required/>
-										</Col>
-									</Row>
+									<Select disabled={this.state.disabled} value={this.state.shift_id} onChange={this.handleChangeClient} style={InputStyle}>
+								            {}
+								    </Select>
 									
 								</Col>
 								<Col xs={0} sm={8} md={8} lg={8} >
@@ -349,7 +314,6 @@ class EditJob extends React.Component{
 						<Col xs= {1} sm={1} md={2} lg={3}>
 			      		</Col>
 					</Row>
-					<Divider/>
 				</div>
 			)
 	}

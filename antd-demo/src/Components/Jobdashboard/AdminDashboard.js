@@ -2,7 +2,7 @@ import React from 'react';
 import {Row, Col } from 'antd';
 import { Select,Input,Button ,message} from 'antd';
 import {connect} from 'react-redux';
-import {getClients,deleteClients} from '../Redux/Actions';
+//import {getClients,deleteClients} from '../Redux/Actions';
 import {Redirect} from 'react-router-dom';
 import {Table,Divider} from "antd";
 import {DatePicker} from 'antd';

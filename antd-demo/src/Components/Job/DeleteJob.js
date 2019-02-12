@@ -3,7 +3,7 @@ import {Row, Col} from 'antd';
 import { Select,Input,Button } from 'antd';
 import { Divider } from 'antd';
 import {connect} from 'react-redux';
-import {getClients} from '../Redux/Actions';
+//import {getClients} from './Actions';
 
 const LabelStyle = {
 
@@ -12,9 +12,7 @@ const LabelStyle = {
 }
 const mapDispatchToProps = (dispatch)=>{
 	return{
-		getClients : ( )=>{
-			dispatch(getClients());
-		},
+		
 			
 	}
 

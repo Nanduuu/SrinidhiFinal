@@ -130,8 +130,9 @@
                             'Client': details[0].client,
                             'Date' : details[0].date.slice(0,10),
                             'Staff' : details[0].worker,
-                            'from_time' : details[0].start_time,
-                            'to_time': details[0].end_time,
+                           // 'from_time' : details[0].start_time,
+                            //'to_time': details[0].end_time,
+                            'shift_id' :details[0].shift_id,
                             'Requested' : details[0].count,
                             'Availability':details[0].left,
 

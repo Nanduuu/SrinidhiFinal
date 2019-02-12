@@ -6,11 +6,10 @@ import {CcMenu} from './CcMenu';
 import {connect } from 'react-redux';
 import {CcDropdown} from './CcDropdown';
 import ClientDetails from './Client/ClientDetails';
-import JobDetails from "./JobDetails";
-import Jobdesc from './Jobdesc';
+import JobDetails from "./Job/JobDetails";
 import PageNotForund from './PageNotFound';
 import InvoiceProcess from './InvoiceProcess';
-import AdminDashboard from './AdminDashboard';
+import AdminDashboard from './Jobdashboard/AdminDashboard';
 
 
 const mapStateToProps = (state) => {
@@ -22,10 +21,6 @@ const mapStateToProps = (state) => {
         
     }
 }
-
-
-
-
 
 class Admin extends React.Component{
 	constructor(props){

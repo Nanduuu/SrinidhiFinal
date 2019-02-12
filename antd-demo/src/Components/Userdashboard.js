@@ -16,9 +16,9 @@ const calStyle = {
 const mapStateToProps = (state)=>{
   
   return {
-    role : state.red.user.Role,
-    jobs : state.red.staffjobDetails,
-    stafftype : state.red.user.Stafftype,
+    role : state.Reducer.user.Role,
+    jobs : state.Reducer.staffjobDetails,
+    stafftype : state.Reducer.user.Stafftype,
     
   }
 
