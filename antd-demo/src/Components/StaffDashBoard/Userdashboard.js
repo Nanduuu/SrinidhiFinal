@@ -4,7 +4,7 @@ import { Calendar, Badge,Icon,Popover,Divider } from 'antd';
 import {Table,Button} from 'antd';
 import {Redirect}  from 'react-router-dom';
 import {connect} from 'react-redux';
-import {staffgetjobdetails} from '../Redux/Actions';
+import {staffConfirmJob,staffgetjobdetails} from './Actions';
 
 const calStyle = {
     backgroundColor: "#b3e6ff",
@@ -19,6 +19,7 @@ const mapStateToProps = (state)=>{
     role : state.Reducer.user.Role,
     jobs : state.Reducer.staffjobDetails,
     stafftype : state.Reducer.user.Stafftype,
+    UserId:state.Reducer.user.UserId,
     
   }
 
@@ -28,7 +29,9 @@ const mapDispatchToProps = (dispatch)=>{
         staffgetjobdetails : (data)=>{
           dispatch(staffgetjobdetails(data));
         },
-
+        staffConfirmJob :(data)=>{
+            dispatch(staffConfirmJob(data));
+        },
     }
 }
 
@@ -118,6 +121,9 @@ class Userdashboard extends React.Component{
 }
 onAccept = (input)=>{
   console.log(input);
+    input.UserId = this.props.UserId;
+   
+  this.props.staffConfirmJob(input);
   
 }
 componentDidMount(){
@@ -158,7 +164,6 @@ render(){
         title: 'To Time',
         dataIndex: 'to_time',
         key: 'to_time',
-        
       },
       {
         title: 'Action',
@@ -193,7 +198,7 @@ render(){
          <Col xs={0} sm={0} md={4} lg={5} xl={5}> 
         </Col>
         <Col xs={24} sm={24} md={16} lg={14} xl={14}> 
-            <Table size='medium' style={{margin:'0px'}} bordered columns={columns} scroll={{ x: 1000 }} size="medium" dataSource={this.state.selectedDateJobs}/>
+            <Table size='small' style={{margin:'0px'}} bordered columns={columns} scroll={{ x:800}} dataSource={this.state.selectedDateJobs}/>
         </Col>
         <Col xs={0} sm={0} md={4} lg={5} xl={5}> 
         </Col>

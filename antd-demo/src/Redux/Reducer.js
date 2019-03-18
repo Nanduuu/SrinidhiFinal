@@ -41,9 +41,12 @@
   						isauthenticated : true,
   						user: { 
   								Fname : action.user.Fname,
+                  Lname : action.user.Lname,
+                  Tel : action.user.Tel,
   								Email : action.user.Emailid,
   								Role : action.user.Role,
                   Stafftype : action.user.Stafftype,
+                  UserId : action.user.UserId,
     						}
   					}
   				)

@@ -20,7 +20,7 @@ router.post('/',function(req,res){
 			if(err){
 				res.send({success:false,message:"Issue with database"});
 			}else{
-				var sql = `select * from jobs where date >= "${req.body.Data.from_date}" and date <= "${req.body.Data.to_date}" and count > filled and worker = "${req.body.Data.stafftype}" ;`
+				var sql = `select * from jobs left join shifts on jobs.shift_id = shifts.shift_id where date >= "${req.body.Data.from_date}" and date <= "${req.body.Data.to_date}" and jobs.shift_id = shifts.shift_id ;`
 				con.query(sql,function(err,result){
 					//console.log(sql)
 					if(err){

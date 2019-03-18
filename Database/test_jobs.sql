@@ -26,7 +26,7 @@ CREATE TABLE `jobs` (
   `jobid` int(11) NOT NULL,
   `worker` varchar(45) NOT NULL,
   `client` varchar(45) NOT NULL,
-  `date` date NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `shift_id` int(11) NOT NULL,
   `count` int(10) NOT NULL,
   `filled` int(10) NOT NULL DEFAULT '0',
@@ -42,7 +42,7 @@ CREATE TABLE `jobs` (
 
 LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
-INSERT INTO `jobs` VALUES (1,'Nurse','StJohn','2019-02-14',3,10,0,'Y');
+INSERT INTO `jobs` VALUES (1,'Doctor','Narayana','2019-03-20 02:27:33',3,10,0,'Y'),(2,'Doctor','Narayana','2019-03-20 02:27:44',4,12,0,'Y'),(3,'Doctor','Govt','2019-03-28 06:21:29',8,15,0,'Y'),(4,'Doctor','Govt','2019-03-30 06:23:07',8,15,0,'Y');
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-12 11:10:35
+-- Dump completed on 2019-03-18 12:47:44

@@ -74,7 +74,6 @@ class Jobdesc extends React.Component {
 		this.state={
 
 			size:"default",
-
 			staff : "",
 			client : "",
 			date : null,
@@ -115,7 +114,7 @@ class Jobdesc extends React.Component {
 	OnchangeDate = (value, datestring)=>{
 		
 		this.setState({
-			date : value
+			date : moment.utc(value),
 		})
 	}
 	OnchangeCount = (value)=>{
@@ -180,7 +179,7 @@ class Jobdesc extends React.Component {
 			var data = {
 				staff : this.state.staff,
 				client : this.state.client,
-				date :this.state.date,
+				date :this.state.date.format("YYYY-MM-DDTHH:mm:ssZ"),
 				shift_id: this.state.shift_id,
 				count: this.state.count,
 			}

@@ -15,6 +15,7 @@ function* do_login(action){
 			const token = response.data.Token;
 			localStorage.setItem('jwtToken',token);
 			setAuthJwt(token);
+			console.log(response.data);
 			yield put({type : "SET_CURRENT_USER", user : response.data});
 			if (response.data.Role === "admin"){
 				yield put(push('/admin'));
@@ -186,6 +187,36 @@ function* do_getJob(action){
 
  }
 
+ function* do_staffconfirmjob(action){
+ 	console.log(action.payload);
+ 	var response = yield call (axios.post, "/api/staffconfirmjob/", {"Data":action.payload});
+ 	yield put({type : "STAFF_CONFIRM_JOB",
+ 				 success:response.data.success,
+ 				 jobDetails:response.data.msg});
+ 
+ }
+
+function* do_getStaffJobDetails(action){
+ 	console.log(action.payload);
+ 	var response = yield call (axios.post, "/api/staffScheduledJobDetails/", {"Data":action.payload});
+ 	yield put({type : "STAFF_SCHEDULED_JOBS",
+ 				 success:response.data.success,
+ 				 jobs:response.data.jobs});
+ 
+ }
+
+ function* do_getAdminDashboardDetails(action){
+ 	console.log(action.payload);
+ 	var response = yield call (axios.post, "/api/getAdminDashboardDetails/", {"Data":action.payload});
+ 	yield put({type : "STAFF_SCHEDULED_JOBS",
+ 				 success:response.data.success,
+ 				 jobs:response.data.jobs});
+ 
+ }
+
+ 
+ 
+
 export function* rootSaga() {
 
 	yield takeEvery("LOGIN",do_login);
@@ -208,6 +239,16 @@ export function* rootSaga() {
 	yield takeLatest("GETJOB",do_getJob);
 	yield takeLatest("DELETEJOBS",do_deleteJobs);
 	yield takeLatest("UPDATEJOBDETAILS",do_updatejobdetails);
+	yield takeLatest("GETADMINDASHBOARDDETAILS",do_getAdminDashboardDetails);
+
+
+/* Satff API section */
+
 	yield takeLatest("STAFFGETJOBDETAILS",do_staffgetjobdetails);
+	yield takeLatest("STAFFCONFIRMJOB",do_staffconfirmjob);
+	yield takeLatest("GETSTAFFJOBDETAILS",do_getStaffJobDetails);
+	
+
+
 
 } 

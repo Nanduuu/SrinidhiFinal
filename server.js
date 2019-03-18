@@ -24,10 +24,22 @@ const getEditClient = require('./getEditClient');
 const updateEditClient = require('./updateEditClient')
 const addShift = require('./addShift');
 const getShiftDetails = require('./getShiftDetails');
+const getAdminDashboardDetails = require('./getAdminDashboardDetails');
 
 const deleteJobs = require('./deleteJobs');
 const updateEditJob = require('./updateEditJob');
 const staffgetJobDetails = require('./staffgetJobDetails');
+const staffconfirmjob = require('./StaffConfirmjob');
+const staffScheduledJobDetails = require('./staffScheduledJobDetails');
+
+
+var date = new Date('1999-12-17T22:00:00');
+var date2 = new Date('1999-12-18T06:00:00');
+
+var timeDiff = Math.abs(date2.getTime() - date.getTime());
+var diffDays = Math.ceil(timeDiff / (1000 * 3600 )); 
+
+console.log(date2.getTimezoneOffset())
 
 var con = mysql.createConnection({
 		  host: "localhost",
@@ -69,24 +81,30 @@ app.use(express.static('public'));
 
 app.use('/api/newuser/',newuser);
 app.use('/api/login/',login);
-app.use('/api/addclient',addclient);
-app.use('/api/activegetClients',activegetClients);
+app.use('/api/addclient/',addclient);
+app.use('/api/activegetClients/',activegetClients);
 
-app.use('/api/disableClient',disableClient);
-app.use('/api/enableClient',enableClient);
-app.use('/api/getEditClient',getEditClient);
-app.use('/api/updateEditClient',updateEditClient);
-app.use('/api/addShift',addShift);
-app.use('/api/getShiftDetails',getShiftDetails);
+app.use('/api/disableClient/',disableClient);
+app.use('/api/enableClient/',enableClient);
+app.use('/api/getEditClient/',getEditClient);
+app.use('/api/updateEditClient/',updateEditClient);
+app.use('/api/addShift/',addShift);
+app.use('/api/getShiftDetails/',getShiftDetails);
 
 app.use('/api/inactivegetClients/',inactivegetClients);
-app.use('/api/getJob',getJob);
-app.use('/api/addJob',addJob);
-app.use('/api/getJobDetails',getJobDetails);
-app.use('/api/deleteClients',deleteClients);
-app.use('/api/deleteJobs',deleteJobs);
-app.use('/api/updateeditjob',updateEditJob);
-app.use('/api/staffgetJobDetails',staffgetJobDetails);
+app.use('/api/getJob/',getJob);
+app.use('/api/addJob/',addJob);
+app.use('/api/getJobDetails/',getJobDetails);
+app.use('/api/deleteClients/',deleteClients);
+app.use('/api/deleteJobs/',deleteJobs);
+app.use('/api/updateeditjob/',updateEditJob);
+
+app.use('/api/staffgetJobDetails/',staffgetJobDetails);
+app.use('/api/staffScheduledJobDetails/',staffScheduledJobDetails);
+app.use("/api/staffconfirmjob/" ,staffconfirmjob)
+
+app.use("/api/getAdminDashboardDetails/" ,getAdminDashboardDetails)
+
 
 
 app.use(express.static(path.join(__dirname, 'public/build')));

@@ -1,6 +1,6 @@
 
 const initialState = {
-		  addClientMsg : "",
+		      addClientMsg : "",
           addClientSuccess : false,
           activeClients : [],
           inactiveClients:[],

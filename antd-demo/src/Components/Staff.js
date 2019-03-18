@@ -2,12 +2,12 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Header from './Header';
 import Media from "react-media";
-import Userdashboard from './Userdashboard';
+import Userdashboard from './StaffDashBoard/Userdashboard';
 import {StaffCcMenu} from './StaffCcMenu';
 import StaffCcDropdown from './StaffCcDropdown';
-import SubmitTimeSheet from './SubmitTimeSheet';
-import PersonalDetails from './PersonalDetails';
-import StaffJobDetails from './StaffJobDetails';
+import SubmitTimeSheet from './StaffTimeSheet/SubmitTimeSheet';
+import PersonalDetails from './StaffPersonalDetails/PersonalDetails';
+import StaffJobDetails from './StaffJobDetails/StaffJobDetails';
 
 
 class Staff extends React.Component{

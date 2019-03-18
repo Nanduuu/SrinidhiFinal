@@ -6,15 +6,48 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {Table,Divider} from "antd";
 import {DatePicker} from 'antd';
+import {getAdminDashboardDetails} from './Actions';
+import moment from 'moment';
 
 const { Column, ColumnGroup } = Table;
 
+const mapDispatchToProps = (dispatch)=>{
+	return{
+		getAdminDashboardDetails :(data)=>{
+			dispatch(getAdminDashboardDetails(data))
+		},
+		
+	}
 
-export default class AdminDashboard extends React.Component{
+}
+
+const mapStateToProps = (state)=>{
+	return{
+		role : state.Reducer.user.Role,
+		
+		UserId : state.Reducer.user.UserId,
+	}
+}
+
+class AdminDashboard extends React.Component{
 
 constructor(props){
 		super(props);
+		this.state = {
+			date: moment(),
+			date_string :"",
+		}
+	}
+
+OnchangeDate = (value, datestring)=>{
 		
+		this.setState({
+			date :value,
+			date_string:datestring,
+		})
+
+		this.props.getAdminDashboardDetails(this.state.datestring);
+
 	}
 
 render(){
@@ -28,7 +61,7 @@ render(){
 						<lable>Select date </lable>
 					</Col>
 					<Col>
-						<DatePicker/>
+						<DatePicker value={this.state.date}  onChange = {this.OnchangeDate} />
 					</Col>
 				</Row>
 				<Table
@@ -89,3 +122,5 @@ render(){
 )}
 
 }
+
+export default connect (mapStateToProps,mapDispatchToProps) (AdminDashboard)

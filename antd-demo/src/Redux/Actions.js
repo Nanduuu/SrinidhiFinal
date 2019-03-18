@@ -59,9 +59,3 @@ export function resetEditJob() {
 	}
 }
 
-export function staffgetjobdetails(data) {
-	return{
-		type : "STAFFGETJOBDETAILS",
-		payload : data,
-	}
-}

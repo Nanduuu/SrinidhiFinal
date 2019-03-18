@@ -32,8 +32,11 @@ const divStyle = {
 const mapStateToProps = (state) => {
 		debugger;
     return {
-        userName: state.Reducer.user.Fname,
+        Fname: state.Reducer.user.Fname,
+        Lname: state.Reducer.user.Lname,
+        Role:state.Reducer.user.Role,
         authenticated:state.Reducer.isauthenticated
+
    }
 }
 
@@ -73,6 +76,11 @@ class Header extends React.Component{
      						 
      				</Col>
      				
+				</Row>
+				<Row style={{backgroundColor:"#99ccff"}}>
+					<Col>
+						<b> <i>{this.props.Fname + this.props.Lname} </i></b>
+					</Col>
 				</Row>
 			</div>
 			)

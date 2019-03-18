@@ -48,12 +48,10 @@ class JobTable extends React.Component{
 		this.OnChangeDate = this.OnChangeDate.bind(this);
 		this.loadJobs = this.loadJobs.bind(this);
 		this.onSelectChange = this.onSelectChange.bind(this);
-		this.OnChangeDate = this.OnChangeDate.bind(this);
 		this.isvalidated = this.isvalidated.bind(this);
 	}
 
 	onSelectChange = (selectedRowKeys, selectedRows)  => {
-				   // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
 				    if(selectedRows.length != 0){
 				    	this.setState({ selectedRowKeys : selectedRowKeys,
 				    					selectedRows:selectedRows,
@@ -81,13 +79,12 @@ class JobTable extends React.Component{
 	}
 
 	OnDeleteJobs= ()=>{
-		debugger;
+	
 		var jobs = [];
 		if(this.state.selectedRows.length > 0) {
 		jobs = this.state.selectedRows.map((row)=>{
 			return row.JobID;
 		})
-		console.log(jobs);
 		this.props.deleteJobs(jobs);
 		var data = {};
 		data.from_date = this.state.from_date;

@@ -42,7 +42,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES ('Narayana',1,'56','Bannergatta Road','Bangalore','2019-02-10','9999-12-31','560029'),('StJohn',2,'30','Hosur Road','Bangalore-01','2019-02-10','9999-12-31','560085'),('Jayadeva',3,'119','Bannergatta Road','Bangalore','2019-02-10','9999-12-31','560030'),('Govt',4,'15','MG Road','Bangalore','2019-02-12','9999-12-31','560025'),('karnataka govt Hospital',5,'15','MG Road','Bangalore','2019-02-12','9999-12-31','560025'),('karnataka govt Hospital Hosur',6,'45','Hosur Road','Chikkaballapur','2019-02-12','9999-12-31','261458');
+INSERT INTO `client` VALUES ('Narayana',1,'56','Bannergatta Road','Bangalore','2019-02-10','9999-12-31','560029'),('StJohn',2,'30','Hosur Road','Bangalore-01','2019-02-10','9999-12-31','560085'),('Jayadeva',3,'119','Bannergatta Road','Bangalore','2019-02-10','2019-03-13','560030'),('Govt',4,'15','MG Road','Bangalore','2019-02-12','9999-12-31','560025'),('karnataka govt Hospital',5,'15','MG Road','Bangalore','2019-02-12','9999-12-31','560025'),('karnataka govt Hospital Hosur',6,'45','Hosur Road','Chikkaballapur','2019-02-12','9999-12-31','261458'),('Voyage',7,'56','Home','UK','2019-02-16','9999-12-31','ABC 124');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-12 11:10:35
+-- Dump completed on 2019-03-18 12:47:44

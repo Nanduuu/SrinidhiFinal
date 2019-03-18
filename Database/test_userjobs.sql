@@ -25,9 +25,10 @@ DROP TABLE IF EXISTS `userjobs`;
 CREATE TABLE `userjobs` (
   `jobid` int(11) NOT NULL DEFAULT '0',
   `userid` int(11) NOT NULL DEFAULT '0',
-  `from_time` time NOT NULL,
-  `to_time` time NOT NULL,
-  `date` date NOT NULL
+  `from_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `to_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  KEY `composite` (`jobid`,`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -37,7 +38,7 @@ CREATE TABLE `userjobs` (
 
 LOCK TABLES `userjobs` WRITE;
 /*!40000 ALTER TABLE `userjobs` DISABLE KEYS */;
-INSERT INTO `userjobs` VALUES (1,1,'00:00:00','00:00:00','0000-00-00'),(1,2,'00:00:00','00:00:00','0000-00-00'),(1,2,'00:00:00','00:00:00','0000-00-00'),(1,2,'00:00:00','00:00:00','0000-00-00'),(1,1,'10:00:00','17:00:00','2019-03-01');
+INSERT INTO `userjobs` VALUES (1,1,'2019-03-20 03:30:00','2019-03-20 11:30:00','2019-03-19 18:30:00'),(2,1,'2019-03-20 06:30:00','2019-03-20 14:30:00','2019-03-19 18:30:00'),(4,1,'2019-03-30 14:30:00','2019-03-30 13:30:00','2019-03-29 18:30:00'),(3,1,'2019-03-28 14:30:00','2019-03-28 13:30:00','2019-03-27 18:30:00');
 /*!40000 ALTER TABLE `userjobs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-12 11:10:35
+-- Dump completed on 2019-03-18 12:47:44
