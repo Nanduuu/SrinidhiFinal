@@ -144,15 +144,6 @@ function* do_getJob(action){
  }
 
 
-
-
-
-
-
-
-
-
-
  function* do_deleteClients(action){
  	console.log(action.payload);
  	var response = yield call(axios.post, "/api/deleteClients/",{'Data' : action.payload});
@@ -206,11 +197,12 @@ function* do_getStaffJobDetails(action){
  }
 
  function* do_getAdminDashboardDetails(action){
+ 	console.log("In Saga ")
  	console.log(action.payload);
  	var response = yield call (axios.post, "/api/getAdminDashboardDetails/", {"Data":action.payload});
- 	yield put({type : "STAFF_SCHEDULED_JOBS",
+ 	yield put({type : "SET_ADMIN_DASHBOARD",
  				 success:response.data.success,
- 				 jobs:response.data.jobs});
+ 				 jobs:response.data.rows});
  
  }
 

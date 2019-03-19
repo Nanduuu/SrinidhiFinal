@@ -2,7 +2,6 @@ import React from 'react';
 import {Row, Col } from 'antd';
 import { Select,Input,Button ,message} from 'antd';
 import {connect} from 'react-redux';
-//import {getClients,deleteClients} from '../Redux/Actions';
 import {Redirect} from 'react-router-dom';
 import {Table,Divider} from "antd";
 import {DatePicker} from 'antd';
@@ -24,7 +23,7 @@ const mapDispatchToProps = (dispatch)=>{
 const mapStateToProps = (state)=>{
 	return{
 		role : state.Reducer.user.Role,
-		
+		adminDashboardJobs : state.Reducer.adminDashboardJobs,
 		UserId : state.Reducer.user.UserId,
 	}
 }
@@ -35,22 +34,31 @@ constructor(props){
 		super(props);
 		this.state = {
 			date: moment(),
-			date_string :"",
+			date_string :moment().format().slice(0,10),
 		}
 	}
-
 OnchangeDate = (value, datestring)=>{
-		
-		this.setState({
-			date :value,
-			date_string:datestring,
-		})
 
-		this.props.getAdminDashboardDetails(this.state.datestring);
+		this.setState({
+			date: value,
+			date_string :datestring,
+		})
+		
+		//this.props.getAdminDashboardDetails(datestring);
 
 	}
+componentDidMount(){
+
+	this.props.getAdminDashboardDetails(this.state.date_string);
+}
+
+
+loadClick = ()=>{
+	this.props.getAdminDashboardDetails(this.state.date_string);
+}
 
 render(){
+
 	return(
 		<div>
 				<Divider style={{backgroundColor:"#4479a1"}}>
@@ -63,57 +71,56 @@ render(){
 					<Col>
 						<DatePicker value={this.state.date}  onChange = {this.OnchangeDate} />
 					</Col>
+					<Col>
+						<Button  onClick = {this.loadClick} >Load</Button>
+					</Col>
 				</Row>
 				<Table
 					pagination= { {pageSizeOptions: ['5','10','15','20','50','100'], showSizeChanger: true}}
-					size="default"
-					dataSource={this.props.jobDetails}
+					size="small"
+					dataSource={this.props.adminDashboardJobs}
 					scroll={{ x: 1000 }}
 				>
 					<Column 
 						title="JOB ID"
-						dataIndex="START_TIME"
-						key="START_TIME" />
+						dataIndex="jobid"
+						key="jobid" />
 
 						<Column 
 						title="CLINET"
-						dataIndex="END_TIME"
-						key="END_TIME" />
+						dataIndex="client"
+						key="client" />
 
-						<Column 
-						title="BRANCH"
-						dataIndex="END_TIME"
-						key="END_TIME" />
-
+						
 						<Column 
 						title="STAFF NAME"
-						dataIndex="SHIFT_TYPE"
-						key="SHIFT_TYPE" />
+						dataIndex="Fname"	
+						key="Fname" />
 
 						<Column
 						title="STAFF TYPE"
-						dataIndex="ACTION"
-						key="ACTION" />
+						dataIndex="staff_type"
+						key="staff_type" />
 
 						<Column
 						title="DATE"
-						dataIndex="ACTION"
-						key="ACTION" />
+						dataIndex="date"
+						key="date" />
 
 						<Column
 						title="START_TIME"
-						dataIndex="ACTION"
-						key="ACTION" />
+						dataIndex="from_time"
+						key="from_time" />
 
 						<Column
 						title="END_TIME"
-						dataIndex="ACTION"
-						key="ACTION" />
+						dataIndex="to_time"
+						key="to_time" />
 
 						<Column
 						title="SHIFT_TYPE"
-						dataIndex="ACTION"
-						key="ACTION" />
+						dataIndex="shift_type"
+						key="shift_type" />
 
 										
 				</Table>

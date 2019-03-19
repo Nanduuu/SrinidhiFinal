@@ -122,7 +122,7 @@ class EditJob extends React.Component{
 	}
 	componentDidMount(){
 		
-
+		
 	}
 	componentWillReceiveProps(nextProps){
 			

@@ -23,10 +23,25 @@
           editJobMsg : "",
           editJobFlag : false,
 
+          adminDashboardJobs:[],
+          
           
 
  
  };
+
+ function UTC_IST(date){
+
+  var dateUTC = new Date(date);
+  var dateUTC = dateUTC.getTime() 
+  var dateIST = new Date(dateUTC);
+      //date shifting for IST timezone (+5 hours and 30 minutes)
+  dateIST.setHours(dateIST.getHours() + 5); 
+  dateIST.setMinutes(dateIST.getMinutes() + 30);
+  console.log(dateIST)
+  return dateIST.toISOString();
+
+}
 
  export function Reducer(state = initialState, action) {
   
@@ -198,6 +213,35 @@
               }
             )
           break;
+          case 'SET_ADMIN_DASHBOARD' :
+
+          var details = action.jobs;
+                var data = [];
+                 if(details.length != 0){
+                   for (var i = 0 ; i <= details.length - 1; i++){
+                          data.push({
+                            //'key' : details[i].jobid,
+                            'jobid' : details[i].jobid,
+                            'client': details[i].client,
+                            'Fname' : details[i].Fname,
+                            'staff_type' : details[i].worker,
+                            'date' : UTC_IST(details[i].date).slice(0,10),
+                            'from_time' : UTC_IST(details[i].from_time).slice(11,19),
+                            'to_time': UTC_IST(details[i].to_time).slice(11,19),
+                            'shift_type':details[i].shift_type,
+                            
+                       })
+                 }
+                 } else{
+                   data = [];
+                 } 
+          return Object.assign(
+          {},
+          state,
+          {
+              adminDashboardJobs:data,
+          }
+          )
   	}
 
   return state

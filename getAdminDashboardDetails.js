@@ -10,31 +10,16 @@ var jwt = require('jsonwebtoken');
 
 router.post('/',function(req,res){
 	
-		var con = mysql.createConnection({
-		  host: "localhost",
-		  user: "root",
-		  password: "root",
-		  database: "test"
-		});
-		con.connect(function(err){
-			if(err){
-				res.send({success:false,message:"Issue with database"});
-			}else{
-				var sql = `select userjobs.jobid , userjobs.from_time, userjobs.to_time, userjobs.date, jobs.client from userjobs left outer join jobs on userjobs.jobid = jobs.jobid  where userjobs.userid = "${req.body.Data.userid}";`
-				con.query(sql,function(err,result){
-					if(err){
-						console.log(err);
-					
-						res.send({success:false,message:"Please enter proper date format : YYYY-MM-DD"});
-					}else{
+		var sql = `select userjobs.jobid, jobs.client,  user.Fname, jobs.worker, userjobs.date ,userjobs.from_time, userjobs.to_time ,shifts.shift_type  from  userjobs,jobs,user,shifts where jobs.jobid = userjobs.jobid and jobs.shift_id= shifts.shift_id and userjobs.userid = user.userid and userjobs.date = "${req.body.Data}";`
 
-						console.log(result);
-				
-						res.send({success:true,jobs:result});
-					}
-					
-				})
+		req.db.query(sql,function(err,result){
+			if(err){
+				res.send({success:false,msg:'Issue with Database'});
+			}else{
+				console.log(result);
+				res.send({success:true,rows:result})
 			}
 		})
+
 })
 module.exports = router; 

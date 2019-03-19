@@ -15,6 +15,8 @@ const initialState = {
 
           updateClientMsg:"",
           updateClientFlag : false,
+
+         
 }
 
 
@@ -155,6 +157,9 @@ export  function ClientReducer( state = initialState, action){
               shiftDetails:action.shiftDetails,
           }
           )
+
+          
+
             
 	}
 
