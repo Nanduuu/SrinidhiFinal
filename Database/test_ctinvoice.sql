@@ -16,30 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `userjobs`
+-- Table structure for table `ctinvoice`
 --
 
-DROP TABLE IF EXISTS `userjobs`;
+DROP TABLE IF EXISTS `ctinvoice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `userjobs` (
-  `jobid` int(11) NOT NULL DEFAULT '0',
-  `userid` int(11) NOT NULL DEFAULT '0',
-  `start_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `end_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  KEY `composite` (`jobid`,`userid`)
+CREATE TABLE `ctinvoice` (
+  `staff_type` varchar(255) DEFAULT NULL,
+  `Long_day` decimal(10,2) DEFAULT NULL,
+  `Early` decimal(10,2) DEFAULT NULL,
+  `Late` decimal(10,2) DEFAULT NULL,
+  `Night` decimal(10,2) DEFAULT NULL,
+  `Saturday` decimal(10,2) DEFAULT NULL,
+  `Sunday` decimal(10,2) DEFAULT NULL,
+  `Sleep_night` decimal(10,2) DEFAULT NULL,
+  `Bank_holiday` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `userjobs`
+-- Dumping data for table `ctinvoice`
 --
 
-LOCK TABLES `userjobs` WRITE;
-/*!40000 ALTER TABLE `userjobs` DISABLE KEYS */;
-INSERT INTO `userjobs` VALUES (22,1,'2019-04-04 06:58:44','2019-04-04 06:58:44','2019-04-04 00:00:00'),(23,1,'2019-04-10 09:00:00','2019-04-10 17:00:00','2019-04-10 00:00:00');
-/*!40000 ALTER TABLE `userjobs` ENABLE KEYS */;
+LOCK TABLES `ctinvoice` WRITE;
+/*!40000 ALTER TABLE `ctinvoice` DISABLE KEYS */;
+INSERT INTO `ctinvoice` VALUES ('Doctor',20.00,10.00,10.00,10.00,45.33,20.00,10.00,10.00),('Nurse',56.00,10.00,10.00,10.00,10.00,10.00,10.00,10.00),('Health Care assistant (HCA)',10.00,10.00,10.00,22.50,10.00,10.00,10.00,10.00),('Domestic worker',10.00,10.00,10.00,10.00,10.00,10.00,10.00,10.00),('Domestic assistant',10.00,10.00,10.00,10.00,10.00,10.00,10.00,10.00),('Domiciliary carer',10.00,10.00,10.00,10.00,10.00,10.00,10.00,10.00);
+/*!40000 ALTER TABLE `ctinvoice` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
