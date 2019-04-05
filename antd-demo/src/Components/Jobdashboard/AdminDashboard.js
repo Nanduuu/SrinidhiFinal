@@ -44,7 +44,7 @@ OnchangeDate = (value, datestring)=>{
 			date_string :datestring,
 		})
 		
-		//this.props.getAdminDashboardDetails(datestring);
+		this.props.getAdminDashboardDetails(datestring);
 
 	}
 componentDidMount(){
@@ -71,9 +71,7 @@ render(){
 					<Col>
 						<DatePicker value={this.state.date}  onChange = {this.OnchangeDate} />
 					</Col>
-					<Col>
-						<Button  onClick = {this.loadClick} >Load</Button>
-					</Col>
+					
 				</Row>
 				<Table
 					pagination= { {pageSizeOptions: ['5','10','15','20','50','100'], showSizeChanger: true}}
@@ -109,12 +107,12 @@ render(){
 
 						<Column
 						title="START_TIME"
-						dataIndex="from_time"
+						dataIndex="start_time"
 						key="from_time" />
 
 						<Column
 						title="END_TIME"
-						dataIndex="to_time"
+						dataIndex="end_time"
 						key="to_time" />
 
 						<Column

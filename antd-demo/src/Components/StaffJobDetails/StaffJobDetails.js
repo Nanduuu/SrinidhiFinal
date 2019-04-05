@@ -23,11 +23,11 @@ const columns = [{
   key: 'Date',
 },{
   title: 'Start Time',
-  dataIndex: 'from_time',
+  dataIndex: 'start_time',
   key: 'Time',
 }, {
   title: 'End Time',
-  dataIndex: 'to_time',
+  dataIndex: 'end_time',
   key: 'Time',
 }, 
 {
@@ -160,12 +160,12 @@ render(){
 
 										<Column 
 											title="Start Time"
-											dataIndex="from_time"
+											dataIndex="start_time"
 											key="date" />
 
 										<Column 
 											title="End Time"
-											dataIndex="to_time"
+											dataIndex="end_time"
 											key="date" />
 
 								

@@ -43,7 +43,8 @@ const mapStateToProps = (state)=>{
 	return {
 		authFailed : state.Reducer.authFailed,
 		isauthenticated : state.Reducer.isauthenticated,
-		Role : state.Reducer.user.Role
+		Role : state.Reducer.user.Role,
+		authenticationMsg : state.Reducer.authenticationMsg,
 	}
 }
 
@@ -131,6 +132,7 @@ class Login extends Component{
 													</Col>
 													<Col xs={20} sm={22} md={16} lg={12} xl={12}>
 															<p style={{color:"red"}}>{this.props.authFailed ? "Authentication failed" :" "}</p>
+															<p style={{color:"red"}}>{this.props.authenticationMsg != " " ? this.props.authenticationMsg :" "}</p>
 															<Input name="email" type="email" onChange={this.Onchange} placeholder="Please enter emial Id" required / >
 															<Input name="pword" type="password" onChange={this.Onchange} placeholder="Enter password" required />
 															

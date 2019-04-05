@@ -159,16 +159,17 @@ class JobTable extends React.Component{
 			      </Col>
 			      </Row>
 			      <Row>
-			      	<Col xs= {1} sm={1} md={2} lg={3}>
+			      	<Col xs= {1} sm={1} md={1} lg={1}>
 			      	</Col>
-			      	<Col xs= {22} sm={22} md={20} lg={18}>
+			      	<Col xs= {22} sm={22} md={22} lg={22}>
 			      	
 							<Table 
 							rowSelection={rowSelection}
 							pagination= { {pageSizeOptions: ['5','10','15','20','50','100'], showSizeChanger: true}}
 							size="small"
 							dataSource={this.props.jobDetails}
-							scroll={{ x: 1000 }}>
+							columnWidth = "500"
+							scroll={{ x: 1200 }}>
 
 							<Column 
 								title="JobID"
@@ -190,12 +191,13 @@ class JobTable extends React.Component{
 							    dataIndex="Staff"
 								key="Staff" />
 							<Column
-								title="From Time"
-							    dataIndex="from_time"
-								key="from_time" />
+								title="Start Time"
+							    dataIndex="start_time"
+
+								key="start_time" />
 							<Column
-								title="To Time"
-							    dataIndex="to_time"
+								title="End Time"
+							    dataIndex="end_time"
 								key="to_time" />
 							<Column
 								title="Requested"
@@ -205,12 +207,11 @@ class JobTable extends React.Component{
 								title="Filled"
 								dataIndex="Filled"
 								key="Filled" />
-
-					
+				
 					</Table>
    
 			      	</Col>
-			      	<Col xs= {1} sm={1} md={2} lg={3}>
+			      	<Col xs= {1} sm={1} md={1} lg={1}>
 			      	</Col>
 					</Row>
 				

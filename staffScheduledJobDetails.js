@@ -17,12 +17,13 @@ router.post('/',function(req,res){
 		  database: "test"
 		});
 
-		console.log(req.body.Data);
+		console.log(new Date(req.body.Data.from_date));
+		console.log(new Date (req.body.Data.to_date))
 		con.connect(function(err){
 			if(err){
 				res.send({success:false,message:"Issue with database"});
 			}else{
-				var sql = `select userjobs.jobid , userjobs.from_time, userjobs.to_time, userjobs.date, jobs.client from userjobs left outer join jobs on userjobs.jobid = jobs.jobid  where userjobs.userid = "${req.body.Data.userid}" and userjobs.date between "${req.body.Data.from_date}" and "${req.body.Data.to_date}";`
+				var sql = `select userjobs.jobid , userjobs.start_time, userjobs.end_time, userjobs.date, jobs.client from userjobs left outer join jobs on userjobs.jobid = jobs.jobid  where userjobs.userid = "${req.body.Data.userid}" ;`// and userjobs.date > "${ new Date (req.body.Data.from_date)}" ;`//and userjobs.date < "${new Date(req.body.Data.to_date)}";`
 				con.query(sql,function(err,result){
 					if(err){
 						console.log(err);

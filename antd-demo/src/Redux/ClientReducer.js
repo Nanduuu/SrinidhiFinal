@@ -15,6 +15,8 @@ const initialState = {
 
           updateClientMsg:"",
           updateClientFlag : false,
+
+          userDetails : [],
 }
 
 
@@ -156,6 +158,17 @@ export  function ClientReducer( state = initialState, action){
           }
           )
             
+          case "SET_USERDETAILS" :
+          return Object.assign(
+            {},
+            state,
+            {
+              userDetails : action.userDetails,
+            }
+
+
+            )
+
 	}
 
 	return state;

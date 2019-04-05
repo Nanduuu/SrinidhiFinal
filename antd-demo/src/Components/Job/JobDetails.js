@@ -5,6 +5,7 @@ import JobTable from './JobTable';
 import EditJob from './EditJob';
 import DeleteJob from './DeleteJob';
 import Jobdesc from './Jobdesc';
+import Bulkjobuploads from './Bulkjobuploads';
 import { Collapse } from 'antd';
 const Panel = Collapse.Panel;
 
@@ -29,7 +30,7 @@ render(){
 				</Col>
 				<Col>
 					
-					<Collapse accordion defaultActiveKey="2">
+					<Collapse accordion >
 					<Panel header =  { <Namebar text= {"ADD JOB"} />} key="1">
 						<Jobdesc/>
 					</Panel>
@@ -41,6 +42,10 @@ render(){
 					<Panel header = { <Namebar text= { "SCHEDULED JOBS"} />} key="3">
 						<JobTable/>
 					</Panel>
+
+					<Panel header = { <Namebar text= { "BULK JOB UPLOAD"} />} key="4">
+						<Bulkjobuploads/>
+					</Panel>
 									
 				</Collapse>
 					
@@ -49,7 +54,6 @@ render(){
 				</Col>
 			</Row>
 
-			
 		</div>
 
 		)

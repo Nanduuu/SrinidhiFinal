@@ -13,6 +13,7 @@ import EditClient from "./EditClient";
 import DeleteShifts from "./DeleteShifts";
 import AddShift from './AddShift';
 import { Collapse } from 'antd';
+
 const Panel = Collapse.Panel;
 
 const Namebar = (props)=>{

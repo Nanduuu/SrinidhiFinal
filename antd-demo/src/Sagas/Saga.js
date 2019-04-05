@@ -15,7 +15,7 @@ function* do_login(action){
 			const token = response.data.Token;
 			localStorage.setItem('jwtToken',token);
 			setAuthJwt(token);
-			console.log(response.data);
+			
 			yield put({type : "SET_CURRENT_USER", user : response.data});
 			if (response.data.Role === "admin"){
 				yield put(push('/admin'));
@@ -24,7 +24,7 @@ function* do_login(action){
 				yield put(push('/staff'));
 			}
 		}else{
-			yield put({type:"AUTH_ERROR"});	
+			yield put({type:"AUTH_ERROR", msg:response.data.msg});	
 		}
 }
 
@@ -49,7 +49,7 @@ function* do_addclient(action){
 				console.log(response);
 				yield put({type:"RESET_ADD_CLIENT",msg:response.data.msg,success:response.data.success});
 			}
-			debugger;
+			
 	
 }
 
@@ -181,15 +181,18 @@ function* do_getJob(action){
  function* do_staffconfirmjob(action){
  	console.log(action.payload);
  	var response = yield call (axios.post, "/api/staffconfirmjob/", {"Data":action.payload});
- 	yield put({type : "STAFF_CONFIRM_JOB",
+ 	console.log(response.data);
+ 	yield put({type : "SET_STAFF_CONFIRM_JOB_STATUS",
  				 success:response.data.success,
- 				 jobDetails:response.data.msg});
+ 				 msg:response.data.msg});
  
  }
 
 function* do_getStaffJobDetails(action){
  	console.log(action.payload);
+ 	console.log('in saga');
  	var response = yield call (axios.post, "/api/staffScheduledJobDetails/", {"Data":action.payload});
+ 	console.log(response.data)
  	yield put({type : "STAFF_SCHEDULED_JOBS",
  				 success:response.data.success,
  				 jobs:response.data.jobs});
@@ -206,7 +209,59 @@ function* do_getStaffJobDetails(action){
  
  }
 
+ function* do_getClientInvoiceRates(acttion){
+ 	    console.log('In saga before call')
+ 		var response = yield call (axios.post, "/api/getClientInvoiceRates/");
+ 		console.log(response.data)
+
+ 		yield put({type : "SET_CLIENT_INVOICE_RATES",
+ 				 success:response.data.success,
+ 				 clientInvoiceRates:response.data.activeclients});
+
+ }
+
+ function* do_getStaffInvoiceRates(acttion){
+ 	    console.log('In saga before call')
+ 		var response = yield call (axios.post, "/api/getStaffInvoiceRates/");
+ 		console.log(response.data)
+
+ 		yield put({type : "SET_STAFF_INVOICE_RATES",
+ 				 success:response.data.success,
+ 				 staffInvoiceRates:response.data.staffInvoiceRates});
+
+ }
+
+ function* do_updateInvoiceRates(action){
+ 	    console.log('saga update invoice rates')
+ 	    console.log(action);
+ 		var response = yield call (axios.post, "/api/updateInvoiceRates/",{"Data":action.payload});
+ 		console.log(response.data)
+
+ 		// yield put({type : "SET_STAFF_INVOICE_RATES",
+ 		// 		 success:response.data.success,
+ 		// 		 staffInvoiceRates:response.data.staffInvoiceRates});
+
+ }
+
+function* do_getUserDetails(action){
+	console.log('In Saga get user details ')
+	var response = yield call (axios.post, "/api/getUserDetails/",);
+ 		console.log(response.data)
+
+ 		yield put({type : "SET_USERDETAILS",
+ 				 success:response.data.success,
+ 				 userDetails:response.data.userDetails});
+
+}
+
  
+ function* do_enable_disable_user(action){
+ 	var response = yield call(axios.post, "/api/enableDisableUser",{"Data":action.payload});
+ 	if (response.data.success == true){
+ 		do_getUserDetails();
+ 	}
+ }
+
  
 
 export function* rootSaga() {
@@ -239,6 +294,15 @@ export function* rootSaga() {
 	yield takeLatest("STAFFGETJOBDETAILS",do_staffgetjobdetails);
 	yield takeLatest("STAFFCONFIRMJOB",do_staffconfirmjob);
 	yield takeLatest("GETSTAFFJOBDETAILS",do_getStaffJobDetails);
+
+	yield takeLatest("GETCLIENTINOVICERATES", do_getClientInvoiceRates);
+	yield takeLatest("GETSTAFFINOVICERATES", do_getStaffInvoiceRates);
+
+	yield takeLatest("UPDATEINVOICERATES", do_updateInvoiceRates);
+
+	yield takeLatest("GETUSERDETAILS", do_getUserDetails);
+	yield takeLatest("ENABLEDISABLEUSER", do_enable_disable_user);
+
 	
 
 

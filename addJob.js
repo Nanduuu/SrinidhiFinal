@@ -8,15 +8,11 @@ const app = express();
 const email = require('./email');
 const router = express.Router();
 
-
-
 var jwt = require('jsonwebtoken');
 
 router.post('/',function(req,res){
 		
-		console.log(typeof(req.body.Data.date));
-		//var date = new Date(req.body.Data.date.format("YYYY-MM-DDTHH:mm:ssZ"));
-		//console.log(date);
+		
 		let data  = {
 					  			'jobid' : null,
 					  			'worker' : req.body.Data.staff,
@@ -24,24 +20,52 @@ router.post('/',function(req,res){
 					  			'date' : new Date(req.body.Data.date),
 					  			'shift_id' :req.body.Data.shift_id,
 					  			'count' :req.body.Data.count,
+					  			 start_time:null,
+					  			 end_time:null,
 					  			'filled':0,
 					  			'active':'Y'
 					 }
-				console.log(data);
+				var sql_shiftdata = `select * from shifts where shift_id = "${req.body.Data.shift_id}"`;
 				var sql_max = 'select max(jobid) as max from jobs;';
 				var sql_insert = 'INSERT INTO jobs SET ?';
 
-				req.db.query(sql_max,function(err,result){
+		req.db.query(sql_shiftdata, function(err,result){
+				if(err){
+					res.send({success:false,msg:"Issue with database"});
+				}else{
+
+					var start_time = new Date( req.body.Data.date.slice(0,10)+ ' '+result[0].start_time );
+					var end_time  = new Date( req.body.Data.date.slice(0,10)+ ' '+result[0].end_time );
+
+					console.log(start_time);
+					console.log(end_time);
+
+					if (start_time > end_time){
+
+						var diff = end_time - start_time;   
+						//console.log(diff)
+						//to_date = to_date.getTime();
+						var  final = start_time.getTime() + diff + 86400000;
+						end_time = new Date(final)
+						data.start_time = start_time;
+						data.end_time = end_time;
+						data.shift_type = result[0].shift_type;
+					}else{
+						data.start_time = start_time;
+						data.end_time = end_time;
+						data.shift_type = result[0].shift_type;
+					}
+					req.db.query(sql_max,function(err,result){
 					if(err){
 						res.send({success:false,message:"Issue with database"});
 					}
-						//console.log("max",result[0].max)
+						
 						if(result[0].max === null){
 							data.jobid = 1;
 						}else{
 							data.jobid = result[0].max + 1;
 						}
-					//	console.log(data);
+					
 						req.db.query(sql_insert,data,function(err,result){
 					if(err){ 
 						console.log(err);
@@ -56,9 +80,9 @@ router.post('/',function(req,res){
 								
 							res.send({success:true,msg:"Job added Successfully"});
 						}
-				})
+					})
 				});
-			
-	
+			}
+		})
 })
 module.exports = router; 

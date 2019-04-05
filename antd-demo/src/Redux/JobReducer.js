@@ -157,8 +157,7 @@ export  function ClientReducer( state = initialState, action){
               shiftDetails:action.shiftDetails,
           }
           )
-
-          
+    
 
             
 	}

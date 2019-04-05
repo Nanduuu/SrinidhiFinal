@@ -2,6 +2,7 @@
  const initialState = {
          	user:{},
          	isauthenticated:false,
+          authenticationMsg : "",
          	authFailed:false,
 
           actions:{
@@ -25,6 +26,12 @@
 
           adminDashboardJobs:[],
           
+          clientInvoiceRates:[],
+
+          staffInvoiceRates:[],
+
+          staffConfirmSuccess : false,
+          staffConfirmMsg : '',
           
 
  
@@ -73,6 +80,7 @@
   				{
   					authFailed:true,
   					user:{},
+            authenticationMsg : action.msg,
   					isauthenticated:false
   				}
   				)
@@ -124,8 +132,8 @@
                             'Client': details[i].client,
                             'Date' : details[i].date.slice(0,10),
                             'Staff' : details[i].worker,
-                            'from_time' : details[i].start_time,
-                            'to_time': details[i].end_time,
+                            'start_time' : details[i].start_time,
+                            'end_time': details[i].end_time,
                             'Requested' : details[i].count,
                             'Filled':details[i].filled,
                        })
@@ -198,8 +206,8 @@
                             'Client': details[i].client,
                             'Date' : details[i].date.slice(0,10),
                             'Staff' : details[i].worker,
-                            'from_time' : details[i].start_time,
-                            'to_time': details[i].end_time,
+                            'start_time' : details[i].start_time,
+                            'end_time': details[i].end_time,
                             'Requested' : details[i].count,
                             'Availability':details[i].left,
                        })
@@ -225,9 +233,9 @@
                             'client': details[i].client,
                             'Fname' : details[i].Fname,
                             'staff_type' : details[i].worker,
-                            'date' : UTC_IST(details[i].date).slice(0,10),
-                            'from_time' : UTC_IST(details[i].from_time).slice(11,19),
-                            'to_time': UTC_IST(details[i].to_time).slice(11,19),
+                            'date' : details[i].date.slice(0,10),
+                            'start_time' : details[i].start_time,
+                            'end_time': details[i].end_time,
                             'shift_type':details[i].shift_type,
                             
                        })
@@ -242,6 +250,57 @@
               adminDashboardJobs:data,
           }
           )
+          break;
+
+
+          case 'SET_CLIENT_INVOICE_RATES' :
+
+          
+              return Object.assign(
+              {},
+              state,
+              {
+                  clientInvoiceRates:action.clientInvoiceRates,
+              }
+              )
+               break;
+              case 'SET_STAFF_INVOICE_RATES' :
+
+              
+              return Object.assign(
+              {},
+              state,
+              {
+                  staffInvoiceRates:action.staffInvoiceRates,
+              }
+              )
+          break;
+
+          case 'SET_STAFF_CONFIRM_JOB_STATUS' :
+                          
+              return Object.assign(
+              {},
+              state,
+              {
+                  staffConfirmSuccess : action.success,
+                  staffConfirmMsg : action.msg,
+              }
+              )
+          break;
+
+          case 'RESET_STAFF_CONFIRM_JOB_STATUS' :
+                          
+              return Object.assign(
+              {},
+              state,
+              {
+                  staffConfirmSuccess : false,
+                  staffConfirmMsg : '',
+              }
+              )
+          break;
+
+
   	}
 
   return state

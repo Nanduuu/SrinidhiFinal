@@ -1,15 +1,24 @@
 import React from 'react';
 import {Row,Col} from 'antd';
-import { Calendar, Badge,Icon,Popover,Divider } from 'antd';
+import { Calendar, Badge,Icon,Popover,Divider,message } from 'antd';
 import {Table,Button} from 'antd';
 import {Redirect}  from 'react-router-dom';
 import {connect} from 'react-redux';
-import {staffConfirmJob,staffgetjobdetails} from './Actions';
+import {staffConfirmJob,staffgetjobdetails ,resetJobConfirmStatus} from './Actions';
 
 const calStyle = {
     backgroundColor: "#b3e6ff",
     margin:"5px",
     borderRadius: '25px',
+
+}
+
+const success = (data)=>{
+  message.success(data);
+}
+
+const error=(data)=>{
+  message.error(data);
 
 }
 
@@ -20,6 +29,8 @@ const mapStateToProps = (state)=>{
     jobs : state.Reducer.staffjobDetails,
     stafftype : state.Reducer.user.Stafftype,
     UserId:state.Reducer.user.UserId,
+    staffConfirmSuccess: state.Reducer.staffConfirmSuccess,
+    staffConfirmMsg: state.Reducer.staffConfirmMsg,
     
   }
 
@@ -32,6 +43,9 @@ const mapDispatchToProps = (dispatch)=>{
         staffConfirmJob :(data)=>{
             dispatch(staffConfirmJob(data));
         },
+        resetJobConfirmStatus :()=>{
+          dispatch(resetJobConfirmStatus());
+        }
     }
 }
 
@@ -122,8 +136,9 @@ class Userdashboard extends React.Component{
 onAccept = (input)=>{
   console.log(input);
     input.UserId = this.props.UserId;
-   
-  this.props.staffConfirmJob(input);
+    input.stafftype = this.props.stafftype
+    this.props.resetJobConfirmStatus();
+    this.props.staffConfirmJob(input);
   
 }
 componentDidMount(){
@@ -142,6 +157,20 @@ componentDidMount(){
   this.props.staffgetjobdetails(data);
 }
 
+componentWillReceiveProps(nextProps){
+
+  if(nextProps.staffConfirmMsg != ''){
+     if(nextProps.staffConfirmSuccess === true){
+       success(nextProps.staffConfirmMsg);
+       this.props.resetJobConfirmStatus();
+     }else{
+       error(nextProps.staffConfirmMsg);
+       this.props.resetJobConfirmStatus();
+     }
+  }
+
+}
+
 render(){
     const columns = [{
         title: 'Client',
@@ -156,13 +185,13 @@ render(){
       },
        {
         title: 'From Time',
-        dataIndex: 'from_time',
+        dataIndex: 'start_time',
         key: 'from_time',
         
       }, 
        {
         title: 'To Time',
-        dataIndex: 'to_time',
+        dataIndex: 'end_time',
         key: 'to_time',
       },
       {

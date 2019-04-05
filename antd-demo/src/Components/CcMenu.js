@@ -37,6 +37,10 @@ export class CcMenu extends React.Component{
 												      current: "INVOICE",
 												    });
 		 			break;
+		 	case "/admin/UserDetails" : this.setState({
+												      current: "USER DETAILS",
+												    });
+		 			break;
 
 		 }
 	}
@@ -64,6 +68,10 @@ export class CcMenu extends React.Component{
 		        
 		        <Menu.Item key="INVOICE">
 		          <Link to= { this.props.match.url + '/invoiceprocess'}>  <Icon type="user" />INVOICE </Link>
+		        </Menu.Item>
+
+		         <Menu.Item key="USER DETAILS">
+		          <Link to= { this.props.match.url + '/UserDetails'}>  <Icon type="user" />USER DETAILS </Link>
 		        </Menu.Item>
 		        
 		      </Menu>

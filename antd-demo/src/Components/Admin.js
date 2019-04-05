@@ -10,6 +10,8 @@ import JobDetails from "./Job/JobDetails";
 import PageNotForund from './PageNotFound';
 import InvoiceProcess from './InvoiceProcess';
 import AdminDashboard from './Jobdashboard/AdminDashboard';
+import Invoice from './Invoice/Invoice';
+import UserDetails from './Users/UserDetails';
 
 
 const mapStateToProps = (state) => {
@@ -67,7 +69,8 @@ class Admin extends React.Component{
 			         	<Route path = '/admin/' exact component={AdminDashboard} />
 			          	<Route path ='/admin/clientdetails' component={ClientDetails} />
 			      		<Route path ='/admin/Jobdetails' component={JobDetails} />
-			      		<Route path ='/admin/invoiceprocess' component={InvoiceProcess} />
+			      		<Route path ='/admin/invoiceprocess' component={Invoice} />
+			      		<Route path = '/admin/UserDetails' component={UserDetails}/>
 			          
 			      	</Switch>	
 					

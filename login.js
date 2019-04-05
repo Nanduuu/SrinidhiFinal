@@ -25,7 +25,7 @@ router.post('/', function(req,res){
 		  		console.log(req.body);
 		  		 
 
- 				var sql = "select Emailid, Fname, Lname,  Tel, Role, stafftype, userid from user where Emailid = '" + req.body.Data.email + "' AND Pword = '" + encrypt + "';";							
+ 				var sql = "select Emailid, Fname, Lname,  Tel, Role, stafftype, userid ,end_date from user where Emailid = '" + req.body.Data.email + "' AND Pword = '" + encrypt + "';";							
 		  		 con.query(sql, function(error,result,fields){
 		  			//console.log(err);
 		  			//console.log(result);
@@ -40,9 +40,12 @@ router.post('/', function(req,res){
 		  				console.log(result);
 		  				//console.log(fields);
 		  				if (result.length === 0){
-		  					res.send({success:false,msg:"User doesnot exists"});
+		  					res.send({success:false,msg:"Authentication failed"});
 		  				}else{
-		  					//console.log(result[0].Fname);
+		  					console.log(result[0]);
+		  					console.log(new Date(result[0].end_date) < new Date('2038-01-19') )
+		  					if(new Date(result[0].end_date) > new Date() ){
+
 		  					const token = jwt.sign({
 		  						"Emailid":result[0].Emailid,
 		  						"Fname" : result[0].Fname,
@@ -51,9 +54,11 @@ router.post('/', function(req,res){
 		  						"Tel"   : result[0].Tel,
 		  						"Stafftype" : result[0].stafftype,
 		  						"UserId" : result[0].userid,
+		  						"start_date":new Date(),
+		  						"end_date":new Date('9999-12-31')
 
 		  					}, 'secretKey');
-		  					console.log(token);
+		  				
 		  					res.send({success:true,
 		  							  "Emailid" : result[0].Emailid,
 		  							  "Fname" : result[0].Fname,
@@ -63,6 +68,14 @@ router.post('/', function(req,res){
 		  							   "Stafftype" : result[0].stafftype,
 		  							   "UserId" : result[0].userid,
 		  							   "Token" : token	});
+
+		  					}else{
+
+		  							res.send({success:false,msg:"User is locked"});
+
+		  					}
+
+		  					
 		  				}
 		  				
 		  			}

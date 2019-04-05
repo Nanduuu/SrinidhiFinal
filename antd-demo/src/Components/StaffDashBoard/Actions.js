@@ -11,3 +11,10 @@ export function staffConfirmJob(data){
 		payload:data,
 	}
 }
+
+export function resetJobConfirmStatus(){
+	return{
+		type:"RESET_STAFF_CONFIRM_JOB_STATUS",
+	
+	}
+}
