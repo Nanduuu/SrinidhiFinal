@@ -227,7 +227,7 @@ class Jobdesc extends React.Component {
 							<Col>
 								<Row>
 									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle} >
-										<label >Doctor/Nurse</label>
+										<label > <b>Doctor/Nurse </b></label>
 									</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
 										<Select value = {this.state.staff} onChange={this.handleChangeStaff}  style={InputStyle} required>
@@ -243,7 +243,7 @@ class Jobdesc extends React.Component {
 								</Row>
 								<Row>
 									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
-										<label>Select Client</label>
+										<label><b>Select Client</b></label>
 									</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
 										<Select value={this.state.client} onChange={this.handleChangeClient} required style={InputStyle}>
@@ -254,7 +254,7 @@ class Jobdesc extends React.Component {
 								</Row>
 								<Row>
 									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
-										<label style={LabelStyle}>Date</label>
+										<label style={LabelStyle}> <b>Date </b></label>
 									</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
 										<DatePicker value={this.state.date}  disabledDate={this.disabledDate}  onChange = {this.OnchangeDate} required size={this.size} style={InputStyle}/>
@@ -263,7 +263,7 @@ class Jobdesc extends React.Component {
 								</Row>
 								<Row>
 									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
-										<label>No. of positions</label>
+										<label> <b>No. of positions</b></label>
 									</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
 										<InputNumber value = {this.state.count}onChange={this.OnchangeCount}  defaultValue={null} style={{width:"97%"} } required/>
@@ -271,7 +271,7 @@ class Jobdesc extends React.Component {
 								</Row>
 								<Row>
 									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
-										<label>Select Shift</label>
+										<label><b>Select Shift</b></label>
 									</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
 										<Row>

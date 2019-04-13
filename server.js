@@ -7,7 +7,7 @@ const fs = require('fs');
 const app = express();
 const router = express.Router();
 const port = process.env.PORT || 8080;
-const newuser = require('./newuser.js')
+const newuser = require('./newuser')
 const login = require('./login.js')
 const addclient = require('./addclient.js');
 const activegetClients = require('./activegetClients');
@@ -33,17 +33,17 @@ const updateInvoicerates = require('./updateInvoiceRates');
 const getUserDetails = require('./getUserDetails');
 const enableDisableUser  = require('./enableDisableUser');
 const bulkJobUploads = require ('./bulkJobUploads');
+const deleteStaffJobs = require('./deleteStaffJobs');
+const getFactTableData = require('./getFactTableData');
+const approveTimeSheet = require('./approveTimeSheet');
+const submitTimeSheet = require('./submitTimeSheet');
+const deleteShift = require('./deleteShift');
+
+//const time = require('./updateFactTable');
+
 
 const timezone = 'UTC';
 process.env.TZ = timezone;
-
-// var date = new Date('1999-12-17T22:00:00');
-// var date2 = new Date('1999-12-18T06:00:00');
-
-// var timeDiff = Math.abs(date2.getTime() - date.getTime());
-// var diffDays = Math.ceil(timeDiff / (1000 * 3600 )); 
-
-// console.log(date2.getTimezoneOffset())
 
 var con = mysql.createConnection({
 		  host: "localhost",
@@ -68,10 +68,6 @@ if(con){
 }
 
 
-con.query('SELECT connection_id();',function(err,result){
-	console.log(result)
-})
-
 const getJob = require('./getJob');
 var path = require("path");
 
@@ -83,9 +79,6 @@ app.use(express.static('public'));
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
 
-
-
-//app.use(upload.array()); 
 app.use(express.static('public'));
 
 
@@ -95,14 +88,12 @@ app.use('/api/newuser/',newuser);
 app.use('/api/login/',login);
 app.use('/api/addclient/',addclient);
 app.use('/api/activegetClients/',activegetClients);
-
 app.use('/api/disableClient/',disableClient);
 app.use('/api/enableClient/',enableClient);
 app.use('/api/getEditClient/',getEditClient);
 app.use('/api/updateEditClient/',updateEditClient);
 app.use('/api/addShift/',addShift);
 app.use('/api/getShiftDetails/',getShiftDetails);
-
 app.use('/api/inactivegetClients/',inactivegetClients);
 app.use('/api/getJob/',getJob);
 app.use('/api/addJob/',addJob);
@@ -110,37 +101,38 @@ app.use('/api/getJobDetails/',getJobDetails);
 app.use('/api/deleteClients/',deleteClients);
 app.use('/api/deleteJobs/',deleteJobs);
 app.use('/api/updateeditjob/',updateEditJob);
-
 app.use('/api/staffgetJobDetails/',staffgetJobDetails);
 app.use('/api/staffScheduledJobDetails/',staffScheduledJobDetails);
 app.use("/api/staffconfirmjob/" ,staffconfirmjob)
-
 app.use("/api/getAdminDashboardDetails/" ,getAdminDashboardDetails);
-
 app.use("/api/updateInvoiceRates/" ,updateInvoicerates);
-
 app.use("/api/getUserDetails/" ,getUserDetails);
-
 app.use("/api/enableDisableUser/" ,enableDisableUser);
 app.use('/api/Bulkjobuploads/', bulkJobUploads);
+app.use('/api/deleteStaffJobs/',deleteStaffJobs);
+app.use('/api/getFactTableData/',getFactTableData);
+app.use('/api/approveTimeSheet/',approveTimeSheet);
+app.use('/api/submitTimeSheet/',submitTimeSheet);
+app.use('/api/deleteShift',deleteShift);
+
+app.get('/acks/*', function(req,res){
+
+	console.log(req.path)
+	 res.sendFile(path.join(__dirname, req.path));
+})
 
 
 
-//var date = new Date('2019-04-01T06:00:00.000Z');
-//var date1 = new Date('2019-04-01 06:00:00');
+app.use(express.static(path.join(__dirname, 'public')));
 
-console.log(new Date());	
-// console.log(date);
-// console.log(date1);
-// console.log(date.toISOString()); 
-// console.log(date.toUTCString());
 
-// console.log(date.\	());
+// app('/', function(req,res){
+// 	res.sendFile(path.join(__dirname,'public','logo.png'))
+// })
 
-app.use(express.static(path.join(__dirname, 'public/build')));
-  // Handle React routing, return all requests to React app
+  
   app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'public/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'build/index.html'));
   });
 
 

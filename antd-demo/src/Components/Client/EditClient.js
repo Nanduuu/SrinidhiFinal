@@ -13,8 +13,8 @@ const InputStyle={
 	padding:"5px"
 }
 const LabelStyle = {
-	textAlign:"center",
-	paddingTop:"10px"
+	textAlign:"left",
+	paddingTop:"10px",
 }
 const submitStyle = {
 	width:"90%"
@@ -156,7 +156,7 @@ render(){
 							<Col>
 								<Row>
 									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle} >
-										<label >Selct Client </label>
+										<label> <b> Selct Client </b> </label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
 										<Select 
@@ -170,7 +170,7 @@ render(){
 								</Row>
 								<Row>
 									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
-										<label style={LabelStyle}>Street Number</label>
+										<label style={LabelStyle}> <b> Street Number </b></label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
 										<Input style={{ width: '90%' }} name="ct_street_number" value= {this.state.ct_street_number} style={InputStyle} onChange={this.Onchange} required / >
@@ -179,7 +179,7 @@ render(){
 								</Row>
 								<Row>
 									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
-										<label>Street Name</label>
+										<label> <b>Street Name </b></label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
 										<Input style={{ width: '90%' }} name = "ct_street_name" value= {this.state.ct_street_name} style={InputStyle} onChange={this.Onchange} required />
@@ -188,7 +188,7 @@ render(){
 								</Row>
 								<Row>
 									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
-										<label>City Name</label>
+										<label> <b> City Name </b> </label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
 										<Input style={{ width: '90%' }} name = "ct_city_name" value= {this.state.ct_city_name} style={InputStyle} onChange={this.Onchange} required />
@@ -197,7 +197,7 @@ render(){
 								</Row>
 								<Row>
 									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
-										<label>Pin Code</label>
+										<label> <b> Pin Code </b> </label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
 										<Input style={{ width: '90%' }} name="ct_pin"  placeholder="Please enter AlphaNumeric Pincode"  pattern="^[0-9a-zA-Z_ ]{1,8}$" style={InputStyle} value= {this.state.ct_pin} onChange={this.Onchange} required/>
@@ -221,8 +221,6 @@ render(){
 					<Col xs={2} sm={2} md={4} lg={5} >
 					</Col>
 				</Row>
-
-
 		</div>
 		)
 }

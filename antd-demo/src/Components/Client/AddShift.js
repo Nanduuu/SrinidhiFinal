@@ -19,7 +19,7 @@ const InputStyle={
 	padding:"5px"
 }
 const LabelStyle = {
-	textAlign:"center",
+	textAlign:"left",
 	paddingTop:"10px"
 }
 const submitStyle = {
@@ -166,7 +166,7 @@ render(){
 					<Col xs={24} sm={24} md={16} lg={14} >
 						<Row>
 								<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
-										<label>Select Client</label>
+										<label> <b> Select Client </b> </label>
 								</Col>
 								<Col xs={16} sm={16} md={12} lg={12}>
 									<Select  onChange={this.OnClientChange} value = {this.state.ct_name}required style={InputStyle}>
@@ -176,7 +176,7 @@ render(){
 						</Row>
 						<Row>
 								<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle}>
-									<label>Duration</label>
+									<label> <b> Duration </b> </label>
 								</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
 										<Row>
@@ -193,7 +193,7 @@ render(){
 						</Row>
 						<Row>
 									<Col xs={8} sm={8} md={12} lg={12} style={LabelStyle} >
-										<label >Shift Type</label>
+										<label > <b> Shift Type </b> </label>
 									</Col>
 									<Col xs={16} sm={16} md={12} lg={12}>
 										<Select  onChange={this.OnShiftChange} value={this.state.shift_type} style={InputStyle} >

@@ -208,7 +208,7 @@ render(){
       }];
 	return(
 		<div >
-      {this.isvalidated() ? null : <Redirect to ='/'/>}
+     
 			<Row style={{backgroundColor:"#eaeeef"}}>
 				 <Col xs={0} sm={2} md={4} lg={7} > 
         </Col>

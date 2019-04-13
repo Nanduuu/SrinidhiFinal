@@ -35,37 +35,30 @@ router.post('/',function(req,res){
 				var release_lockes = 'UNLOCK TABLES;';
 				var flag = true;
  
-				con.query(get_locks, function (err,result){
-					if(err){
-						console.log('in error at locks')
-						console.log(err);
-					}else{
-						con.query('select connection_id()',function(err,result){
-						console.log(result);
+				// con.query(get_locks, function (err,result){
+				// 	if(err){
+				// 		console.log('in error at locks')
+				// 		console.log(err);
+				// 	}else{
+				// 		con.query('select connection_id()',function(err,result){
+				// 		console.log(result);
 
 							var check_availability = `select * from jobs where filled = count and jobid = "${req.body.Data.JobID}";`
 
-							con.query(check_availability, function(err,result){
+					con.query(check_availability, function(err,result){
 
  
 							if (err ){
-								con.query(release_lockes, function(err,result){
-
-											if(err){
-												console.log(err)
-											}
-										});
-								//con.end();
+								
+								console.log(err);											
+							//	con.end();
 						
-								res.send({success:false,msg:"No availability"}); 
+							//	res.send({success:false,msg:"No availability"}); 
+						}
 						
-							}else if(result.length > 0){ 
+							if(result.length > 0){ 
 								console.log(result);
-								con.query(release_lockes, function(err,result){
-													if(err){
-														console.log(err)
-													}
-												});
+								
 								//con.end();
 							
 								res.send({success:false,msg:"No availability"}); 
@@ -76,62 +69,47 @@ router.post('/',function(req,res){
 
 							  		var sql_conflict = `select * from userjobs  where end_time >= "${req.body.Data.start_time}" and end_time <= "${req.body.Data.end_time}" and userid = ${req.body.Data.UserId} ;`// "${req.body.Data.end_time}";`
 							
-									
-
-
 									con.query( sql_conflict,function(err,result){
 					
-					if( result.length !== 0 ){
-							con.query(release_lockes,function(err,result){
-								if(err){
-									console.log(err);
-								}
-							});
-							con.end();
-							res.send({success:false,msg:"Time Conflict"});
-					}else{
+										if( result.length !== 0 ){ 
+												
+											//	con.end();
+												res.send({success:false,msg:"Time Conflict"});
+										}else{
 
-						con.query(sql_dup, function(err,result){
-							if (result.length !== 0){ 
-									con.query(release_lockes,function(err,result){
+											con.query(sql_dup, function(err,result){
+												if (result.length !== 0){ 
+														
+											//			con.end();
+														res.send({success:false,msg:"User alreday enrolled to this job"});
+												}else{
 
-									})
-									con.end();
-									res.send({success:false,msg:"User alreday enrolled to this job"});
-							}else{
+													var sqlInsertJob = `INSERT INTO userjobs SET ? ;`;
 
-									var sqlInsertJob = `INSERT INTO userjobs SET ? ;`;
+													con.query(sqlInsertJob,data,function(err,result){ 
+														console.log("In Insert query")
+														
+														if (err){
+															
+															console.log(err)
+															con.query('ROLLBACK',function(err,result){
 
-									con.query(sqlInsertJob,data,function(err,result){ 
-									console.log("In Insert query")
-									console.log(err);
-									if (err){
-										con.query(release_lockes, function(err,result){
-											if(err){
-												console.log(err)
-											}
-										});
-										con.query('ROLLBACK',function(err,result){
+															});
+											//				con.end();
+															res.send({success:false,msg:"Database error"});
+														}else{
+															
+															con.query(`update jobs set filled = filled+1 where jobid = "${req.body.Data.JobID}";`,function(err,result){
 
-										});
-										con.end();
-										res.send({success:false,msg:"Database error"});
-									}else{
-										con.query(`update jobs set filled = filled+1 where jobid = "${req.body.Data.JobID}";`,function(err,result){
+															})
+															con.query('commit', function(err,result){
 
-										})
-										con.query('commit', function(err,result){
+															});
 
-										});
-
-										con.query(release_lockes, function(err,result){
-											if(err){
-												console.log(err);
-											}
-										});
-										con.end();
-										res.send({success:true,msg:"Enrolled Successfully"});
-									}
+															
+											//				con.end();
+															res.send({success:true,msg:"Enrolled Successfully"});
+														}
 								})
 							}
 						})
@@ -142,16 +120,8 @@ router.post('/',function(req,res){
 	})
 
 
-					});
-					}
+});
 					
-				})
-
-				
-					
-})
-
-	//con.end();
 
 module.exports = router; 
 

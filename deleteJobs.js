@@ -18,7 +18,6 @@ router.post('/',function(req,res){
 			if(err){
 				res.send({success:false,message:"Issue with database"});
 			}else{
-				//var sql = `delete from jobs where (jobid) in (${req.Data.jobs}) ;`
 				console.log(req.body);
 				var sql = 'delete from jobs where (jobid) in ("' + req.body.Data.join('","') + '");';
 				con.query(sql,function(err,result){
@@ -27,8 +26,13 @@ router.post('/',function(req,res){
 						con.end();
 						res.send({success:false,message:"Please enter proper Job ids"});
 					}else{
-						con.end();
-						res.send({success:true,message:result});
+
+						con.query('delete from userjobs where (jobid) in ("' + req.body.Data.join('","') + '");' , function(err,result){
+
+							con.end();
+							res.send({success:true,message:result});
+						})
+						
 					}
 				})
 			}

@@ -3,6 +3,7 @@ const initialState = {
 	staffConfirmJob_status:false,
 	staffConfirmJob_msg:"",
 	staffScheduledJobs : null,
+  factTableData : [],
 }
 
 function UTC_IST(date){
@@ -58,6 +59,18 @@ export function StaffDashboard( state = initialState, action){
             }
           )
         break;
+
+      case "SET_FACT_TABLE_DATA" : 
+          console.log(action.payload)
+        return Object.assign(
+            {},
+            state,
+            {
+                factTableData : action.payload,
+            }
+          )
+        break;
+
 		default:
 		return state;
 	}

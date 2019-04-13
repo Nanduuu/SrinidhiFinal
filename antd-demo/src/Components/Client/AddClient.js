@@ -20,8 +20,8 @@ const InputStyle={
 	padding:"5px"
 }
 const LabelStyle = {
-	textAlign:"center",
-	paddingTop:"10px"
+	textAlign:"left",
+	paddingTop:"10px",
 }
 const submitStyle = {
 	width:"90%"
@@ -201,8 +201,8 @@ class AddClient extends React.Component {
 							<Col>
 								<form onSubmit ={this.Onsubmit}>
 								<Row>
-									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle} >
-										<label >Client Name</label>
+									<Col xs={12} sm={12} md={8} lg={8} style={LabelStyle} >
+										<label ><b>Client Name</b></label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
 										<Input name = "ct_name" value= {this.state.ct_name}style={InputStyle} onChange={this.Onchange} required />
@@ -211,8 +211,8 @@ class AddClient extends React.Component {
 								</Row>
 								
 								<Row>
-									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
-										<label style={LabelStyle}>Street Number</label>
+									<Col xs={12} sm={12} md={8} lg={8} style={LabelStyle}>
+										<label style={LabelStyle}> <b> Street Number </b> </label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
 										<Input name="ct_street_number" value= {this.state.ct_street_number} style={InputStyle} onChange={this.Onchange} required / >
@@ -220,8 +220,8 @@ class AddClient extends React.Component {
 									</Col>
 								</Row>
 								<Row>
-									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
-										<label>Street Name</label>
+									<Col xs={12} sm={12} md={8} lg={8} style={LabelStyle}>
+										<label> <b> Street Name </b></label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
 										<Input name = "ct_street_name" value= {this.state.ct_street_name} style={InputStyle} onChange={this.Onchange} required />
@@ -229,8 +229,8 @@ class AddClient extends React.Component {
 
 								</Row>
 								<Row>
-									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
-										<label>City Name</label>
+									<Col xs={12} sm={12} md={8} lg={8} style={LabelStyle}>
+										<label> <b> City Name </b> </label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
 										<Input name = "ct_city_name" value= {this.state.ct_city_name} style={InputStyle} onChange={this.Onchange} required />
@@ -238,8 +238,8 @@ class AddClient extends React.Component {
 
 								</Row>
 								<Row>
-									<Col xs={12} sm={12} md={12} lg={12} style={LabelStyle}>
-										<label>Pin Code</label>
+									<Col xs={12} sm={12} md={8} lg={8} style={LabelStyle}>
+										<label> <b> Pin Code </b> </label>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>
 										<Input name="ct_pin"  placeholder="Please enter AlphaNumeric Pincode"  pattern="^[0-9a-zA-Z_ ]{1,8}$" style={InputStyle} value= {this.state.ct_pin} onChange={this.Onchange} required/>
@@ -247,7 +247,7 @@ class AddClient extends React.Component {
 
 								</Row>
 								<Row style={{paddingTop:"10px"}}>
-									<Col xs={12} sm={12} md={12} lg={12}>
+									<Col xs={12} sm={12} md={8} lg={8}>
 										<Input type="submit" disabled = {this.props.statusInd} style={submitStyle} value = "Add"/>
 									</Col>
 									<Col xs={12} sm={12} md={12} lg={12}>

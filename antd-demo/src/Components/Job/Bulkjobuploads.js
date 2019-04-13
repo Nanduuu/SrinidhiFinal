@@ -50,7 +50,6 @@ OnSubmit = ()=>{
 	}
 }
 
-
 render(){
 	const { uploading, jobsDoc ,coverList} = this.state;
     const propsjobsDoc = {

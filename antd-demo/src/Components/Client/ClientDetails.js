@@ -14,6 +14,7 @@ import DeleteShifts from "./DeleteShifts";
 import AddShift from './AddShift';
 import { Collapse } from 'antd';
 
+
 const Panel = Collapse.Panel;
 
 const Namebar = (props)=>{
@@ -32,7 +33,13 @@ const customPanelStyle = {
 };
 
 
-
+const mapStateToProps = (state)=>{
+	return{
+		role : state.Reducer.user.Role,
+		adminDashboardJobs : state.Reducer.adminDashboardJobs,
+		UserId : state.Reducer.user.UserId,
+	}
+}
 
 class ClientDetails extends React.Component {
 	
@@ -40,12 +47,19 @@ class ClientDetails extends React.Component {
 		super(props)
 			
 	}
+
+	isvalidated = ()=>{
+		if (this.props.role !== 'staff'){
+			return true;
+		}
+	}
 	
 	
 	render(){
 		
 		return(
 				<div>
+				{this.isvalidated() ? null : <Redirect to ='/PageNotFound'/>}
 				<Collapse accordion defaultActiveKey="1">
 					<Panel header =  { <Namebar text= {"ADD CLIENT"} />} key="1">
 						<AddClient/>
@@ -74,4 +88,4 @@ class ClientDetails extends React.Component {
 			)
 	}
 }
-export default ClientDetails;
+export default connect (mapStateToProps,null)(ClientDetails);

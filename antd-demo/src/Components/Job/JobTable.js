@@ -165,8 +165,8 @@ class JobTable extends React.Component{
 			      	
 							<Table 
 							rowSelection={rowSelection}
-							pagination= { {pageSizeOptions: ['5','10','15','20','50','100'], showSizeChanger: true}}
-							size="small"
+							pagination= { {pageSizeOptions: ['5','10','15','20'], showSizeChanger: true}}
+							
 							dataSource={this.props.jobDetails}
 							columnWidth = "500"
 							scroll={{ x: 1200 }}>

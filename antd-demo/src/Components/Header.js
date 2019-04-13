@@ -9,7 +9,7 @@ import {Redirect} from 'react-router-dom'
 
 const baseStyle = {
 	width:'100%',
-	background: '#4479a1',
+	background: '#6699ff',
 	color:"white",
 	padding:"3px"
 }
@@ -19,7 +19,7 @@ const imgBorder ={
 	borderRadius: "0px",
 	float:"left",
 	padding:"1px",
-	borderRadius:"50px 50px"
+	
 }
 
 const divStyle = {
@@ -77,11 +77,13 @@ class Header extends React.Component{
      				</Col>
      				
 				</Row>
-				<Row style={{backgroundColor:"#99ccff"}}>
-					<Col>
-						<b> <i>{this.props.Fname + this.props.Lname} </i></b>
+				<Row style={{backgroundColor:"#5f5f5f"}}>
+					<Col style={{color:"white",textAlign:"right",margin:"10px"}}>
+						
+						<b> {new Date().toISOString().slice(0,10)}</b>
 					</Col>
 				</Row>
+				
 			</div>
 			)
 	}

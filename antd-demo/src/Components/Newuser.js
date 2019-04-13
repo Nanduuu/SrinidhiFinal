@@ -4,7 +4,8 @@ import  {Row,Col}  from 'antd';
 import axios from 'axios';
 import {message} from 'antd';
 import {Redirect  } from 'react-router';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+
 
 const Option = Select.Option;
 
@@ -44,12 +45,21 @@ const footer = {
   background: '#4292f4'
 }
 
+let lable_style = {
+  margin : '5px',
+  textAlign : 'left',
+  
+}
+
 var border={
 
-  borderRadius: "25px",
+  borderRadius: "10px",
   border: "2px solid #4292f4",
-  backgroundColor : "white"
+  backgroundColor : "white",
+  padding : '10px',
 }
+
+
 
 class Newuser extends React.Component {
 	constructor(props){
@@ -114,7 +124,7 @@ showModal = () => {
 
   onCheck=()=>{
   	if(this.state.Pword !== this.state.Rpword){
-  		alert("password did not match");
+  		error("password did not match");
     }
   }
 
@@ -123,7 +133,7 @@ showModal = () => {
   	event.preventDefault();
     
     if(this.state.Pword !== this.state.Rpword && this.state.Pword !== null){
-    	alert("password did not match");
+    	error("password did not match");
     }else{
 
     let formData = new FormData();
@@ -137,7 +147,7 @@ showModal = () => {
     	const config = {     
 						    headers: { 'content-type': 'multipart/form-data' }
 						}
-		//console.log(formData.getAll());
+		
     	axios.post('/api/newuser/',formData)
     		  .then( (res) =>{
 
@@ -149,22 +159,19 @@ showModal = () => {
     		  		  success(res.data.msg)
                 this.setState({regSuccess:true})
               }else{
-               // error(res.data.msg)
-              }
+               
+            }
 
-    		  	}
+    		  }
 
     		  }).catch((error)=>{
-    		  	//	error("Error");
+    		  	
     		  });
-
-  	 
+	 
     }
 
     
   }
-
- 
 
 render (){
 
@@ -183,14 +190,20 @@ render (){
           <Col xs={2} sm={1} md={4} lg={6} xl={6}>
           </Col>
           <Col xs={20} sm={22} md={16} lg={12} xl={12}>
-            <div style={{marginTop:'8%',width:'100%',color:'white' }}>
-              NEW USER FORM
-            </div>
+            
 					<form onSubmit = {this.handleOk}>
-						<Input name="Fname" placeholder="Enter first name" onChange={this.Onchange} style={InputStyle} required />
-						<Input name="Lname" placeholder="Enter last name" onChange={this.Onchange} style={InputStyle} />
-            <Input name="Email" type="email" placeholder="Enter email Id" onChange={this.Onchange} style={InputStyle} required/>
-            <Select value = {this.state.Stafftype} onChange={this.handleChangeStaff} placeholder={"Select Job Type"}  required>
+          <div style={border}>
+            <div style={{marginTop:'2%',width:'100%',color:'white' }}>
+              <h3>  NEW USER FORM </h3>
+            </div>
+            <div style = {lable_style}> <b>First Name </b></div>
+						<Input name="Fname" onChange={this.Onchange} style={InputStyle} required />
+            <div style = {lable_style}> <b> Last Name </b> </div>
+						<Input name="Lname" onChange={this.Onchange} style={InputStyle} />
+            <div style = {lable_style}> <b> Email ID </b> </div>
+            <Input name="Email" type="email" onChange={this.Onchange} style={InputStyle} required/>
+            <div style = {lable_style}> <b> Designation </b> </div>
+            <Select value = {this.state.Stafftype} onChange={this.handleChangeStaff} required>
                             <Option value="Doctor">Doctor</Option>
                             <Option value="Nurse">Nurse</Option>
                             <Option value="Health Care assistant (HCA)">Health Care assistant (HCA)</Option>
@@ -198,9 +211,13 @@ render (){
                             <Option value="Domestic assistant">Domestic assistant</Option>
                             <Option value="Domiciliary carer">Domiciliary carer</Option>
                           </Select>
-						<Input name="Tel" type="tel" placeholder="Enter Phone Number"  onChange={this.Onchange} style={InputStyle} required/>
-						<Input name="Pword" type="password" placeholder={'Enter password'} onChange={this.Onchange} style={InputStyle} required/>
-						<Input name="Rpword" type="password" placeholder={'Confirm password'} onBlur={this.onCheck} style={InputStyle}  onChange={this.Onchange} required/>
+             <div style = {lable_style}> <b> Phone Number </b> </div>
+						<Input name="Tel" type="tel" onChange={this.Onchange} style={InputStyle} required/>
+
+            <div style = {lable_style}> <b> Password </b> </div>
+						<Input name="Pword" type="password" onChange={this.Onchange} style={InputStyle} required/>
+            <div style = {lable_style}> <b> Confirm Password  </b> </div>
+						<Input name="Rpword" type="password" onBlur={this.onCheck} style={InputStyle}  onChange={this.Onchange} required/>
 						
 
 
@@ -209,10 +226,11 @@ render (){
                     <Input style={{marginTop:'1%',width:'100%'}} type="submit" value="Submit"/> 
                  </Col>
                  <Col xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Button style={{marginTop:'1%',width:'100%'}} ><Link  to ={'/'}>Back </Link></Button>
-                  </Col>
-            </Row>    
+                    <Button type="primary" style={{marginTop:'1%',width:'100%'}} ><Link  to ={'/'}>Back </Link></Button>                  </Col>
+            </Row>   
+            </div> 
 					</form>
+
           </Col>
           <Col xs={2} sm={1} md={4} lg={6} xl={6}>
           </Col>

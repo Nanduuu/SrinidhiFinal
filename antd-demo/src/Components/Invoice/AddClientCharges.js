@@ -146,7 +146,7 @@ class AddClientCharges extends React.Component{
 						columns={columns}
 						dataSource ={this.props.clientInvoiceRates}
 						scroll={{ x: 1000 }}
-						size="small"
+						
 						>
 
 						</Table>

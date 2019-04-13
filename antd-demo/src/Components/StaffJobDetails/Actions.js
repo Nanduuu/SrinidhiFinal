@@ -4,3 +4,10 @@ export function getStaffJobDetails(data){
 		payload:data,
 	}
 }
+
+export function deleteStaffJobs(data){
+	return {
+		type:'DELETESTAFFJOBS',
+		payload:data,
+	}
+}

@@ -44,7 +44,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('nandakumarvn01@gmail.com','Nanda','Kumar','9945215941','912ec803b2ce49e4a541068d495ab570','staff',1,'Doctor','2019-04-04 02:28:06','2038-01-19 00:00:00'),('ajaymr2345@gmail.com','Ajay','Kumar','9945215941','fd2cc6c54239c40495a0d3a93b6380eb','admin',2,'','2019-03-31 02:14:47','2038-01-18 18:30:00'),('nanda@gmail.com','giri','MN','9945215941','912ec803b2ce49e4a541068d495ab570','staff',3,'Doctor','2019-03-31 01:46:34','2038-01-19 00:00:00'),('hareesh@gmail.com','Hareesh','Ram','9945215941','912ec803b2ce49e4a541068d495ab570','staff',9,'Domestic worker','2019-03-31 02:19:46','2038-01-19 00:00:00'),('nandakumarvn03@gmail.com','Nanda','Kumar','9945215941','912ec803b2ce49e4a541068d495ab570','staff',10,'Doctor','2019-03-31 01:46:35','2038-01-19 00:00:00'),('nraghurao9@gmail.com','Raghu','Rao','9945215941','912ec803b2ce49e4a541068d495ab570','staff',11,'Doctor','2019-03-31 01:46:36','2038-01-19 00:00:00'),('nanda123@gmail.com','nanda','kumar','9945215941','912ec803b2ce49e4a541068d495ab570','staff',12,'Health Care assistant (HCA)','2019-03-31 01:46:37','2038-01-19 00:00:00');
+INSERT INTO `user` VALUES ('nandakumarvn01@gmail.com','Nanda','Kumar','9945215941','912ec803b2ce49e4a541068d495ab570','staff',1,'Doctor','2019-04-07 16:29:56','2038-01-19 00:00:00'),('ajaymr2345@gmail.com','Ajay','Kumar','9945215941','fd2cc6c54239c40495a0d3a93b6380eb','admin',2,'','2019-03-31 02:14:47','2038-01-18 18:30:00'),('nanda@gmail.com','giri','MN','9945215941','912ec803b2ce49e4a541068d495ab570','staff',3,'Doctor','2019-04-07 16:29:52','2038-01-19 00:00:00'),('hareesh@gmail.com','Hareesh','Ram','9945215941','912ec803b2ce49e4a541068d495ab570','staff',9,'Domestic worker','2019-04-07 16:29:53','2038-01-19 00:00:00'),('undefined','undefined','undefined','undefined','912ec803b2ce49e4a541068d495ab570','staff',10,'undefined','2019-04-13 12:31:24','2019-04-13 12:31:24'),('raghukumar@gmail.com',' Raghu','kumar','9945215941','912ec803b2ce49e4a541068d495ab570','staff',11,'undefined','2019-04-13 12:34:08','2038-01-19 00:00:00');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-05  6:16:51
+-- Dump completed on 2019-04-13 12:47:07

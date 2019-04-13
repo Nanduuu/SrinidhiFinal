@@ -67,7 +67,7 @@ export class CcMenu extends React.Component{
 		        </Menu.Item>
 		        
 		        <Menu.Item key="INVOICE">
-		          <Link to= { this.props.match.url + '/invoiceprocess'}>  <Icon type="user" />INVOICE </Link>
+		          <Link to= { this.props.match.url + '/invoiceprocess'}>  <Icon type="bars" />INVOICE </Link>
 		        </Menu.Item>
 
 		         <Menu.Item key="USER DETAILS">

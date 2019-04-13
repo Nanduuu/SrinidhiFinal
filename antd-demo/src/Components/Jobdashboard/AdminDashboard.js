@@ -57,25 +57,33 @@ loadClick = ()=>{
 	this.props.getAdminDashboardDetails(this.state.date_string);
 }
 
+isvalidated = ()=>{
+		if (this.props.role !== 'staff'){
+			return true;
+		}
+	}
+
 render(){
 
 	return(
 		<div>
-				<Divider style={{backgroundColor:"#4479a1"}}>
+				{this.isvalidated() ? null : <Redirect to ='/PageNotFound'/>}
+				<Divider style={{backgroundColor:"#5f5f5f"}}>
 						<span style={{color:"white"}}>SCHEDULES</span> 
 					</Divider>
 				<Row>
 					<Col>
-						<lable>Select date </lable>
+						<lable> <b>Select Date </b> </lable>
+						<DatePicker value={this.state.date}  onChange = {this.OnchangeDate} />
 					</Col>
 					<Col>
-						<DatePicker value={this.state.date}  onChange = {this.OnchangeDate} />
+						
 					</Col>
 					
 				</Row>
 				<Table
 					pagination= { {pageSizeOptions: ['5','10','15','20','50','100'], showSizeChanger: true}}
-					size="small"
+					size="medium"
 					dataSource={this.props.adminDashboardJobs}
 					scroll={{ x: 1000 }}
 				>

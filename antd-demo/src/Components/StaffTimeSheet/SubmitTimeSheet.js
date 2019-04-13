@@ -1,50 +1,84 @@
 import React from 'react';
 import { Table, Divider, Tag ,DatePicker, Button } from 'antd';
-import {Row, Col } from 'antd';
+import { Row, Col } from 'antd';
 import moment from 'moment';
 import { Modal } from 'antd';
 import {Input} from 'antd';
+import { getFactTableData } from './Actions';
+import {connect} from 'react-redux';
+import axios from 'axios';
+
 const { TextArea } = Input;
 
 
 const { MonthPicker, RangePicker } = DatePicker;
 const { Column, ColumnGroup } = Table;
 
+const mapDispatchToProps = (dispatch)=>{
+	return{
+		getFactTableData : (data)=>{
+			dispatch(getFactTableData(data))
 
-const dataSource = [{
-  key: '1',
-  JobId:"ABC001",
-  Hospital: 'Narayana',
-  Date:"01/01/2019",
-  Time: "10 to 12",
-  
-},{
-  key: '2',
-  JobId:"ABC002",
-  Hospital: 'Forties',
-  Date:"02/01/2019",
-  Time: "6 to 12",
-  
-},];
+		},
+	}
+}
+
+const mapStateToProps = (state)=>{
+	return {
+		userid : state.Reducer.user.UserId,
+		factTableData : state.StaffDashboard.factTableData,
+	}
+}
 
 
 class SubmitTimeSheet extends React.Component{
 
 	constructor(props){
 		super(props);
-		this.state = { visible: false }
+		this.state = { 
+			visible: false,
+			startDate: null,
+			endDate:null,
+			curr_record:null,
+			remarks:'',
+		 }
 
 	}
-	showModal = () => {
+
+ showModal = (record) => {
     this.setState({
       visible: true,
+      curr_record : record,
     });
   }
 
   handleOk = (e) => {
-    console.log(e);
+    console.log();
+
+    var data = {};
+    var record = this.state.curr_record;
+
+    const data = new FormData();
+
+    data.append('jobid', record.jobid);
+    data.append('userid', record.userid);
+    data.append('remarks', this.state.remarks);
+    data.append('ack',this.state.file);
+
+
+    
+
+    axios.post('/api/submitTimeSheet/',data).then(function(res){
+
+    }).catch(function(err){
+
+    })
+
+
     this.setState({
       visible: false,
+      curr_record:null,
+      remarks:'',
     });
   }
 
@@ -52,8 +86,66 @@ class SubmitTimeSheet extends React.Component{
     console.log(e);
     this.setState({
       visible: false,
+      curr_record:null,
+      file:null,
+      remarks:'',
     });
   }
+
+  componentDidMount(){
+
+  	let endDate =  new Date().toISOString();
+    let startDate = new Date();
+	startDate.setDate(startDate.getDate() - 30);
+
+	let data = {
+		endDate,
+		startDate : startDate.toISOString(),
+		userid : this.props.userid,
+	}
+
+	console.log(data)
+  	this.props.getFactTableData(data);
+
+
+  }
+
+  onLoad = ()=>{
+  		let startDate =  this.state.startDate;
+   		 let endDate = this.state.endDate;
+	
+
+	let data = {
+		startDate,
+		endDate,
+		userid : this.props.userid,
+	}
+
+	console.log(data)
+  	this.props.getFactTableData(data);
+
+
+
+  }
+
+  OnChangeDate = (value,dateString)=>{
+		console.log(dateString);
+		this.setState({
+		startDate : dateString[0],
+		endDate : dateString[1],
+	
+		})
+
+	}
+
+	fileOnchange=(event)=>{
+		console.log(event.target.files[0])
+		this.setState({file : event.target.files[0]})
+	}
+
+	remarksOnchange=(event)=>{
+		this.setState({remarks:event.target.value})
+	}
 
 render(){
 
@@ -63,29 +155,44 @@ render(){
 			const dateFormat = 'YYYY/MM/DD';
 
 	const columns = [{
-				  title: 'JobId',
-				  dataIndex: 'JobId',
-				  key: 'JobId',
+				  title: 'Job ID',
+				  dataIndex: 'jobid',
+				  key: 'jobid',
+				  width:150,
 
 				},{
 				  title: 'Hospital',
-				  dataIndex: 'Hospital',
-				  key: 'Hospital',
+				  dataIndex: 'client',
+				  key: 'Jobid',
+				  width:150,
+				  
 				},{title: 'Date',
-				  dataIndex: 'Date',
+				  dataIndex: 'date',
 				  key: 'Date',
+				  width:150,
+				   
 				},{
-				  title: 'Time',
-				  dataIndex: 'Time',
-				  key: 'Time',
+				  title: 'Start Time',
+				  dataIndex: 'start_time',
+				  key: 'jobid',
+				  width:150,
+				   
 				}, {
+				  title: 'End Time',
+				  dataIndex: 'end_time',
+				  key: 'jobid',
+				  width:150,
+				  
+				},{
 				  title: 'Action',
 				  dataIndex: 'Action',
-				  key: 'Action',
+				  key: 'jobid',
+				  width:150,
+				  
 				  render: (text, record) => (
 				    <span>
-				       <Button type="primary" onClick={this.showModal}>
-				          Submit Time Sheet
+				       <Button type="primary" onClick={()=>{this.showModal(record)}} disabled = { record.flag == 'Y' ? true : false} >
+				         { record.flag == 'Y' ? 'Approved' : 'Submit Time Sheet'} 
 				        </Button>
 				    </span>
 				  ),
@@ -99,33 +206,39 @@ render(){
 		          onOk={this.handleOk}
 		          onCancel={this.handleCancel}
 		        >
-		          <Input type="file"/>
-		          <lable> Remarks </lable>
-		          <TextArea/>
+		          <Input type="file" name={'ack'} onChange = {this.fileOnchange}/>
+		          <lable > Remarks (Characters should be less than 200) </lable>
+		          <TextArea onChange = {this.remarksOnchange} value = {this.state.remarks} />
+		          <lable> Characters Count : {this.state.remarks.length} </lable>
 		        </Modal>
 			<Row>
 				<Col>
 				</Col>
 				<Col>
 					<Row>
-						 <Col xs={0} sm={2} md={4} lg={5} xl={5}> 
+						 <Col xs={0} sm={0} md={2} lg={2} xl={2}> 
       					 </Col>
-						<Col xs={24} sm={20} md={16} lg={14} xl={14}> 
+						<Col xs={24} sm={24} md={20} lg={20} xl={20}> 
 							<div style={{margin:"5px"}}>
-					       		<RangePicker defaultValue={[moment( startDate, dateFormat), moment(endDate, dateFormat)]}/>
+					       		<RangePicker defaultValue={[moment( startDate, dateFormat), moment(endDate, dateFormat)]}
+					       		onChange = {this.OnChangeDate}/>
 			        			<Button 
 			            			type="primary"
 			            			style={{margin:"5px"}}
+			            			onClick = {this.onLoad}
 			        			>
 			        			Load
 			        			</Button>
 			        	     </div>
 			     			<div>
-           						 <Table columns={columns} size="medium" dataSource={dataSource} />
+           						 <Table columns={columns} 
+           						 		size="medium" 
+           						 		scroll = {{x:1000}}
+           						 		dataSource={this.props.factTableData} />
 					   			
           					</div>
 						</Col>
-       					<Col xs={0} sm={2} md={4} lg={5} xl={5}> 
+       					<Col xs={0} sm={0} md={2} lg={2} xl={2}> 
 						</Col>
 					</Row>	
 					</Col>
@@ -141,4 +254,4 @@ render(){
 
 }
 
-export default SubmitTimeSheet;
+export default connect ( mapStateToProps ,mapDispatchToProps ) (SubmitTimeSheet);

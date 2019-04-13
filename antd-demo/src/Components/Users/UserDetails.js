@@ -2,11 +2,13 @@ import React from 'react';
 import { Table, Button} from 'antd';
 import {connect} from 'react-redux';
 import {getUserDetails,enable_disable_user} from './Actions';
+import {Redirect} from 'react-router-dom';
 
 
 const mapStateToProps = (state)=>{
 	return{
 		userDetails : state.ClientDetails.userDetails,
+    role : state.Reducer.user.Role,
 	}
 }
 
@@ -33,11 +35,6 @@ const Accept = (props)=>{
     )
  }
 
-
-
-
-
-
 class UserDetails extends React.Component{
 	constructor(props){
 		super(props);
@@ -54,6 +51,17 @@ onEnableDisable = (input)=>{
 	this.props.enable_disable_user(input);
 }
 
+componentWillReceiveProps(nextProps){
+
+    if(nextProps.userDetails != this.props.userDetails){
+       this.props.getUserDetails();
+    }
+}
+isvalidated = ()=>{
+    if (this.props.role !== 'staff'){
+      return true;
+    }
+  }
 
 render(){
 
@@ -102,12 +110,9 @@ render(){
       }];
 	return(
 			<div style={{margin:'5px'}}>
-
-
-				<Table size='small' style={{margin:'0px'}} bordered columns={columns} scroll={{ x:800}} dataSource={this.props.userDetails}/>
-
-
-
+        {this.isvalidated() ? null : <Redirect to ='/PageNotFound'/>}
+				<Table style={{margin:'0px'}} columns={columns} scroll={{ x:800}} 
+        pagination= { {pageSizeOptions: ['5','10'], showSizeChanger: true}} dataSource={this.props.userDetails}/>
 			</div>
  		) 
     }

@@ -145,7 +145,7 @@ class AddStaffCharges extends React.Component{
             columns={columns}
             dataSource ={this.props.staffInvoiceRates}
             scroll={{ x: 1000 }}
-            size="small"
+            
             >
 
             </Table>

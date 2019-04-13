@@ -180,15 +180,15 @@ render(){
 				<div>
 					{this.isvalidated() ? null : <Redirect to ='/PageNotFound'/>}
 					<Row style={{padding:"5px"}}>
-						<Col xs={2} sm={2} md={4} lg={5} >
+						<Col xs={0} sm={0} md={4} lg={5} >
 						</Col>
-						<Col xs={20} sm={20} md={16} lg={14}>
+						<Col xs={24} sm={24} md={16} lg={14}>
 							<form onSubmit = {this.OnSubmit}>
 								<Row style={{padding:"5px"}}>
-									<Col xs={8} sm={8} md={8} lg={8} style={LabelStyle}>
-										<lable> Select cleint to disable  </lable>
+									<Col xs={24} sm={24} md={8} lg={8} style={LabelStyle}>
+										<lable> <b> Select client to disable </b>  </lable>
 									</Col>
-									<Col xs={8} sm={8} md={8} lg={8}>
+									<Col xs={24} sm={24} md={8} lg={8}>
 										<Select 
 											onSelect = {this.disableOnSelect}
 											value = {this.state.disableSelectedClient}
@@ -197,17 +197,17 @@ render(){
 											
 										</Select>
 									</Col>
-									<Col xs={8} sm={8} md={8} lg={8}>
+									<Col xs={24} sm={24} md={8} lg={8}>
 										<Button type="primary" onClick = {this.disable} style={submitStyle}> Disable </Button>
 									</Col>
 								</Row>
 
 
 								<Row style={{padding:"5px"}}>
-									<Col xs={8} sm={8} md={8} lg={8} style={LabelStyle}>
-										<lable> Select cleint to enable  </lable>
+									<Col xs={24} sm={24} md={8} lg={8} style={LabelStyle}>
+										<lable> <b> Select client to enable </b>  </lable>
 									</Col>
-									<Col xs={8} sm={8} md={8} lg={8}>
+									<Col xs={24} sm={24} md={8} lg={8}>
 										<Select 
 											onSelect = {this.enableOnSelect}
 											value = {this.state.enableSelectedClient}
@@ -216,14 +216,14 @@ render(){
 
 										</Select>
 									</Col>
-									<Col xs={8} sm={8} md={8} lg={8}>
+									<Col xs={24} sm={24} md={8} lg={8}>
 										<Button type="primary" onClick={this.enable} style={submitStyle}> Enable</Button>
 									</Col>
 								</Row>
 								
 							</form>
 						</Col>
-						<Col xs={2} sm={2} md={4} lg={5} >
+						<Col xs={0} sm={0} md={4} lg={5} >
 					</Col>
 					</Row>
 				</div>

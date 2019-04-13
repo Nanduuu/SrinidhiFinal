@@ -37,7 +37,7 @@ function* do_logout(){
 }
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 function* do_addclient(action){
 	yield put({type:"SET_ADD_CLIENT"});
@@ -125,7 +125,7 @@ function* do_getShiftDetails(action){
 		 yield	put ({type:"SET_SHIFT_DETAILS",flag:response.data.success,shiftDetails:response.data.shiftDetails})	
 	}
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
  function* do_addjob(action){
  	yield put({type:"SET_ADD_JOB"});
@@ -237,9 +237,7 @@ function* do_getStaffJobDetails(action){
  		var response = yield call (axios.post, "/api/updateInvoiceRates/",{"Data":action.payload});
  		console.log(response.data)
 
- 		// yield put({type : "SET_STAFF_INVOICE_RATES",
- 		// 		 success:response.data.success,
- 		// 		 staffInvoiceRates:response.data.staffInvoiceRates});
+ 		
 
  }
 
@@ -262,7 +260,32 @@ function* do_getUserDetails(action){
  	}
  }
 
- 
+ function* do_deleteStaffJobs(action){
+ 	var response = yield call(axios.post, "/api/deleteStaffJobs",{"Data":action.payload});
+ 	
+}
+
+ function* do_approveTimeSheet(action){
+
+ 	console.log('in saga approve timesheet')
+ 	var response = yield call(axios.post, "/api/approveTimeSheet",{"Data":action.payload});
+ 	
+}
+
+
+function* do_getFactTableData(action){
+	//console.log('in saga')
+	var response = yield call(axios.post, "/api/getFactTableData/",{"Data":action.payload});
+		//console.log(response.data.factTable)
+
+		if(response){
+			yield put({
+				type:"SET_FACT_TABLE_DATA",
+				payload:response.data.factTable,
+
+			})
+		}
+}
 
 export function* rootSaga() {
 
@@ -294,17 +317,13 @@ export function* rootSaga() {
 	yield takeLatest("STAFFGETJOBDETAILS",do_staffgetjobdetails);
 	yield takeLatest("STAFFCONFIRMJOB",do_staffconfirmjob);
 	yield takeLatest("GETSTAFFJOBDETAILS",do_getStaffJobDetails);
-
 	yield takeLatest("GETCLIENTINOVICERATES", do_getClientInvoiceRates);
 	yield takeLatest("GETSTAFFINOVICERATES", do_getStaffInvoiceRates);
-
 	yield takeLatest("UPDATEINVOICERATES", do_updateInvoiceRates);
-
 	yield takeLatest("GETUSERDETAILS", do_getUserDetails);
 	yield takeLatest("ENABLEDISABLEUSER", do_enable_disable_user);
-
-	
-
-
+	yield takeLatest("DELETESTAFFJOBS",do_deleteStaffJobs);
+	yield takeLatest('GETFACTTABLEDATA',do_getFactTableData);
+	yield takeLatest('APPROVETIMESHREET', do_approveTimeSheet);
 
 } 
