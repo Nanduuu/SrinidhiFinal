@@ -18,7 +18,7 @@ router.post('/',function(req,res){
 						res.send({success:false,msg:'Error with database'});
 					}
 
-					res.send({success:true,activeclients:result});
+					res.send({success:true,rates:result});
 				})
 			
 		

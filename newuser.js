@@ -45,7 +45,7 @@ router.post('/',function(req,res){
 						userid = result[0].max + 1;
 					}
 					var sql = 'insert into user (Emailid, Fname, Lname, Tel, Pword, role,userid, stafftype) values' +
-		  		 			'("'+ req.fields.Email +'","' +req.fields.Fname +'","'+ req.fields.Lname +'","'+req.fields.Tel +'","'+ encrypt +'","'+ "staff"+ '",' + userid + ',"' + req.body.Stafftype + '")';
+		  		 			'("'+ req.fields.Email +'","' +req.fields.Fname +'","'+ req.fields.Lname +'","'+req.fields.Tel +'","'+ encrypt +'","'+ "staff"+ '",' + userid + ',"' + req.fields.Stafftype + '")';
 
 		  		 	con.query(sql, function(err,result){
 		  			console.log(err);

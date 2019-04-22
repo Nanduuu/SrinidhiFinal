@@ -10,6 +10,45 @@ const router = express.Router();
 
 var jwt = require('jsonwebtoken');
 
+
+
+function getActiveUsers (staffType){
+
+	
+
+	let myPromise = new Promise(function(resolve, reject){
+  			var con = mysql.createConnection({
+					  host: "localhost",
+					  user: "root",
+					  password: "root",
+					  database: "test"
+					});
+	 		con.connect(function(err) {
+					  if (err) {
+					  			throw err;
+					  			res.send({success:false,msg:'Issue at conncting database'});
+					  	}
+			})
+
+	 		con.query(`select Emailid from user where stafftype = "${staffType}" and end_date > "${new Date().toISOString()}";`, function(err,result){
+	 			if(err){
+	 				console.log(err);
+	 				reject('Issue with database');
+	 			}else{
+
+	 				con.end();
+	 				 resolve(resolve);
+	 			}
+	 		})
+
+	})
+
+	return myPromise;
+
+}
+
+
+
 router.post('/',function(req,res){
 		
 		
@@ -77,6 +116,33 @@ router.post('/',function(req,res){
 								res.send({success:false, msg:"Issue with database"});
 								}
 							}else {
+
+								let emailData = {};
+
+								getActiveUsers(req.body.Data.staff).then(function(result){
+
+									if(result){
+
+										var info = {
+											hospital : req.body.Data.client,
+	  										date : req.body.Data.date,
+	  										from_time : start_time,
+	  										to_time  : end_time,
+										}
+
+										let emailData = {
+
+											info,
+											toList : 'nandakumarvn01@gmail.com',
+
+										}
+
+										email.sendEmail(emailData);
+									}
+
+								}).catch(function(err){
+									console.log(err);
+								})
 								
 							res.send({success:true,msg:"Job added Successfully"});
 						}

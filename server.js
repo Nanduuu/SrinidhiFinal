@@ -38,6 +38,8 @@ const getFactTableData = require('./getFactTableData');
 const approveTimeSheet = require('./approveTimeSheet');
 const submitTimeSheet = require('./submitTimeSheet');
 const deleteShift = require('./deleteShift');
+const updateUserDetails = require('./updateUserDetails');
+const updatePassword = require('./updatePassword');
 
 //const time = require('./updateFactTable');
 
@@ -114,6 +116,8 @@ app.use('/api/getFactTableData/',getFactTableData);
 app.use('/api/approveTimeSheet/',approveTimeSheet);
 app.use('/api/submitTimeSheet/',submitTimeSheet);
 app.use('/api/deleteShift',deleteShift);
+app.use('/api/updateUserDetails/',updateUserDetails);
+app.use('/api/updatePassword/',updatePassword);
 
 app.get('/acks/*', function(req,res){
 
@@ -131,10 +135,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 // })
 
   
-  app.get('*', function(req, res) {
+  app.get('/*', function(req, res) {
+  	console.log('in static files')
     res.sendFile(path.join(__dirname, 'public', 'build/index.html'));
   });
 
+
+// app.get('/*', function (req, res) {
+//    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+//  });
 
 var server = http.createServer(app);
 
