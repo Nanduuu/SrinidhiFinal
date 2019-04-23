@@ -115,7 +115,7 @@ app.use('/api/deleteStaffJobs/',deleteStaffJobs);
 app.use('/api/getFactTableData/',getFactTableData);
 app.use('/api/approveTimeSheet/',approveTimeSheet);
 app.use('/api/submitTimeSheet/',submitTimeSheet);
-app.use('/api/deleteShift',deleteShift);
+app.use('/api/deleteShift/',deleteShift);
 app.use('/api/updateUserDetails/',updateUserDetails);
 app.use('/api/updatePassword/',updatePassword);
 

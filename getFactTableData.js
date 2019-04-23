@@ -21,6 +21,15 @@ router.post('/',function(req,res){
 
 					console.log(sql_factTable);
 
+				}else if ( req.body.Data.client){
+
+					console.log('in user fact table')
+
+					var sql_factTable = `SELECT * from facttable left join jobs on jobs.jobid = facttable.jobid where facttable.date >="${req.body.Data.startDate}" and facttable.date <= "${req.body.Data.endDate}" and jobs.client = "${req.body.Data.client}";`;
+
+					console.log(sql_factTable);
+
+
 				}else{
 
 					console.log('in user fact table')
