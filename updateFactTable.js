@@ -1,7 +1,9 @@
 var schedule = require('node-schedule');
 var mysql = require('mysql');
 var rule = new schedule.RecurrenceRule();
-rule.second = 5;
+rule.hour  = 23;
+rule.minute = 30;
+
  
 var j = schedule.scheduleJob(rule, function(){
 
@@ -31,7 +33,7 @@ var j = schedule.scheduleJob(rule, function(){
 			con.query(sql_fetch_data,function(err,result){
 
 				if(err){
-				//	console.log(err)
+				
 				}else{
 
 					console.log(result);
@@ -39,7 +41,7 @@ var j = schedule.scheduleJob(rule, function(){
 				result.map(function(row){
 					con.query('INSERT INTO facttable SET ? ',row, function(err,result){
 					if(err){
-						//console.log(err);
+					
 					}
 					console.log(result);
 					})
@@ -49,14 +51,9 @@ var j = schedule.scheduleJob(rule, function(){
 
 				}
 
-				//console.log(result);
-
-				
-
-			})
+		})
 
 });
 
 
-console.log("in timer")
 

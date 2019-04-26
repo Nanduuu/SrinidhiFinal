@@ -27,7 +27,7 @@ const updateEditJob = require('./updateEditJob');
 const staffgetJobDetails = require('./staffgetJobDetails');
 const staffconfirmjob = require('./StaffConfirmjob');
 const staffScheduledJobDetails = require('./staffScheduledJobDetails');
-const getClientInvoicerates = require('./getClientInvoicerates');
+const getClientInvoicerates = require('./getClientInvoiceRates');
 const getStaffInvoicerates = require('./getStaffInvoicerates');
 const updateInvoicerates = require('./updateInvoiceRates');
 const getUserDetails = require('./getUserDetails');
@@ -40,8 +40,9 @@ const submitTimeSheet = require('./submitTimeSheet');
 const deleteShift = require('./deleteShift');
 const updateUserDetails = require('./updateUserDetails');
 const updatePassword = require('./updatePassword');
+const getProcessFactTableDetails = require('./getProcessFactTableDetails');
 
-//const time = require('./updateFactTable');
+const time = require('./updateFactTable');
 
 
 const timezone = 'UTC';
@@ -118,16 +119,17 @@ app.use('/api/submitTimeSheet/',submitTimeSheet);
 app.use('/api/deleteShift/',deleteShift);
 app.use('/api/updateUserDetails/',updateUserDetails);
 app.use('/api/updatePassword/',updatePassword);
+app.use('/api/getProcessFactTableDetails/',getProcessFactTableDetails);
 
 app.get('/acks/*', function(req,res){
 
 	console.log(req.path)
-	 res.sendFile(path.join(__dirname, req.path));
-})
+    res.sendFile(path.join(__dirname, req.path));
+ })
 
 
 
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 
 // app('/', function(req,res){
@@ -135,15 +137,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 // })
 
   
-  app.get('/*', function(req, res) {
-  	console.log('in static files')
-    res.sendFile(path.join(__dirname, 'public', 'build/index.html'));
+ // app.get('*', function(req, res) {
+ // 	console.log('in static files')
+ //   res.sendFile(path.join(__dirname, 'public', 'build/index.html'));
+ // });
+
+
+   app.use(express.static(path.join(__dirname, 'public/build')));
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'public/build', 'index.html'));
   });
-
-
-// app.get('/*', function (req, res) {
-//    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-//  });
 
 var server = http.createServer(app);
 
