@@ -41,9 +41,24 @@ const deleteShift = require('./deleteShift');
 const updateUserDetails = require('./updateUserDetails');
 const updatePassword = require('./updatePassword');
 const getProcessFactTableDetails = require('./getProcessFactTableDetails');
+const processInvoice = require('./processInvoice');
+const updateOfficeAddress = require('./updateOfficeAddress');
+const getOfficeAddress = require('./getOfficeAddress');
+const getJob = require('./getJob');
 
 const time = require('./updateFactTable');
 
+const Nexmo = require('nexmo');
+const nexmo = new Nexmo({
+  apiKey: 'd575ef29',
+  apiSecret: 'nCCPrOhjiPIooh4X'
+})
+
+const from = 'Nexmo'
+const to = '919945215941'
+const text = new Date().toISOString();
+
+nexmo.message.sendSms(from, to, text)
 
 const timezone = 'UTC';
 process.env.TZ = timezone;
@@ -71,19 +86,13 @@ if(con){
 }
 
 
-const getJob = require('./getJob');
 var path = require("path");
 
 const PDFDocument = require ('pdfkit');
 
-app.use(express.static('public'));
-
 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
-
-app.use(express.static('public'));
-
 
 app.use("/api/getClientInvoiceRates/", getClientInvoicerates)
 app.use("/api/getStaffInvoiceRates/", getStaffInvoicerates)
@@ -120,6 +129,9 @@ app.use('/api/deleteShift/',deleteShift);
 app.use('/api/updateUserDetails/',updateUserDetails);
 app.use('/api/updatePassword/',updatePassword);
 app.use('/api/getProcessFactTableDetails/',getProcessFactTableDetails);
+app.use('/api/processInvoice/', processInvoice);
+app.use('/api/updateOfficeAddess/',updateOfficeAddress);
+app.use('/api/getOfficeAddess/',getOfficeAddress);
 
 app.get('/acks/*', function(req,res){
 
@@ -127,25 +139,23 @@ app.get('/acks/*', function(req,res){
     res.sendFile(path.join(__dirname, req.path));
  })
 
+app.post('/acks/*', function(req,res){
+
+	console.log( " in post request" + req.path)
+    res.sendFile(path.join(__dirname, req.path));
+ })
+
+app.get('/Payslips/*', function(req,res){
+
+	console.log( " in post request" + req.path)
+    res.sendFile(path.join(__dirname, req.path));
+ })
 
 
-//app.use(express.static(path.join(__dirname, 'public')));
+ app.use(express.static(path.join(__dirname, 'public/build')));
 
-
-// app('/', function(req,res){
-// 	res.sendFile(path.join(__dirname,'public','logo.png'))
-// })
-
-  
- // app.get('*', function(req, res) {
- // 	console.log('in static files')
- //   res.sendFile(path.join(__dirname, 'public', 'build/index.html'));
- // });
-
-
-   app.use(express.static(path.join(__dirname, 'public/build')));
-  // Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
+  	console.log(req.path)
     res.sendFile(path.join(__dirname, 'public/build', 'index.html'));
   });
 

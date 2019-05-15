@@ -42,7 +42,7 @@ CREATE TABLE `staffinvoice` (
 
 LOCK TABLES `staffinvoice` WRITE;
 /*!40000 ALTER TABLE `staffinvoice` DISABLE KEYS */;
-INSERT INTO `staffinvoice` VALUES ('Doctor',15.00,10.00,10.00,10.00,56.00,10.00,10.00,10.00),('Domestic assistant',10.00,10.00,10.00,10.00,10.20,10.00,10.00,10.00),('Domestic worker',10.00,10.00,10.00,10.00,10.00,15.00,10.00,10.00),('Domiciliary carer',10.00,10.00,10.00,10.00,10.00,10.00,10.00,10.00),('Health Care assistant (HCA)',10.00,10.00,10.00,10.00,50.00,10.00,10.00,10.00),('Nurse',10.00,10.00,10.00,10.00,10.00,10.00,10.00,10.00);
+INSERT INTO `staffinvoice` VALUES ('Doctor',15.00,10.00,10.00,10.00,56.00,10.00,10.00,10.00),('Domestic assistant',10.00,10.00,10.00,10.00,10.00,10.00,10.00,10.00),('Domestic worker',10.00,10.00,10.00,10.00,10.00,15.00,10.00,10.00),('Domiciliary carer',10.00,10.00,10.00,10.00,10.00,10.00,10.00,10.00),('Health Care assistant (HCA)',10.00,10.00,10.00,10.00,50.00,10.00,10.00,10.00),('Nurse',10.00,10.00,10.00,10.00,10.00,10.00,10.00,10.00);
 /*!40000 ALTER TABLE `staffinvoice` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-26  3:56:14
+-- Dump completed on 2019-05-15  6:44:58

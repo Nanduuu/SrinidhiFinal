@@ -11,10 +11,7 @@ const router = express.Router();
 var jwt = require('jsonwebtoken');
 
 
-
 function getActiveUsers (staffType){
-
-	
 
 	let myPromise = new Promise(function(resolve, reject){
   			var con = mysql.createConnection({
