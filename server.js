@@ -2,51 +2,49 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const mysql = require('mysql');
 var http = require('http');
-var schedule = require('node-schedule'); 
-const fs = require('fs');
 const app = express();
-const router = express.Router();
 const port = process.env.PORT || 8080;
-const newuser = require('./newuser')
-const login = require('./login.js')
-const addclient = require('./addclient.js');
-const activegetClients = require('./activegetClients');
-const inactivegetClients = require('./inactivegetClients');
-const addJob = require('./addJob');
-const getJobDetails = require('./getJobDetails');
-const deleteClients = require('./deleteClients');
-const disableClient = require('./disableClient');
-const enableClient = require('./enableClient');
-const getEditClient = require('./getEditClient');
-const updateEditClient = require('./updateEditClient')
-const addShift = require('./addShift');
-const getShiftDetails = require('./getShiftDetails');
-const getAdminDashboardDetails = require('./getAdminDashboardDetails');
-const deleteJobs = require('./deleteJobs');
-const updateEditJob = require('./updateEditJob');
-const staffgetJobDetails = require('./staffgetJobDetails');
-const staffconfirmjob = require('./StaffConfirmjob');
-const staffScheduledJobDetails = require('./staffScheduledJobDetails');
-const getClientInvoicerates = require('./getClientInvoiceRates');
-const getStaffInvoicerates = require('./getStaffInvoicerates');
-const updateInvoicerates = require('./updateInvoiceRates');
-const getUserDetails = require('./getUserDetails');
-const enableDisableUser  = require('./enableDisableUser');
-const bulkJobUploads = require ('./bulkJobUploads');
-const deleteStaffJobs = require('./deleteStaffJobs');
-const getFactTableData = require('./getFactTableData');
-const approveTimeSheet = require('./approveTimeSheet');
-const submitTimeSheet = require('./submitTimeSheet');
-const deleteShift = require('./deleteShift');
-const updateUserDetails = require('./updateUserDetails');
-const updatePassword = require('./updatePassword');
-const getProcessFactTableDetails = require('./getProcessFactTableDetails');
-const processInvoice = require('./processInvoice');
-const updateOfficeAddress = require('./updateOfficeAddress');
-const getOfficeAddress = require('./getOfficeAddress');
-const getJob = require('./getJob');
+const newuser = require('./Routers/Users/newuser')
+const login = require('./Routers/login.js')
+const addclient = require('./Routers/Client/addclient.js');
+const activegetClients = require('./Routers/Client/activegetClients');
+const inactivegetClients = require('./Routers/Client/inactivegetClients');
+const addJob = require('./Routers/Job/addJob');
+const getJobDetails = require('./Routers/Job/getJobDetails');
+const deleteClients = require('./Routers/Client/deleteClients');
+const disableClient = require('./Routers/Client/disableClient');
+const enableClient = require('./Routers/Client/enableClient');
+const getEditClient = require('./Routers/Client/getEditClient');
+const updateEditClient = require('./Routers/Client/updateEditClient')
+const addShift = require('./Routers/Shifts/addShift');
+const getShiftDetails = require('./Routers/Shifts/getShiftDetails');
+const getAdminDashboardDetails = require('./Routers/Job/getAdminDashboardDetails');
+const deleteJobs = require('./Routers/Job/deleteJobs');
+const updateEditJob = require('./Routers/Job/updateEditJob');
+const staffgetJobDetails = require('./Routers/UserJobs/staffgetJobDetails');
+const staffconfirmjob = require('./Routers/UserJobs/StaffConfirmjob');
+const staffScheduledJobDetails = require('./Routers/UserJobs/staffScheduledJobDetails');
+const getClientInvoicerates = require('./Routers/TimeSheetAndInvoice/getClientInvoiceRates');
+const getStaffInvoicerates = require('./Routers/TimeSheetAndInvoice/getStaffInvoicerates');
+const updateInvoicerates = require('./Routers/TimeSheetAndInvoice/updateInvoiceRates');
+const getUserDetails = require('./Routers/Users/getUserDetails');
+const enableDisableUser  = require('./Routers/Users/enableDisableUser');
+const bulkJobUploads = require ('./Routers/Job/bulkJobUploads');
+const deleteStaffJobs = require('./Routers/UserJobs/deleteStaffJobs');
+const getFactTableData = require('./Routers/FactTable/getFactTableData');
+const approveTimeSheet = require('./Routers/TimeSheetAndInvoice/approveTimeSheet');
+const submitTimeSheet = require('./Routers/UserJobs/submitTimeSheet');
+const deleteShift = require('./Routers/Shifts/deleteShift');
+const updateUserDetails = require('./Routers/Users/updateUserDetails');
+const updatePassword = require('./Routers/Users/updatePassword');
+const getProcessFactTableDetails = require('./Routers/FactTable/getProcessFactTableDetails');
+const processInvoice = require('./Routers/TimeSheetAndInvoice/processInvoice');
+const updateOfficeAddress = require('./Routers/Users/updateOfficeAddress');
+const getOfficeAddress = require('./Routers/Users/getOfficeAddress');
+const getJob = require('./Routers/Job/getJob');
 
-const time = require('./updateFactTable');
+
+const time = require('./Routers/FactTable/updateFactTable');
 
 const Nexmo = require('nexmo');
 const nexmo = new Nexmo({
@@ -86,9 +84,10 @@ if(con){
 }
 
 
+
 var path = require("path");
 
-const PDFDocument = require ('pdfkit');
+//const PDFDocument = require ('pdfkit');
 
 
 app.use(bodyParser.json()); 
